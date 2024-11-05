@@ -1,18 +1,30 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = ({ infoLinks }) => {
+  const navigate = useNavigate();
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId.toLowerCase().replace(/\s+/g, '-'));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handlePageNavigation = (e, path) => {
+    e.preventDefault();
+    navigate(path);
+  };
+
   return (
     <footer className="bg-gray-100 mt-auto bottom-0 w-full">
       <div className="max-w-screen-lg px-4 py-8 mx-auto">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* Company Name */}
           <div className="flex justify-center sm:justify-start">
-            <a href="">
-              <img 
-                className="h-44 md:h-44" 
-                src="/src/Assets/img/Logo Footer.png" 
-                alt="Logo" 
-              />
+            <a href="/#beranda" onClick={(e) => handleNavClick(e, 'beranda')}>
+              <img className="h-44 md:h-44" src="/src/Assets/img/Logo Footer.png" alt="Logo" />
             </a>
           </div>
 
@@ -20,18 +32,12 @@ const Footer = () => {
           <div className="text-center sm:text-left">
             <div className="text-sm uppercase text-sky-500 font-bold mb-4">Info</div>
             <div className="space-y-3">
-              <a className="block text-sky-500 hover:text-sky-600" href="/#">
-                Beranda
-              </a>
-              <a className="block text-sky-500 hover:text-sky-600" href="/#">
-                Layanan
-              </a>
-              <a className="block text-sky-500 hover:text-sky-600" href="/#">
-                Ulasan
-              </a>
-              <a className="block text-sky-500 hover:text-sky-600" href="/#">
-                Tentang Kami
-              </a>
+              {infoLinks &&
+                infoLinks.map((link, index) => (
+                  <a key={index} className="block text-sky-500 hover:text-sky-600" href={link.href} onClick={(e) => handleNavClick(e, link.text)}>
+                    {link.text}
+                  </a>
+                ))}
             </div>
           </div>
 
@@ -39,10 +45,10 @@ const Footer = () => {
           <div className="text-center sm:text-left">
             <div className="text-sm uppercase text-sky-500 font-bold mb-4">Perusahaan</div>
             <div className="space-y-3">
-              <a className="block text-sky-500 hover:text-sky-600" href="/#">
+              <a className="block text-sky-500 hover:text-sky-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/syarat-dan-ketentuan')}>
                 Syarat dan ketentuan
               </a>
-              <a className="block text-sky-500 hover:text-sky-600" href="/#">
+              <a className="block text-sky-500 hover:text-sky-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/kebijakan-privasi')}>
                 Kebijakan Privasi
               </a>
             </div>
