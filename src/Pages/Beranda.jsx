@@ -7,7 +7,6 @@ function Beranda() {
   return (
     <>
       <Navbar ></Navbar>
-      <div className="p-5"></div>
       <HeroSection></HeroSection>
       <Footer></Footer>
     </>

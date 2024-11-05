@@ -8,7 +8,7 @@ function Navbar({
   onLoginClick,
   backgroundColor = 'bg-gray-100',
   textColor = 'text-black-500',
-  hoverColor = 'text-blue-500',
+  hoverColor = 'hover:text-blue-500',
   buttonColor = 'bg-blue-500',
   buttonHoverColor = 'bg-blue-700',
 }) {
@@ -39,7 +39,7 @@ function Navbar({
               <ul className="flex gap-10">
                 {navigation.map((nav, index) => (
                   <li key={index}>
-                    <a href={`#${nav.name}`} className={`font-medium ${textColor} hover:${hoverColor}`}>
+                    <a href={`#${nav.name}`} className={`font-medium ${textColor} ${hoverColor} transition duration-300`}>
                       {nav.name}
                     </a>
                   </li>
@@ -47,7 +47,7 @@ function Navbar({
               </ul>
             </div>
             <div>
-              <button onClick={handleLogin} className={`${buttonColor} hover:${buttonHoverColor} text-white font-bold py-2 px-4 rounded-full`}>
+              <button onClick={handleLogin} className={`${buttonColor} hover:${buttonHoverColor} text-white font-bold py-2 px-4 rounded-lg`}>
                 {buttonName}
               </button>
             </div>
@@ -63,7 +63,7 @@ function Navbar({
           <ul className="flex flex-col items-center gap-4 py-4">
             {navigation.map((nav, index) => (
               <li key={index}>
-                <a href={`#${nav.name}`} className={`font-medium ${textColor} hover:${hoverColor}`}>
+                <a href={`#${nav.name}`} className={`font-medium ${textColor} ${hoverColor} transition duration-300 `}>
                   {nav.name}
                 </a>
               </li>
