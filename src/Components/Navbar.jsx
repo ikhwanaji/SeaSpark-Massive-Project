@@ -13,15 +13,9 @@ function Navbar({
   onLoginClick,
   backgroundColor = 'bg-white',
   textColor = 'text-black-500',
-<<<<<<< HEAD
-  hoverColor = 'hover:text-blue-500',
-  buttonColor = 'bg-blue-500',
-  buttonHoverColor = 'bg-blue-700',
-=======
   hoverColor = 'text-sky-500',
   buttonColor = 'bg-sky-500',
   buttonHoverColor = 'bg-sky-600',
->>>>>>> syaa-code
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -46,25 +40,6 @@ function Navbar({
               <img className="w-1/3 md:w-1/4" src="/src/Assets/img/logo.png" alt="Logo" />
             </a>
           </div>
-<<<<<<< HEAD
-          <div className="hidden md:flex items-center justify-between flex-grow">
-            <div className="flex-grow flex justify-center">
-              <ul className="flex gap-10">
-                {navigation.map((nav, index) => (
-                  <li key={index}>
-                    <a href={`#${nav.name}`} className={`font-medium ${textColor} ${hoverColor} transition duration-300`}>
-                      {nav.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <button onClick={handleLogin} className={`${buttonColor} hover:${buttonHoverColor} text-white font-bold py-2 px-4 rounded-lg`}>
-                {buttonName}
-              </button>
-            </div>
-=======
 
           {/* Desktop Navigation (Centered) */}
           <div className="hidden md:flex flex-grow items-center justify-center">
@@ -80,7 +55,6 @@ function Navbar({
                 </li>
               ))}
             </ul>
->>>>>>> syaa-code
           </div>
 
           {/* Login Button */}
@@ -109,14 +83,10 @@ function Navbar({
           <ul className="flex flex-col items-center gap-4 py-4">
             {navigation.map((nav, index) => (
               <li key={index}>
-<<<<<<< HEAD
-                <a href={`#${nav.name}`} className={`font-medium ${textColor} ${hoverColor} transition duration-300 `}>
-=======
                 <a
                   href={`#${nav.name}`}
                   className={`font-medium ${textColor} hover:${hoverColor}`}
                 >
->>>>>>> syaa-code
                   {nav.name}
                 </a>
               </li>

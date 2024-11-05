@@ -2,20 +2,12 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-<<<<<<< HEAD
-    <div className="relative max-w-2xll mx-20 mt-20 rounded-md ">
-      <img className="h-96 w-full object-cover rounded-md" src="/src/Assets/img/HeroSection.jpg" alt="Hero Section" />
-      <div className="absolute inset-0 flex items-center justify-between text-white font-bold text-3xl bottom-10 left-10 pb-16">
-        <p>
-          Kesehatan <span className="text-blue-500 ">Ikan Kerapu</span>
-=======
     <div className="relative w-full h-[80vh] overflow-hidden">
       <img className="h-full w-full object-cover" src="/src/Assets/img/HeroSection.jpg" alt="Hero Section" />
       <div className="absolute inset-0 bg-black opacity-40" />
       <div className="absolute inset-0 flex flex-col items-start justify-center text-white font-bold text-4xl px-10">
         <p className="mb-4">
           Kesehatan <span className="text-sky-500">Ikan Kerapu</span>
->>>>>>> syaa-code
           <br />
           Kesejahteraan <span className="text-sky-500">Peternak!</span>
         </p>

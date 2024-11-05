@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Img from '../Assets/img/HeroSection.jpg';
 import ImgLoginUser from '../Assets/img/LoginUser.png';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <div className="min-h-screen bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: `url(${Img})` }}>
       <div className="container mx-auto px-4">
@@ -36,38 +27,43 @@ const LoginPage = () => {
                   placeholder="Masukkan alamat email anda"
                 />
               </div>
-              <div className="mt-2">
+              <div className="mt-4">
                 <div className="flex justify-between">
-                  <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label
+                    htmlFor="password" // Menambahkan htmlFor untuk menghubungkan dengan input
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                  >
                     Sandi
                   </label>
                 </div>
-                <div className="relative">
-                  <input
-                    id="password"
-                    name="password"
-                    className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none pr-10"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="current-password"
-                    placeholder="Masukkan kata sandi anda"
-                  />
-                  <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5" onClick={togglePasswordVisibility}>
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </button>
-                </div>
+                <input
+                  id="password" // Menambahkan id
+                  name="password" // Menambahkan name
+                  className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                  type="password"
+                  autoComplete="current-password"
+                  placeholder="Masukkan kata sandi anda"
+                />
               </div>
-              <div className="text-end text-xs text-gray-500 pt-2">
+              <div className="text-end text-xs text-gray-500 pt-1">
                 <p>
                   Belum punya Akun? {''}
-                  <Link to="/register" className="text-gray-800">
+                  <a href="#" className="text-black">
                     Daftar Disini
-                  </Link>{' '}
-                  {/* Ganti a dengan Link */}
+                  </a>
                 </p>
               </div>
-              <div className="mt-2">
+              <div className="mt-4">
                 <button className="bg-sky-500 text-white font-bold py-2 px-4 w-full rounded hover:bg-white hover:text-black transition duration-300 ease-in-out">Masuk</button>
               </div>
+
+              {/* <div className="mt-4 flex items-center justify-between">
+                <span className="border-b w-1/5 md:w-1/4"></span>
+                <a href="#" className="text-xs text-gray-500 uppercase">
+                  or sign up
+                </a>
+                <span className="border-b w-1/5 md:w-1/4"></span>
+              </div> */}
               <div className="mt-4 flex items-center justify-between">
                 <span className="border-b w-1/5 lg:w-1/4"></span>
                 <a href="#" className="text-xs text-center text-gray-500 uppercase">
@@ -75,7 +71,7 @@ const LoginPage = () => {
                 </a>
                 <span className="border-b w-1/5 lg:w-1/4"></span>
               </div>
-              <a href="#" className="flex items-center justify-center mt-4 bg-sky-500 rounded-lg shadow-md hover:bg-white transition duration-300 ease-in-out">
+              <a href="#" className="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
                 <div className="px-4 py-3">
                   <svg className="h-6 w-6 " viewBox="0 0 40 40">
                     <path
@@ -96,7 +92,7 @@ const LoginPage = () => {
                     />
                   </svg>
                 </div>
-                <h1 className="px-4 py-3 w-5/6 text-center text-white font-bold hover:text-black transition duration-300 ease-in-out">Lanjutkan dengan Google</h1>
+                <h1 className=" px-4 py-3 w-5/6 text-center text-white font-bold hover:bg-white hover:text-black transition duration-300 ease-in-out">Lanjutkan dengan Google</h1>
               </a>
             </div>
           </div>
