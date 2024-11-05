@@ -3,7 +3,7 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <div className="relative max-w-2xll mx-20 mt-11 rounded-md ">
+    <div className="relative max-w-2xll mx-20 mt-20 rounded-md ">
       <img className="h-96 w-full object-cover rounded-md" src="/src/Assets/img/HeroSection.jpg" alt="Hero Section" />
       <div className="absolute inset-0 flex items-center justify-between text-white font-bold text-3xl bottom-10 left-10 pb-16">
         <p>
