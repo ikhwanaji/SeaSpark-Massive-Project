@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackHomeButton from '../Components/BackHomeButton';
+import Button from '../Components/Button';
 const Syarat_ketentuan = () => {
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ const Syarat_ketentuan = () => {
             </p>
           </div>
           {/* Component Tombol kembali ke beranda */}
-          <BackHomeButton />
+          <Button></Button>
         </div>
       </div>
     </div>

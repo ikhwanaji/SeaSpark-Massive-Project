@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackHomeButton from '../Components/BackHomeButton';
+import Button from '../Components/Button';
 const Kebijakan_Privasi = () => {
   const navigate = useNavigate();
 
@@ -58,9 +58,9 @@ const Kebijakan_Privasi = () => {
             <br />
             <a href="">Alamat: [Alamat Perusahaan]</a>
           </div>
-          
+
           {/* Component Tombol kembali ke beranda */}
-          <BackHomeButton />
+          <Button />
         </div>
       </div>
     </div>

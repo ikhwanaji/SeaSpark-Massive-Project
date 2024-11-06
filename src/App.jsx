@@ -4,6 +4,9 @@ import LoginPage from './Pages/LoginPage';
 import Register from './Pages/Register';
 import Kebijakan_Privasi from './Pages/Kebijakan_Privasi';
 import Syarat_ketentuan from './Pages/Syarat_ketentuan';
+import BerandaUser from './Pages/BerandaUser';
+import Pemesanan from './Pages/Pemesanan';
+import LayananPage from './Pages/LayananPage';
 
 
 function App() {
@@ -15,6 +18,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/kebijakan-privasi" element={<Kebijakan_Privasi />} />
         <Route path="/syarat-dan-ketentuan" element={<Syarat_ketentuan />} />
+        <Route path="/beranda-user" element={<BerandaUser />} />
+        <Route path="/Pemesanan" element={<Pemesanan />} />
+        <Route path="/Layanan" element={<LayananPage />} />
       </Routes>
     </BrowserRouter>
   );

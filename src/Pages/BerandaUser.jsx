@@ -7,23 +7,26 @@ import TimKami from '../Components/Timkami';
 import UlasanGrid from '../Components/UlasanGrid';
 import CardProduk from '../Components/CardProduk';
 import Button from '../Components/Button';
+import { FiUserCheck } from 'react-icons/fi';
 
-function Beranda() {
+function BerandaUser() {
   // Modifikasi navigation untuk mencakup type dan path
   const navigation = [
-    { name: 'Beranda', type: 'scroll' },
-    { name: 'Layanan', type: 'scroll' },
-    { name: 'Ulasan', type: 'scroll' },
-    { name: 'Tentang Kami', type: 'scroll' },
+    { name: 'Beranda', type: 'link', path: '/beranda-user' },
+    { name: 'Layanan', type: 'link', path: '/layanan' },
+    { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
+    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+    { name: 'Kontak', type: 'link', path: '/kontak' },
     // Menambahkan item navigasi dengan tipe link
   ];
 
-  const infoLinks = navigation
-    .filter((nav) => nav.type === 'scroll') // Hanya mengambil navigasi scroll untuk footer
-    .map((nav) => ({
-      href: `/#${nav.name.toLowerCase().replace(/\s+/g, '-')}`,
-      text: nav.name,
-    }));
+  const infoLinks = [
+    { text: 'Beranda', path: '/beranda-user', href: '#beranda' },
+    { text: 'Layanan', path: '/layanan', href: '#layanan' },
+    { text: 'Pemesanan', path: '/pemesanan', href: '#pemesanan' },
+    { text: 'Tentang Kami', path: '/tentang-kami', href: '#tentang-kami' },
+    { text: 'Kontak', path: '/kontak', href: '#kontak' },
+  ];
 
   const ulasanCards = [
     {
@@ -35,21 +38,6 @@ function Beranda() {
       title: 'Doni Putra',
       content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
       date: '02-02-2023',
-    },
-    {
-      title: 'Doni Putra',
-      content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
-      date: '03-03-2023',
-    },
-    {
-      title: 'Doni Putra',
-      content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
-      date: '03-03-2023',
-    },
-    {
-      title: 'Doni Putra',
-      content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
-      date: '03-03-2023',
     },
     {
       title: 'Doni Putra',
@@ -78,7 +66,17 @@ function Beranda() {
 
   return (
     <>
-      <Navbar navigation={navigation} buttonName="Masuk" backgroundColor="bg-gray-100" textColor="text-black-500" hoverColor="hover:text-blue-500" buttonColor="bg-blue-500" buttonHoverColor="bg-blue-700" />
+      <Navbar
+        navigation={navigation}
+        buttonName="Profil User"
+        useIcon={true}
+        icon={<FiUserCheck size={24} />}
+        backgroundColor="bg-gray-100"
+        textColor="text-black-500"
+        hoverColor="hover:text-blue-500"
+        buttonColor="bg-blue-500"
+        buttonHoverColor="bg-blue-700"
+      />
       <main>
         <section id="beranda">
           <HeroSection />
@@ -106,9 +104,9 @@ function Beranda() {
           <UlasanGrid title="Ulasan" subtitle="Apa Pendapat Mereka??" cards={ulasanCards} />
         </section>
       </main>
-      <Footer infoLinks={infoLinks} />
+      <Footer infoLinks={infoLinks} isUserPage={true} />
     </>
   );
 }
 
-export default Beranda;
+export default BerandaUser;
