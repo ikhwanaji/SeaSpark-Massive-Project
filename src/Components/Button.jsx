@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const BackHomeButton = ({
+const Button = ({
   buttonText = 'Kembali ke Beranda',
+  to = '/',
   backgroundColor = 'bg-blue-500',
   hoverColor = 'hover:bg-blue-700',
   textColor = 'text-white',
@@ -14,17 +15,31 @@ const BackHomeButton = ({
   rounded = 'rounded',
   fontWeight = 'font-bold',
   customClassName = '',
+  position = 'center', // Menambahkan prop position dengan default 'center'
 }) => {
   const navigate = useNavigate();
 
-  const handleBackHome = () => {
-    navigate('/');
+  const handleButton = () => {
+    navigate(to);
+  };
+
+  // Menentukan kelas posisi berdasarkan prop position
+  const getPositionClass = () => {
+    switch (position) {
+      case 'left':
+        return 'justify-start';
+      case 'right':
+        return 'justify-end';
+      case 'center':
+      default:
+        return 'justify-center';
+    }
   };
 
   return (
-    <div className={`${margin} ${alignment}`}>
+    <div className={`${margin} ${alignment} flex ${getPositionClass()}`}>
       <button
-        onClick={handleBackHome}
+        onClick={handleButton}
         className={`
           ${backgroundColor}
           ${hoverColor}
@@ -42,8 +57,9 @@ const BackHomeButton = ({
   );
 };
 
-BackHomeButton.propTypes = {
+Button.propTypes = {
   buttonText: PropTypes.string,
+  to: PropTypes.string,
   backgroundColor: PropTypes.string,
   hoverColor: PropTypes.string,
   textColor: PropTypes.string,
@@ -53,6 +69,7 @@ BackHomeButton.propTypes = {
   rounded: PropTypes.string,
   fontWeight: PropTypes.string,
   customClassName: PropTypes.string,
+  position: PropTypes.oneOf(['left', 'right', 'center']), // Menambahkan PropTypes untuk position
 };
 
-export default BackHomeButton;
+export default Button;

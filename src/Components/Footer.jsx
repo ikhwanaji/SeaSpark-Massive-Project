@@ -1,14 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Footer = ({ infoLinks }) => {
+const Footer = ({ infoLinks, isUserPage }) => {
   const navigate = useNavigate();
 
-  const handleNavClick = (e, targetId) => {
+  const handleNavClick = (e, item) => {
     e.preventDefault();
-    const element = document.getElementById(targetId.toLowerCase().replace(/\s+/g, '-'));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (isUserPage) {
+      navigate(item.path);
+    } else {
+      const element = document.getElementById(item.text.toLowerCase().replace(/\s+/g, '-'));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -23,7 +27,7 @@ const Footer = ({ infoLinks }) => {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* Company Name */}
           <div className="flex justify-center sm:justify-start">
-            <a href="/#beranda" onClick={(e) => handleNavClick(e, 'beranda')}>
+            <a href={isUserPage ? '/beranda-user' : '/#beranda'} onClick={(e) => (isUserPage ? handlePageNavigation(e, '/beranda-user') : handleNavClick(e, { text: 'beranda' }))}>
               <img className="h-44 md:h-44" src="/src/Assets/img/Logo Footer.png" alt="Logo" />
             </a>
           </div>
@@ -34,7 +38,7 @@ const Footer = ({ infoLinks }) => {
             <div className="space-y-3">
               {infoLinks &&
                 infoLinks.map((link, index) => (
-                  <a key={index} className="block text-sky-500 hover:text-sky-600" href={link.href} onClick={(e) => handleNavClick(e, link.text)}>
+                  <a key={index} className="block text-sky-500 hover:text-sky-600" href={isUserPage ? link.path : link.href} onClick={(e) => handleNavClick(e, link)}>
                     {link.text}
                   </a>
                 ))}
