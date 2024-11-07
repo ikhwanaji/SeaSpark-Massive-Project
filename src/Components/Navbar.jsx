@@ -14,7 +14,7 @@ function Navbar({
   useIcon = false,
   icon = null,
   onLoginClick,
-  backgroundColor = 'bg-gray-100',
+  backgroundColor = 'bg-white',
   textColor = 'text-black-500',
   hoverColor = 'hover:text-blue-500',
   buttonColor = 'bg-blue-500',
