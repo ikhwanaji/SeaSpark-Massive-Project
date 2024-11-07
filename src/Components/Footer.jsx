@@ -22,7 +22,7 @@ const Footer = ({ infoLinks, isUserPage }) => {
   };
 
   return (
-    <footer className="bg-gray-100 mt-auto bottom-0 w-full">
+    <footer className="bg-white mt-auto bottom-0 w-full">
       <div className="max-w-screen-lg px-4 py-8 mx-auto">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* Company Name */}

@@ -7,6 +7,7 @@ import Syarat_ketentuan from './Pages/Syarat_ketentuan';
 import BerandaUser from './Pages/BerandaUser';
 import Pemesanan from './Pages/Pemesanan';
 import LayananPage from './Pages/LayananPage';
+import TentangKami from './Pages/TentangKami';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/beranda-user" element={<BerandaUser />} />
         <Route path="/Pemesanan" element={<Pemesanan />} />
         <Route path="/Layanan" element={<LayananPage />} />
+        <Route path="/TentangKami" element={<TentangKami />} />
       </Routes>
     </BrowserRouter>
   );

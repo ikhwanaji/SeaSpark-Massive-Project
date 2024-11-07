@@ -11,7 +11,7 @@ const LayananKami = () => {
 
       <div className="flex flex-wrap justify-center gap-10">
         {/* Artikel & Blog Card */}
-        <div className="bg-blue-100 p-8 rounded-2xl shadow-lg w-80 flex flex-col items-center text-center ">
+        <div className="bg-white p-8 rounded-2xl shadow-lg w-80 flex flex-col items-center text-center ">
           <div className="flex justify-center mb-6">
             <img src="/src/Assets/img/artikel.jpg" alt="Artikel & Blog Icon" className="h-24 w-24 object-contain" />
           </div>
@@ -21,7 +21,7 @@ const LayananKami = () => {
         </div>
 
         {/* Katalog Alat & Bahan Card */}
-        <div className="bg-blue-100 p-8 rounded-2xl shadow-lg w-80 flex flex-col items-center text-center">
+        <div className="bg-white p-8 rounded-2xl shadow-lg w-80 flex flex-col items-center text-center">
           <div className="flex justify-center mb-6">
             <img src="/src/Assets/img/katalog.jpg" alt="Katalog Alat & Bahan Icon" className="h-24 w-24 object-contain" />
           </div>
