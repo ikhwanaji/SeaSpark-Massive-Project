@@ -57,7 +57,7 @@ const LoginPage = () => {
     if (validateForm()) {
       // Simulasi pengecekan login
       // Di sini Anda bisa menambahkan logika autentikasi yang sebenarnya
-      navigate('/beranda-user');
+      navigate('/beranda-pengguna');
     }
   };
 
