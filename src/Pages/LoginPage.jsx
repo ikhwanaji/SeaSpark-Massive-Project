@@ -68,18 +68,18 @@ const LoginPage = () => {
           <div className="flex flex-col lg:flex-row">
             <div className="hidden lg:block lg:w-1/2 bg-cover" style={{ backgroundImage: `url(${ImgLoginUser})` }}></div>
             <div className="w-full p-8 lg:w-1/2">
-              <h2 className="text-2xl font-semibold text-gray-700 text-center">Selamat datang! </h2>
-              <p className="text-xl text-gray-600 text-center">Silakan masuk ke akun anda</p>
+              <h2 className="text-2xl font-semibold text-black text-center">Selamat datang! </h2>
+              <p className="text-l text-gray-700 text-center">Silakan masuk ke akun anda</p>
 
               <form onSubmit={handleSubmit}>
                 <div className="mt-4">
-                  <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                  <label htmlFor="email" className="block text-black text-sm font-bold mb-2">
                     Email
                   </label>
                   <input
                     id="email"
                     name="email"
-                    className={`bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded py-2 px-4 block w-full appearance-none`}
+                    className={`bg-white text-gray-700 focus:outline-none focus:shadow-outline border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded py-2 px-4 block w-full appearance-none`}
                     type="email"
                     autoComplete="email"
                     placeholder="Masukkan alamat email anda"
@@ -90,7 +90,7 @@ const LoginPage = () => {
                 </div>
                 <div className="mt-4">
                   <div className="flex justify-between">
-                    <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                    <label htmlFor="password" className="block text-black text-sm font-bold mb-2">
                       Sandi
                     </label>
                   </div>
@@ -98,7 +98,7 @@ const LoginPage = () => {
                     <input
                       id="password"
                       name="password"
-                      className={`bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded py-2 px-4 block w-full appearance-none pr-10`}
+                      className={`bg-white text-gray-700 focus:outline-none focus:shadow-outline border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded py-2 px-4 block w-full appearance-none pr-10`}
                       type={showPassword ? 'text' : 'password'}
                       autoComplete="current-password"
                       placeholder="Masukkan kata sandi anda"
@@ -120,7 +120,7 @@ const LoginPage = () => {
                   </p>
                 </div>
                 <div className="mt-4">
-                  <button type="submit" className="bg-sky-500 text-white font-bold py-2 px-4 w-full rounded hover:bg-white hover:text-black transition duration-300 ease-in-out">
+                  <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-700 hover:text-white transition duration-300 ease-in-out">
                     Masuk
                   </button>
                 </div>
@@ -133,7 +133,7 @@ const LoginPage = () => {
                 </a>
                 <span className="border-b w-1/5 lg:w-1/4"></span>
               </div>
-              <a href="#" className="flex items-center justify-center mt-4 bg-sky-500 rounded-lg shadow-md hover:bg-white transition duration-300 ease-in-out">
+              <a href="#" className="flex items-center justify-center mt-4 bg-white rounded-lg shadow-md hover:bg-gray-200 transition duration-300 ease-in-out">
                 <div className="px-4 py-3">
                   <svg className="h-6 w-6" viewBox="0 0 40 40">
                     <path
@@ -154,7 +154,7 @@ const LoginPage = () => {
                     />
                   </svg>
                 </div>
-                <h1 className="px-4 py-3 w-5/6 text-center text-white font-bold hover:text-black transition duration-300 ease-in-out">Lanjutkan dengan Google</h1>
+                <h1 className="px-4 py-3 w-5/6 text-center text-black font-bold hover:text-black transition duration-300 ease-in-out">Lanjutkan dengan Google</h1>
               </a>
             </div>
           </div>

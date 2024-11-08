@@ -9,17 +9,15 @@ import CardProduk from '../Components/CardProduk';
 import Button from '../Components/Button';
 
 function Beranda() {
-  // Modifikasi navigation untuk mencakup type dan path
   const navigation = [
     { name: 'Beranda', type: 'scroll' },
     { name: 'Layanan', type: 'scroll' },
     { name: 'Ulasan', type: 'scroll' },
     { name: 'Tentang Kami', type: 'scroll' },
-    // Menambahkan item navigasi dengan tipe link
   ];
 
   const infoLinks = navigation
-    .filter((nav) => nav.type === 'scroll') // Hanya mengambil navigasi scroll untuk footer
+    .filter((nav) => nav.type === 'scroll')
     .map((nav) => ({
       href: `/#${nav.name.toLowerCase().replace(/\s+/g, '-')}`,
       text: nav.name,
