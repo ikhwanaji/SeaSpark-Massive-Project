@@ -12,7 +12,7 @@ import { FiUserCheck } from 'react-icons/fi';
 function BerandaUser() {
   // Modifikasi navigation untuk mencakup type dan path
   const navigation = [
-    { name: 'Beranda', type: 'link', path: '/beranda-user' },
+    { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
     { name: 'Layanan', type: 'link', path: '/layanan' },
     { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
     { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
@@ -21,7 +21,7 @@ function BerandaUser() {
   ];
 
   const infoLinks = [
-    { text: 'Beranda', path: '/beranda-user', href: '#beranda' },
+    { text: 'Beranda', path: '/beranda-pengguna', href: '#beranda' },
     { text: 'Layanan', path: '/layanan', href: '#layanan' },
     { text: 'Pemesanan', path: '/pemesanan', href: '#pemesanan' },
     { text: 'Tentang Kami', path: '/tentang-kami', href: '#tentang-kami' },
@@ -38,6 +38,21 @@ function BerandaUser() {
       title: 'Doni Putra',
       content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
       date: '02-02-2023',
+    },
+    {
+      title: 'Doni Putra',
+      content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
+      date: '03-03-2023',
+    },
+    {
+      title: 'Doni Putra',
+      content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
+      date: '03-03-2023',
+    },
+    {
+      title: 'Doni Putra',
+      content: 'Setelah menggunakan layanan DoKer ini, kondisi ikan kerapu saya membaik secara signifikan. Saya merasa lebih percaya diri dalam merawat ikan saya.',
+      date: '03-03-2023',
     },
     {
       title: 'Doni Putra',
@@ -97,7 +112,7 @@ function BerandaUser() {
                 <CardProduk key={index} image={product.image} title={product.title} price={product.price} />
               ))}
             </div>
-            <Button buttonText="Pesan Sekarang" to="/login" />
+            <Button buttonText="Pesan Sekarang" to="/Pemesanan" />
           </div>
         </section>
         <section id="ulasan">
