@@ -29,7 +29,7 @@ function App() {
         <Route path="/layanan" element={<LayananPage />} />
         <Route path="/Detail" element={<DetailPage />} />
         <Route path="/Kontak" element={<KontakKami />} /> 
-        <Route path="/TentangKami" element={<TentangKami />} /> 
+        <Route path="/tentang-kami" element={<TentangKami />} /> 
       </Routes>
     </BrowserRouter>
   );

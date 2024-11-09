@@ -15,7 +15,7 @@ const TimKami = () => {
             Kami adalah Tim pengembang yang berkomitmen untuk menciptakan pengalaman terbaik bagi pengguna DoKer. Kami berupaya keras menghadirkan platform yang tidak hanya mudah diakses, tetapi juga memberikan manfaat yang maksimal, guna
             membantu Anda dalam mengatasi berbagai masalah penyakit yang sering dialami ikan kerapu.
           </p>
-          <Button buttonText="Kenali Tim Kami" to="/TentangKami" position='left' />
+          <Button buttonText="Kenali Tim Kami" to="/tentang-kami" position='left' />
         </div>
       </div>
     </div>
