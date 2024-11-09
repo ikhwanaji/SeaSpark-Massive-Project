@@ -56,7 +56,7 @@ function PemesananPaketan() {
           buttonName="Profil User"
           useIcon={true}
           icon={<FiUserCheck size={24} />}
-          backgroundColor="bg-gray-100"
+          backgroundColor="bg-white"
           textColor="text-black-500"
           hoverColor="hover:text-blue-500"
           buttonColor="bg-blue-500"
