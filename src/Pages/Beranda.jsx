@@ -76,7 +76,7 @@ function Beranda() {
 
   return (
     <>
-      <Navbar navigation={navigation} buttonName="Masuk" backgroundColor="bg-gray-100" textColor="text-black-500" hoverColor="hover:text-blue-500" buttonColor="bg-blue-500" buttonHoverColor="bg-blue-700" />
+      <Navbar navigation={navigation} buttonName="Masuk" backgroundColor="bg-white" textColor="text-black-500" hoverColor="hover:text-blue-500" buttonColor="bg-blue-500" buttonHoverColor="bg-blue-700" />
       <main>
         <section id="beranda">
           <HeroSection />
@@ -87,12 +87,12 @@ function Beranda() {
         <section id="tentang-kami">
           <TimKami />
         </section>
-        <section>
+        <section id="produk-kami">
           <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-800 mb-2">Produk Terbaik Kami</h2>
+              <h2 className="text-4xl font-bold text-gray-800">Produk Terbaik Kami</h2>
             </div>
-            <div className="flex space-x-4 p-4">
+            <div className="flex space-x-4 p-4 mb-6">
               {products.map((product, index) => (
                 <CardProduk key={index} image={product.image} title={product.title} price={product.price} />
               ))}

@@ -9,7 +9,7 @@ const Kebijakan_Privasi = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center">
+    <div className="bg-white min-h-screen flex justify-center items-center">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="bg-white shadow-md rounded-lg p-8">
           <div>

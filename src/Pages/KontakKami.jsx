@@ -29,22 +29,19 @@ const KontakKami = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {' '}
-      {/* Wrapper untuk seluruh konten */}
       <Navbar
         navigation={navigation}
         buttonName="Profil User"
         useIcon={true}
         icon={<FiUserCheck size={24} />}
-        backgroundColor="bg-gray-100"
+        backgroundColor="bg-white"
         textColor="text-black-500"
         hoverColor="hover:text-blue-500"
         buttonColor="bg-blue-500"
         buttonHoverColor="bg-blue-700"
       />
-      {/* Container utama dengan padding top yang lebih besar */}
       <div className="flex-grow bg-blue-100 py-20">
         {' '}
-        {/* Mengubah padding-top dan bottom menjadi py-20 */}
         <div className="container mx-auto px-4">
           <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col md:flex-row items-center max-w-[800px] mx-auto">
             {/* Bagian Gambar */}
@@ -79,9 +76,9 @@ const KontakKami = () => {
                   <textarea id="message" name="message" autoComplete="off" className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan pesan" rows="4" required></textarea>
                 </div>
 
-                <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300">
+                <Button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300">
                   Kirim
-                </button>
+                </Button>
               </form>
             </div>
           </div>

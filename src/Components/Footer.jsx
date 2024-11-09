@@ -34,11 +34,11 @@ const Footer = ({ infoLinks, isUserPage }) => {
 
           {/* Info */}
           <div className="text-center sm:text-left">
-            <div className="text-sm uppercase text-sky-500 font-bold mb-4">Info</div>
+            <div className="text-sm uppercase text-blue-500 font-bold mb-4">Info</div>
             <div className="space-y-3">
               {infoLinks &&
                 infoLinks.map((link, index) => (
-                  <a key={index} className="block text-sky-500 hover:text-sky-600" href={isUserPage ? link.path : link.href} onClick={(e) => handleNavClick(e, link)}>
+                  <a key={index} className="block text-blue-500 hover:text-blue-600" href={isUserPage ? link.path : link.href} onClick={(e) => handleNavClick(e, link)}>
                     {link.text}
                   </a>
                 ))}
@@ -47,12 +47,12 @@ const Footer = ({ infoLinks, isUserPage }) => {
 
           {/* Perusahaan */}
           <div className="text-center sm:text-left">
-            <div className="text-sm uppercase text-sky-500 font-bold mb-4">Perusahaan</div>
+            <div className="text-sm uppercase text-blue-500 font-bold mb-4">Perusahaan</div>
             <div className="space-y-3">
-              <a className="block text-sky-500 hover:text-sky-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/syarat-dan-ketentuan')}>
+              <a className="block text-blue-500 hover:text-blue-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/syarat-dan-ketentuan')}>
                 Syarat dan ketentuan
               </a>
-              <a className="block text-sky-500 hover:text-sky-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/kebijakan-privasi')}>
+              <a className="block text-blue-500 hover:text-blue-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/kebijakan-privasi')}>
                 Kebijakan Privasi
               </a>
             </div>
@@ -60,8 +60,8 @@ const Footer = ({ infoLinks, isUserPage }) => {
 
           {/* Kontak */}
           <div className="text-center sm:text-left">
-            <div className="text-sm uppercase text-sky-500 font-bold mb-4">Kontak</div>
-            <div className="space-y-3 text-sky-500">
+            <div className="text-sm uppercase text-blue-500 font-bold mb-4">Kontak</div>
+            <div className="space-y-3 text-blue-500">
               <p>Jl. Za Pagar Alam No. 1</p>
               <p>Bandar Lampung, Lampung</p>
               <p>Indonesia</p>
@@ -73,7 +73,7 @@ const Footer = ({ infoLinks, isUserPage }) => {
       </div>
 
       {/* Copyright */}
-      <div className="py-4 text-center bg-sky-500 text-white">
+      <div className="py-4 text-center bg-blue-500 text-white">
         <p>© Copyright 2020. All Rights Reserved.</p>
       </div>
     </footer>
