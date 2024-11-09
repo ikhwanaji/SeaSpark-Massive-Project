@@ -4,10 +4,11 @@ import LoginPage from './Pages/LoginPage';
 import Register from './Pages/Register';
 import Kebijakan_Privasi from './Pages/Kebijakan_Privasi';
 import Syarat_ketentuan from './Pages/Syarat_ketentuan';
-import BerandaUser  from './Pages/BerandaUser ';
+import BerandaUser  from './Pages/BerandaUser';
 import Pemesanan from './Pages/Pemesanan';
 import LayananPage from './Pages/LayananPage';
-import KontakKami from './Pages/KontakKami'; 
+import DetailPage from './Pages/DetailPage';
+import KontakKami from './Pages/KontakKami';
 import PemesananPaketan from './Pages/PemesananPaketan';
 import PemesananSatuan from './Pages/PemesananSatuan';
 import TentangKami from './Pages/TentangKami'; 
@@ -25,7 +26,8 @@ function App() {
         <Route path="/Pemesanan" element={<Pemesanan />} />
         <Route path="/pemesanan-paketan" element={<PemesananPaketan />} />
         <Route path="/pemesanan-satuan" element={<PemesananSatuan />} />
-        <Route path="/Layanan" element={<LayananPage />} />
+        <Route path="/layanan" element={<LayananPage />} />
+        <Route path="/Detail" element={<DetailPage />} />
         <Route path="/Kontak" element={<KontakKami />} /> 
         <Route path="/TentangKami" element={<TentangKami />} /> 
       </Routes>
