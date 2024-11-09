@@ -4,7 +4,7 @@ import LoginPage from './Pages/LoginPage';
 import Register from './Pages/Register';
 import Kebijakan_Privasi from './Pages/Kebijakan_Privasi';
 import Syarat_ketentuan from './Pages/Syarat_ketentuan';
-import BerandaUser  from './Pages/BerandaUser ';
+import BerandaUser  from './Pages/BerandaUser';
 import Pemesanan from './Pages/Pemesanan';
 import LayananPage from './Pages/LayananPage';
 import KontakKami from './Pages/KontakKami'; 
@@ -27,7 +27,7 @@ function App() {
         <Route path="/pemesanan-satuan" element={<PemesananSatuan />} />
         <Route path="/Layanan" element={<LayananPage />} />
         <Route path="/Kontak" element={<KontakKami />} /> 
-        <Route path="/TentangKami" element={<TentangKami />} /> 
+        <Route path="/tentang-kami" element={<TentangKami />} /> 
       </Routes>
     </BrowserRouter>
   );
