@@ -35,12 +35,14 @@ function Navbar({
   }, [location]);
 
   const handleLogin = () => {
-    if (onLoginClick) {
+    if (buttonName === 'Profil User') {
+      navigate('/akun');
+    } else if (onLoginClick) {
       onLoginClick();
     } else {
       navigate('/login');
     }
-  };
+  };  
 
   const handleNavClick = (e, item) => {
     e.preventDefault();

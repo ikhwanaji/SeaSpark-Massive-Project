@@ -10,14 +10,12 @@ import Button from '../Components/Button';
 import { FiUserCheck } from 'react-icons/fi';
 
 function BerandaUser() {
-  // Modifikasi navigation untuk mencakup type dan path
   const navigation = [
     { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
     { name: 'Layanan', type: 'link', path: '/layanan' },
     { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
     { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
     { name: 'Kontak', type: 'link', path: '/kontak' },
-    // Menambahkan item navigasi dengan tipe link
   ];
 
   const infoLinks = [
@@ -102,7 +100,7 @@ function BerandaUser() {
         <section id="tentang-kami">
           <TimKami />
         </section>
-        <section>
+        <section id="produk-kami">
           <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-gray-800 mb-2">Produk Terbaik Kami</h2>

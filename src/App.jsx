@@ -8,7 +8,13 @@ import BerandaUser  from './Pages/BerandaUser';
 import Pemesanan from './Pages/Pemesanan';
 import LayananPage from './Pages/LayananPage';
 import DetailPage from './Pages/DetailPage';
+import AkunPage from './Pages/AkunPage';
+import PengaturanProfil from './Pages/PengaturanProfil';
+import PengaturanAvatar from './Pages/PengaturanAvatar';
+import PengaturanPassword from './Pages/PengaturanPassword';
+import PengaturanNotifikasi from './Pages/PengaturanNotifikasi';
 import KontakKami from './Pages/KontakKami';
+import SuksesPage from './Pages/SuksesPage';
 import PemesananPaketan from './Pages/PemesananPaketan';
 import PemesananSatuan from './Pages/PemesananSatuan';
 import TentangKami from './Pages/TentangKami'; 
@@ -28,7 +34,13 @@ function App() {
         <Route path="/pemesanan-satuan" element={<PemesananSatuan />} />
         <Route path="/layanan" element={<LayananPage />} />
         <Route path="/Detail" element={<DetailPage />} />
-        <Route path="/Kontak" element={<KontakKami />} /> 
+        <Route path="/Akun" element={<AkunPage />} />
+        <Route path="/PengaturanProfil" element={<PengaturanProfil />} />
+        <Route path="/PengaturanAvatar" element={<PengaturanAvatar />} />
+        <Route path="/PengaturanPassword" element={<PengaturanPassword />} />
+        <Route path="/PengaturanNotifikasi" element={<PengaturanNotifikasi />} />
+        <Route path="/Kontak" element={<KontakKami />} />
+        <Route path="/Sukses" element={<SuksesPage />} />
         <Route path="/tentang-kami" element={<TentangKami />} /> 
       </Routes>
     </BrowserRouter>
