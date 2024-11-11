@@ -5,7 +5,6 @@ const TimKami = () => {
   return (
     <div className="bg-blue-50 py-20">
       <div className="flex flex-col items-center md:flex-row md:justify-center md:items-start gap-10">
-        {/* Image with size adjusted to align with text height */}
         <img src="/src/Assets/img/timkami.jpg" alt="Tim Member" className="rounded-full h-80 w-80 object-cover" />
 
         {/* Text Section */}

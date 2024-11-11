@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; 
+import { FiUserCheck } from 'react-icons/fi';
 import Navbar from '../Components/Navbar';
 import TentangKami from '../Components/TentangKami';
 import Footer from '../Components/Footer';
-import { FiUserCheck } from 'react-icons/fi';
 
 function TentangKamiPage() {
   const location = useLocation();
@@ -43,9 +43,9 @@ function TentangKamiPage() {
       <Navbar
         navigation={navigation}
         buttonName="Masuk"
-        useIcon={false}
+        useIcon={true}
         icon={<FiUserCheck size={24} />}
-        backgroundColor="bg-gray-100"
+        backgroundColor="bg-white"
         textColor="text-black-500"
         hoverColor="hover:text-blue-500"
         buttonColor="bg-blue-500"

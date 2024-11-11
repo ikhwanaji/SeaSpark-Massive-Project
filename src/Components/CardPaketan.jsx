@@ -14,7 +14,7 @@ const CardPaketan = ({ title, price, image, items }) => (
     <div className="p-4">
       <h2 className="text-xl font-bold text-center mb-2">{title}</h2>
       <p className="text-center text-gray-700 mb-4">{price}</p>
-      <button className="bg-blue-500 text-white w-full py-2 rounded-lg mb-4 hover:bg-blue-600 transition-colors duration-300">Beli Sekarang</button>
+      <button className="bg-blue-500 text-white w-full py-2 rounded-lg mb-4 hover:bg-blue-700 transition-colors duration-300">Beli Sekarang</button>
       <ul className="text-gray-700">
         {items.map((item, idx) => (
           <CardItem key={idx} item={item} />
