@@ -1,42 +1,63 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom'; 
+import { FiUserCheck } from 'react-icons/fi';
 import Navbar from '../Components/Navbar';
 import TentangKami from '../Components/TentangKami';
 import Footer from '../Components/Footer';
 
-// Define the navigation array if it’s not imported from another file
-const navigation = [
-  { name: 'Beranda', type: 'scroll' },
-  { name: 'Layanan', type: 'scroll' },
-  { name: 'Ulasan', type: 'scroll' },
-  { name: 'Tentang Kami', type: 'scroll' },
-];
+function TentangKamiPage() {
+  const location = useLocation();
 
-function TentangKamiPage() {  
-  const infoLinks = navigation
-    .filter((nav) => nav.type === 'scroll')
-    .map((nav) => ({
-      href: `/#${nav.name.toLowerCase().replace(/\s+/g, '-')}`,
-      text: nav.name,
-    }));
+  const navigation = [
+    { name: 'Beranda', type: 'link', path: '/' },
+    { name: 'Layanan', type: 'link', path: '/layanan' },
+    { name: 'Ulasan', type: 'link', path: '/' },
+    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+  ];
+
+  const infoLinks = [
+    {
+      text: 'Beranda',
+      path: location.pathname === '/tentang-kami' ? '/' : '/',
+      href: location.pathname === '/' ? '#beranda' : '/',
+    },
+    {
+      text: 'Layanan',
+      path: '/layanan',
+      href: location.pathname === '/' ? '#layanan' : '/layanan',
+    },
+    {
+      text: 'Ulasan',
+      path: '/',
+      href: location.pathname === '/' ? '#ulasan' : '/',
+    },
+    {
+      text: 'Tentang Kami',
+      path: '/tentang-kami',
+      href: location.pathname === '/' ? '#tentang-kami' : '/tentang-kami',
+    },
+  ];
 
   return (
-    <>
-      <Navbar 
-        navigation={navigation} 
-        buttonName="Masuk" 
-        backgroundColor="bg-white" 
-        textColor="text-black-500" 
-        hoverColor="hover:text-blue-500" 
-        buttonColor="bg-blue-500" 
-        buttonHoverColor="bg-blue-700" 
+    <div className="flex flex-col min-h-screen">
+      <Navbar
+        navigation={navigation}
+        buttonName="Masuk"
+        useIcon={true}
+        icon={<FiUserCheck size={24} />}
+        backgroundColor="bg-white"
+        textColor="text-black-500"
+        hoverColor="hover:text-blue-500"
+        buttonColor="bg-blue-500"
+        buttonHoverColor="bg-blue-700"
       />
-      <main>
+      <main className="flex-grow">
         <section>
           <TentangKami />
         </section>
       </main>
-      <Footer infoLinks={infoLinks} />
-    </>
+      <Footer infoLinks={infoLinks} isUserPage={true} />
+    </div>
   );
 }
 

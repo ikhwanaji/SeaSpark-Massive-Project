@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../Components/Button';
 
-const HeroSection = () => {
+const HeroSection = ({ to }) => {
   return (
     <div className="relative max-w-2xll mt-20 rounded-md">
       <img className="w-full h-[80vh] object-cover" src="/src/Assets/img/HeroSection.jpg" alt="Hero Section" />
@@ -19,7 +19,7 @@ const HeroSection = () => {
             <p>Temukan alat, bahan, dan panduan lengkap untuk mengatasi berbagai masalah kesehatan ikan kerapu.</p>
           </div>
           <div className="mt-4">
-            <Button buttonText="Pesan Sekarang" to="#produk-kami" position="left" />
+            <Button buttonText="Pesan Sekarang" to={to} position="left" /> {/* Menggunakan prop to */}
           </div>
         </div>
         <div className="w-1/3">{/* <img src="/src/Assets/img/logo.png" alt="Logo" className="w-full" /> */}</div>

@@ -74,7 +74,6 @@ const KontakKami = () => {
                   </label>
                   <textarea id="message" name="message" autoComplete="off" className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan pesan" rows="4" required></textarea>
                 </div>
-
                 <button
                   type="button"
                   className="w-full bg-blue-500 font-semibold text-white p-2 rounded hover:bg-blue-700 transition duration-300"
@@ -82,7 +81,6 @@ const KontakKami = () => {
                 >
                   Kirim
                 </button>
-
               </form>
             </div>
           </div>

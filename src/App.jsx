@@ -18,6 +18,7 @@ import SuksesPage from './Pages/SuksesPage';
 import PemesananPaketan from './Pages/PemesananPaketan';
 import PemesananSatuan from './Pages/PemesananSatuan';
 import TentangKami from './Pages/TentangKami'; 
+import PembayaranPage from './Pages/Pembayaran';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/Pemesanan" element={<Pemesanan />} />
         <Route path="/pemesanan-paketan" element={<PemesananPaketan />} />
         <Route path="/pemesanan-satuan" element={<PemesananSatuan />} />
+        <Route path="/pembayaran" element={<PembayaranPage />} />
         <Route path="/layanan" element={<LayananPage />} />
         <Route path="/Detail" element={<DetailPage />} />
         <Route path="/Akun" element={<AkunPage />} />

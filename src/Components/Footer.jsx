@@ -1,23 +1,33 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Footer = ({ infoLinks, isUserPage }) => {
   const navigate = useNavigate();
 
   const handleNavClick = (e, item) => {
     e.preventDefault();
+
+    // Jika sedang di halaman user, gunakan navigasi
     if (isUserPage) {
-      navigate(item.path);
-    } else {
-      const element = document.getElementById(item.text.toLowerCase().replace(/\s+/g, '-'));
+      navigate(item.path || '/');
+      return;
+    }
+
+    // Untuk halaman beranda, gunakan scroll smooth
+    if (window.location.pathname === '/') {
+      const elementId = item.text.toLowerCase().replace(/\s+/g, '-');
+      const element = document.getElementById(elementId);
+
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // Jika tidak di halaman beranda, navigasikan ke beranda
+      navigate('/' + elementId);
     }
   };
 
-  const handlePageNavigation = (e, path) => {
-    e.preventDefault();
+  const handlePageNavigation = (path) => {
     navigate(path);
   };
 
@@ -27,9 +37,9 @@ const Footer = ({ infoLinks, isUserPage }) => {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* Company Name */}
           <div className="flex justify-center sm:justify-start">
-            <a href={isUserPage ? '/beranda-user' : '/#beranda'} onClick={(e) => (isUserPage ? handlePageNavigation(e, '/beranda-user') : handleNavClick(e, { text: 'beranda' }))}>
+            <Link to={isUserPage ? '/beranda-user' : '/'} className="cursor-pointer">
               <img className="h-44 md:h-44" src="/src/Assets/img/Logo Footer.png" alt="Logo" />
-            </a>
+            </Link>
           </div>
 
           {/* Info */}
@@ -38,9 +48,9 @@ const Footer = ({ infoLinks, isUserPage }) => {
             <div className="space-y-3">
               {infoLinks &&
                 infoLinks.map((link, index) => (
-                  <a key={index} className="block text-blue-500 hover:text-blue-600" href={isUserPage ? link.path : link.href} onClick={(e) => handleNavClick(e, link)}>
+                  <Link key={index} to={isUserPage ? link.path : '/'} className="block text-blue-500 hover:text-blue-600" onClick={(e) => handleNavClick(e, link)}>
                     {link.text}
-                  </a>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -49,12 +59,12 @@ const Footer = ({ infoLinks, isUserPage }) => {
           <div className="text-center sm:text-left">
             <div className="text-sm uppercase text-blue-500 font-bold mb-4">Perusahaan</div>
             <div className="space-y-3">
-              <a className="block text-blue-500 hover:text-blue-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/syarat-dan-ketentuan')}>
+              <Link to="/syarat-dan-ketentuan" className="block text-blue-500 hover:text-blue-600 cursor-pointer">
                 Syarat dan ketentuan
-              </a>
-              <a className="block text-blue-500 hover:text-blue-600 cursor-pointer" onClick={(e) => handlePageNavigation(e, '/kebijakan-privasi')}>
+              </Link>
+              <Link to="/kebijakan-privasi" className="block text-blue-500 hover:text-blue-600 cursor-pointer">
                 Kebijakan Privasi
-              </a>
+              </Link>
             </div>
           </div>
 
