@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import { FiUserCheck } from 'react-icons/fi';
 import Footer from '../Components/Footer';
@@ -6,6 +7,8 @@ import ProdukList from '../Components/ProdukList';
 import KategoriProduct from '../Components/KategoriProduct';
 
 function PemesananSatuan() {
+  const navigate = useNavigate();
+
   const navigation = [
     { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
     { name: 'Layanan', type: 'link', path: '/layanan' },
@@ -32,6 +35,8 @@ function PemesananSatuan() {
       nama: 'Jaring Ikan Kantong',
       harga: 30000,
       gambar: 'https://placehold.co/150x150',
+      deskripsi: 'Jaring ikan berkualitas untuk kegiatan perikanan',
+      stok: 50
     },
     {
       id: 2,
@@ -39,6 +44,8 @@ function PemesananSatuan() {
       nama: 'Panduan Penyakit Parasit pada Ikan Kerapu: Identifikasi dan Pengobatan',
       harga: 100000,
       gambar: 'https://placehold.co/150x150',
+      deskripsi: 'Buku panduan lengkap untuk identifikasi dan pengobatan penyakit ikan kerapu',
+      stok: 20
     },
     {
       id: 3,
@@ -46,27 +53,36 @@ function PemesananSatuan() {
       nama: 'Red Blue Dox',
       harga: 30000,
       gambar: 'https://placehold.co/150x150',
+      deskripsi: 'Obat untuk mengatasi penyakit ikan',
+      stok: 100
     },
     {
       id: 4,
       kategori: 'Obat-Obatan',
-      nama: 'Red Blue Dox',
+      nama: 'Vitamin Ikan',
       harga: 30000,
       gambar: 'https://placehold.co/150x150',
+      deskripsi: 'Suplemen untuk meningkatkan kesehatan ikan',
+      stok: 75
     },
     {
       id: 5,
       kategori: 'Obat-Obatan',
-      nama: 'Red Blue Dox',
-      harga: 30000,
+      nama: 'Antibiotik Ikan',
+      harga: 50000,
       gambar: 'https://placehold.co/150x150',
+      deskripsi: 'Obat untuk mengobati infeksi bakteri pada ikan',
+      stok: 60
     },
-    // Tambahkan produk lainnya di sini
   ];
 
   const handleBeli = (produk) => {
-    setProdukTerpilih(produk);
-    console.log('Produk terpilih:', produk);
+    // Navigasi ke halaman pembayaran dengan membawa data produk
+    navigate('/pembayaran', { 
+      state: { 
+        produk: produk 
+      } 
+    });
   };
 
   const handleCategorySelect = (categoryName) => {
@@ -80,12 +96,26 @@ function PemesananSatuan() {
   };
 
   const categories = [
-    { name: 'Alat', count: daftarProduk.filter((p) => p.kategori === 'Alat').length, onSelect: handleCategorySelect },
-    { name: 'Obat-Obatan', count: daftarProduk.filter((p) => p.kategori === 'Obat-Obatan').length, onSelect: handleCategorySelect },
-    { name: 'Buku Panduan', count: daftarProduk.filter((p) => p.kategori === 'Buku Panduan').length, onSelect: handleCategorySelect },
+    { 
+      name: 'Alat', 
+      count: daftarProduk.filter((p) => p.kategori === 'Alat').length, 
+      onSelect: handleCategorySelect 
+    },
+    { 
+      name: 'Obat-Obatan', 
+      count: daftarProduk.filter((p) => p.kategori === 'Obat-Obatan').length, 
+      onSelect: handleCategorySelect 
+    },
+    { 
+      name: 'Buku Panduan', 
+      count: daftarProduk.filter((p) => p.kategori === 'Buku Panduan').length, 
+      onSelect: handleCategorySelect 
+    },
   ];
 
-  const filteredProduk = selectedCategories.length > 0 ? daftarProduk.filter((produk) => selectedCategories.includes(produk.kategori)) : daftarProduk;
+  const filteredProduk = selectedCategories.length > 0 
+    ? daftarProduk.filter((produk) => selectedCategories.includes(produk.kategori)) 
+    : daftarProduk;
 
   return (
     <>
@@ -110,21 +140,18 @@ function PemesananSatuan() {
             <div className="w-4/5 bg-white p-6 rounded-lg shadow-sm">
               <div className="flex flex-wrap -mx-4">
                 {filteredProduk.map((produk) => (
-                  <ProdukList key={produk.id} {...produk} onBeli={handleBeli} />
+                  <ProdukList 
+                    key={produk.id} 
+                    {...produk} 
+                    onBeli={handleBeli} 
+                  />
                 ))}
               </div>
             </div>
           </div>
-          {produkTerpilih && (
-            <div className="mt-8 p-4 bg-green-100 rounded-lg">
-              <h2 className="text-xl font-semibold mb-2">Produk Terpilih:</h2>
-              <p>Nama: {produkTerpilih.nama}</p>
-              <p>Harga: Rp {produkTerpilih.harga.toLocaleString()}</p>
-            </div>
-          )}
         </div>
-        <Footer infoLinks={infoLinks} isUserPage={true} />
       </div>
+      <Footer infoLinks={infoLinks} isUserPage={true} />
     </>
   );
 }

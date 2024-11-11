@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../Components/Button';
 
-const LayananKami = () => {
+const LayananKami = ({ to }) => {
   return (
     <div className="bg-blue-50 py-20 ">
       <div className="text-center mb-12">
@@ -27,7 +27,7 @@ const LayananKami = () => {
           </div>
           <h3 className="text-xl font-semibold text-blue-500 mb-3">KATALOG ALAT & BAHAN</h3>
           <p className="text-gray-600 text-base mb-6 flex-grow">Kami menawarkan alat, bahan, dan panduan untuk menangani penyakit ikan kerapu.</p>
-          <Button buttonText="Selengkapnya" to="/layanan" />
+          <Button buttonText="selengkapnya" to={to} position="left" />
         </div>
       </div>
     </div>

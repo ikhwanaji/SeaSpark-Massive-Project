@@ -1,46 +1,63 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom'; 
 import Navbar from '../Components/Navbar';
 import TentangKami from '../Components/TentangKami';
 import Footer from '../Components/Footer';
-import { FiUser Check } from 'react-icons/fi';
-
-// Define the navigation array if it’s not imported from another file
-const navigation = [
-  { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
-  { name: 'Layanan', type: 'link', path: '/layanan' },
-  { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
-  { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-  { name: 'Kontak', type: 'link', path: '/kontak' },
-];
+import { FiUserCheck } from 'react-icons/fi';
 
 function TentangKamiPage() {
-  const infoLinks = navigation
-    .filter((nav) => nav.type === 'scroll')
-    .map((nav) => ({
-      href: `/#${nav.name.toLowerCase().replace(/\s+/g, '-')}`,
-      text: nav.name,
-    }));
+  const location = useLocation();
+
+  const navigation = [
+    { name: 'Beranda', type: 'link', path: '/' },
+    { name: 'Layanan', type: 'link', path: '/layanan' },
+    { name: 'Ulasan', type: 'link', path: '/' },
+    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+  ];
+
+  const infoLinks = [
+    {
+      text: 'Beranda',
+      path: location.pathname === '/tentang-kami' ? '/' : '/',
+      href: location.pathname === '/' ? '#beranda' : '/',
+    },
+    {
+      text: 'Layanan',
+      path: '/layanan',
+      href: location.pathname === '/' ? '#layanan' : '/layanan',
+    },
+    {
+      text: 'Ulasan',
+      path: '/',
+      href: location.pathname === '/' ? '#ulasan' : '/',
+    },
+    {
+      text: 'Tentang Kami',
+      path: '/tentang-kami',
+      href: location.pathname === '/' ? '#tentang-kami' : '/tentang-kami',
+    },
+  ];
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar
         navigation={navigation}
-        buttonName="Profil User" // Menjaga tombol "Profil User"
-        useIcon={true} // Menjaga penggunaan ikon
-        icon={<FiUser Check size={24} />} // Menjaga ikon pengguna
-        backgroundColor="bg-gray-100" // Menjaga warna latar belakang
-        textColor="text-black-500" // Menjaga warna teks
-        hoverColor="hover:text-blue-500" // Menjaga efek hover
-        buttonColor="bg-blue-500" // Menjaga warna tombol
-        buttonHoverColor="bg-blue-700" // Menjaga efek hover pada tombol
+        buttonName="Masuk"
+        useIcon={false}
+        icon={<FiUserCheck size={24} />}
+        backgroundColor="bg-gray-100"
+        textColor="text-black-500"
+        hoverColor="hover:text-blue-500"
+        buttonColor="bg-blue-500"
+        buttonHoverColor="bg-blue-700"
       />
-      <main>
+      <main className="flex-grow">
         <section>
           <TentangKami />
         </section>
       </main>
-      <Footer infoLinks={infoLinks} />
-    </>
+      <Footer infoLinks={infoLinks} isUserPage={true} />
+    </div>
   );
 }
 

@@ -79,10 +79,10 @@ function Beranda() {
       <Navbar navigation={navigation} buttonName="Masuk" backgroundColor="bg-white" textColor="text-black-500" hoverColor="hover:text-blue-500" buttonColor="bg-blue-500" buttonHoverColor="bg-blue-700" />
       <main>
         <section id="beranda">
-          <HeroSection />
+          <HeroSection to="/login" />
         </section>
         <section id="layanan">
-          <LayananKami />
+          <LayananKami to="/login" />
         </section>
         <section id="tentang-kami">
           <TimKami />

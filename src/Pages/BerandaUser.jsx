@@ -94,10 +94,10 @@ function BerandaUser() {
       />
       <main>
         <section id="beranda">
-          <HeroSection />
+          <HeroSection to="/pemesanan" />
         </section>
         <section id="layanan">
-          <LayananKami />
+          <LayananKami to="/pemesanan-satuan"/>
         </section>
         <section id="tentang-kami">
           <TimKami />
