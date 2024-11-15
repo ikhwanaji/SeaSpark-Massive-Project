@@ -53,8 +53,8 @@ const Layanan = () => {
       {' '}
       <Navbar
         navigation={navigation}
-        buttonName="Masuk"
-        useIcon={false}
+        buttonName="Profil User"
+        useIcon={true}
         icon={<FiUserCheck size={24} />}
         backgroundColor="bg-white"
         textColor="text-black-500"
@@ -62,7 +62,7 @@ const Layanan = () => {
         buttonColor="bg-blue-500"
         buttonHoverColor="bg-blue-700"
       />
-      <div className="flex-grow bg-gray-100 py-20">
+      <div className="flex-grow bg-blue-100 py-20">
         {' '}
         <div className="container mx-auto px-8 mt-6" >
           <div className="min-h-screen bg-blue-100 flex flex-col items-center p-8">
