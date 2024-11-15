@@ -28,7 +28,7 @@ function NotifikasiPage() {
                     <img 
                         src="/src/Assets/img/timkami.jpg" 
                         alt="Profile" 
-                        className="w-48 h-48 rounded-full border-4 border-white object-cover" 
+                        className="w-48 h-48 rounded-full border-4 border-gray-100 object-cover" 
                     />
                 </div>
             </div>

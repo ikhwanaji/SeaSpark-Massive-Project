@@ -19,6 +19,11 @@ import PemesananPaketan from './Pages/PemesananPaketan';
 import PemesananSatuan from './Pages/PemesananSatuan';
 import TentangKami from './Pages/TentangKami'; 
 import PembayaranPage from './Pages/Pembayaran';
+import ManajemenOrderPage from './Admin/Pages/ManajemenOrderPage';
+import DetailPesananSatuanPage from './Admin/Pages/DetailPesananSatuanPage';
+import TambahPesananSatuanPage from './Admin/Pages/TambahPesananSatuanPage';
+import DetailPesananPaketanPage from './Admin/Pages/DetailPesananPaketanPage';
+import TambahPesananPaketanPage from './Admin/Pages/TambahPesananPaketanPage';
 
 function App() {
   return (
@@ -34,6 +39,11 @@ function App() {
         <Route path="/pemesanan-paketan" element={<PemesananPaketan />} />
         <Route path="/pemesanan-satuan" element={<PemesananSatuan />} />
         <Route path="/pembayaran" element={<PembayaranPage />} />
+        <Route path="/manajemen-order" element={<ManajemenOrderPage />} />
+        <Route path="/detail-pesanan-satuan" element={<DetailPesananSatuanPage />} />
+        <Route path="/tambah-pesanan-satuan" element={<TambahPesananSatuanPage />} />
+        <Route path="/detail-pesanan-paketan" element={<DetailPesananPaketanPage />} />
+        <Route path="/tambah-pesanan-paketan" element={<TambahPesananPaketanPage />} />
         <Route path="/layanan" element={<LayananPage />} />
         <Route path="/Detail" element={<DetailPage />} />
         <Route path="/Akun" element={<AkunPage />} />
