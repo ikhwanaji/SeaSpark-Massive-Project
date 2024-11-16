@@ -7,7 +7,7 @@ const ProfilePage = () => {
             <div className="relative w-full h-60 bg-cover bg-center rounded-t-lg mt-8" 
                     style={{ backgroundImage: 'url(/src/Assets/img/HeroSection.jpg)' }}>
                 <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 translate-y-1/2">
-                    <img src="https://placehold.co/150x150" alt="Profile" className="w-48 h-48 rounded-full border-4 border-white object-cover" />
+                    <img src="https://placehold.co/150x150" alt="Profile" className="w-48 h-48 rounded-full border-4 border-gray-100 object-cover" />
                 </div>
             </div>
 
