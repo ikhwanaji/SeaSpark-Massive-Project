@@ -12,7 +12,7 @@ const TentangKami = () => {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-gray-100 p-12 mt-14">
+    <div className="w-full min-h-screen bg-blue-50 p-12 mt-14">
       {/* DoKer Section */}
       <div className="mx-auto w-4/5 sm:w-2/3 text-center mb-24 flex flex-col sm:flex-row items-center justify-center sm:space-x-8">
         <img src="/src/Assets/img/seaspark.jpg" alt="Underwater scene" className="w-full sm:w-full h-[500px] object-cover rounded-lg shadow-md" />
