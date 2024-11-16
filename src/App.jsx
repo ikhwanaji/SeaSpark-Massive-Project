@@ -19,6 +19,9 @@ import PemesananPaketan from './Pages/PemesananPaketan';
 import PemesananSatuan from './Pages/PemesananSatuan';
 import TentangKami from './Pages/TentangKami'; 
 import PembayaranPage from './Pages/Pembayaran';
+import LoginAdmin from './Pages/loginadmin';
+import LupaPassword from './Pages/LupaPassword';
+
 
 function App() {
   return (
@@ -44,6 +47,8 @@ function App() {
         <Route path="/Kontak" element={<KontakKami />} />
         <Route path="/Sukses" element={<SuksesPage />} />
         <Route path="/tentang-kami" element={<TentangKami />} /> 
+        <Route path="/login-admin" element={<LoginAdmin/>} /> 
+        <Route path="/lupa-password" element={<LupaPassword/>} /> 
       </Routes>
     </BrowserRouter>
   );

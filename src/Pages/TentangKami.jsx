@@ -43,7 +43,7 @@ function TentangKamiPage() {
       <Navbar
         navigation={navigation}
         buttonName="Masuk"
-        useIcon={true}
+        useIcon={false}
         icon={<FiUserCheck size={24} />}
         backgroundColor="bg-white"
         textColor="text-black-500"
@@ -52,7 +52,7 @@ function TentangKamiPage() {
         buttonHoverColor="bg-blue-700"
       />
       <main className="flex-grow">
-        <section>
+        <section >
           <TentangKami />
         </section>
       </main>

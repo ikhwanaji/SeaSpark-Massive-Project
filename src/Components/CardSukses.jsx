@@ -19,7 +19,7 @@ function SuccessMessage() {
           <polyline points="22 4 12 14.01 9 11.01" />
         </svg>
       </div>
-      <Button>
+      <Button to='/beranda-pengguna'>
         Kembali Ke Beranda
       </Button>
     </div>

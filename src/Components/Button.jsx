@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const Button = ({
   buttonText = 'Kembali ke Beranda',
   to = '/',
-  backgroundColor = 'bg-blue-500',
-  hoverColor = 'hover:bg-blue-700',
+  backgroundColor = 'bg-blue-700',
+  hoverColor = 'hover:bg-blue-500',
   textColor = 'text-white',
   padding = 'py-2 px-4',
   margin = 'mt-8',
@@ -15,7 +15,9 @@ const Button = ({
   rounded = 'rounded',
   fontWeight = 'font-bold',
   customClassName = '',
-  position = 'center', // Menambahkan prop position dengan default 'center'
+  position = 'center',
+  height = 'auto',
+  fullWidth = false, // Menambahkan prop fullWidth dengan default false
 }) => {
   const navigate = useNavigate();
 
@@ -23,7 +25,6 @@ const Button = ({
     navigate(to);
   };
 
-  // Menentukan kelas posisi berdasarkan prop position
   const getPositionClass = () => {
     switch (position) {
       case 'left':
@@ -48,8 +49,10 @@ const Button = ({
           ${rounded}
           ${fontWeight}
           ${customClassName}
+          ${fullWidth ? 'w-full' : ''}  
           transition duration-300 ease-in-out
         `}
+        style={{ height }}
       >
         {buttonText}
       </button>
@@ -69,7 +72,9 @@ Button.propTypes = {
   rounded: PropTypes.string,
   fontWeight: PropTypes.string,
   customClassName: PropTypes.string,
-  position: PropTypes.oneOf(['left', 'right', 'center']), // Menambahkan PropTypes untuk position
+  position: PropTypes.oneOf(['left', 'right', 'center']),
+  height: PropTypes.string,
+  fullWidth: PropTypes.bool, 
 };
 
 export default Button;

@@ -13,11 +13,12 @@ function Navbar({
   useIcon = false,
   icon = null,
   onLoginClick = null,
+  onIconClick = null, // Tambahkan prop baru untuk ikon
   backgroundColor = 'bg-white',
   textColor = 'text-black-500',
-  hoverColor = 'hover:text-blue-500',
+  hoverColor = 'hover:text-blue-700',
   buttonColor = 'bg-blue-500',
-  buttonHoverColor = 'bg-blue-700',
+  buttonHoverColor = 'bg-blue-500',
   logo = '/src/Assets/img/logo.png',
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +43,16 @@ function Navbar({
     } else {
       navigate('/login');
     }
-  };  
+  };
+
+  // Fungsi untuk menangani klik ikon
+  const handleIconClick = () => {
+    if (onIconClick) {
+      onIconClick();
+    } else if (buttonName === 'Profil User') {
+      navigate('/akun');
+    }
+  };
 
   const handleNavClick = (e, item) => {
     e.preventDefault();
@@ -76,14 +86,38 @@ function Navbar({
   const renderLoginButton = () => {
     if (useIcon && icon) {
       return (
-        <div onClick={handleLogin} className={`cursor-pointer ${textColor} ${hoverColor} transition-all duration-300`} title={buttonName}>
+        <div
+          onClick={handleIconClick}
+          className={`
+            cursor-pointer 
+            ${textColor} 
+            ${hoverColor} 
+            transition-all 
+            duration-300 
+            hover:bg-gray-100 
+            p-2 
+            rounded-full
+          `}
+          title={buttonName}
+        >
           {icon}
         </div>
       );
     }
 
     return (
-      <button onClick={handleLogin} className={`${buttonColor} hover:${buttonHoverColor} text-white font-bold py-2 px-4 rounded-lg`}>
+      <button
+        onClick={handleLogin}
+        className={`
+          ${buttonColor} 
+          hover:${buttonHoverColor} 
+          text-white 
+          font-bold 
+          py-2 
+          px-4 
+          rounded-lg
+        `}
+      >
         {buttonName}
       </button>
     );
@@ -164,6 +198,7 @@ Navbar.propTypes = {
   useIcon: PropTypes.bool,
   icon: PropTypes.element,
   onLoginClick: PropTypes.func,
+  onIconClick: PropTypes.func, // Tambahkan PropTypes untuk onIconClick
   backgroundColor: PropTypes.string,
   textColor: PropTypes.string,
   hoverColor: PropTypes.string,

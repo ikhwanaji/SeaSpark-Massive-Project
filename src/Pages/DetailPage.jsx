@@ -33,10 +33,10 @@ const Detail = () => {
         buttonColor="bg-blue-500"
         buttonHoverColor="bg-blue-700"
       />
-      <div className="flex-grow bg-gray-200 py-20">
+      <div className="flex-grow bg-blue-50 py-20">
         {' '}
         <div className="container mx-auto px-8">
-          <div className="min-h-screen bg-gray-200 flex flex-col items-center p-8">
+          <div className="min-h-screen bg-blue-50 flex flex-col items-center p-8">
             <CardDetail />
           </div>
         </div>
