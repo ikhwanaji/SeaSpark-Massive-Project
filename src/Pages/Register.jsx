@@ -142,7 +142,7 @@ const Register = () => {
                   onClick={handleRegister} 
                   className="bg-sky-500 text-white font-bold py-2 px-4 w-full rounded hover:bg-white hover:text-black transition duration-300 ease-in-out"
                 >
-                  Register
+                  Daftar
                 </button>
               </div>
 
