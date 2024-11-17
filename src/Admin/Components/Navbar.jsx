@@ -1,19 +1,23 @@
-import React from 'react';
-import { FaSearch } from 'react-icons/fa';
+import React from "react";
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   return (
     <nav className="bg-sky-900 flex justify-between items-center p-4">
       {/* Logo Section */}
       <div className="flex items-center">
-        <img src="/src/Assets/img/logo2.png" alt="Logo" className="w-36 h-12 mr-2" />
+        <img
+          src="/src/Assets/img/logo2.png"
+          alt="Logo"
+          className="w-36 h-12 mr-2"
+        />
       </div>
 
       {/* Right Side: Search Bar and Profile Icon */}
       <div className="flex items-center space-x-4">
         {/* Search Bar with Icon */}
         <div className="flex items-center bg-white rounded-md overflow-hidden">
-          <FaSearch className="text-gray-400 ml-3" />
+          <FaSearch className="text- ml-3" />
           <input
             type="text"
             placeholder="Pencarian"
