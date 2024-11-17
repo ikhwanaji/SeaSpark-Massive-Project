@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const BreadcrumbTable = () => {
   const [selected, setSelected] = useState(1);
@@ -10,15 +10,17 @@ const BreadcrumbTable = () => {
           <tr>
             <td
               className={`border border-gray-400 px-3 py-1 cursor-pointer ${
-                selected === 'Sebelumnya' ? 'bg-sky-300 text-sky-900' : 'text-gray-600'
+                selected === "Sebelumnya"
+                  ? "bg-sky-300 text-sky-900"
+                  : "text-gray-600"
               }`}
-              onClick={() => setSelected('Sebelumnya')}
+              onClick={() => setSelected("Sebelumnya")}
             >
               Sebelumnya
             </td>
             <td
               className={`border border-gray-400 px-3 py-1 cursor-pointer ${
-                selected === 1 ? 'bg-sky-300 text-sky-900' : 'text-gray-600'
+                selected === 1 ? "bg-sky-300 text-sky-900" : "text-gray-600"
               }`}
               onClick={() => setSelected(1)}
             >
@@ -26,7 +28,7 @@ const BreadcrumbTable = () => {
             </td>
             <td
               className={`border border-gray-400 px-3 py-1 cursor-pointer ${
-                selected === 2 ? 'bg-sky-300 text-sky-900' : 'text-gray-600'
+                selected === 2 ? "bg-sky-300 text-sky-900" : "text-gray-600"
               }`}
               onClick={() => setSelected(2)}
             >
@@ -34,7 +36,7 @@ const BreadcrumbTable = () => {
             </td>
             <td
               className={`border border-gray-400 px-3 py-1 cursor-pointer ${
-                selected === 3 ? 'bg-sky-300 text-sky-900' : 'text-gray-600'
+                selected === 3 ? "bg-sky-300 text-sky-900" : "text-gray-600"
               }`}
               onClick={() => setSelected(3)}
             >
@@ -43,9 +45,11 @@ const BreadcrumbTable = () => {
             {/* <td className="px-3 py-1 text-gray-600">...</td> */}
             <td
               className={`border border-gray-400 px-3 py-1 cursor-pointer ${
-                selected === 'Selanjutnya' ? 'bg-sky-300 text-sky-900' : 'text-gray-600'
+                selected === "Selanjutnya"
+                  ? "bg-sky-300 text-sky-900"
+                  : "text-gray-600"
               }`}
-              onClick={() => setSelected('Selanjutnya')}
+              onClick={() => setSelected("Selanjutnya")}
             >
               Selanjutnya
             </td>
