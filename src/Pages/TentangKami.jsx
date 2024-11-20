@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom'; 
+import { useLocation } from 'react-router-dom';
 import { FiUserCheck } from 'react-icons/fi';
 import Navbar from '../Components/Navbar';
 import TentangKami from '../Components/TentangKami';
@@ -11,8 +11,9 @@ function TentangKamiPage() {
   const navigation = [
     { name: 'Beranda', type: 'link', path: '/' },
     { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Ulasan', type: 'link', path: '/' },
+    { name: 'Produk', type: 'link', path: '/produk' },
     { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+    { name: 'Kontak', type: 'link', path: '/kontak' },
   ];
 
   const infoLinks = [
@@ -27,14 +28,19 @@ function TentangKamiPage() {
       href: location.pathname === '/' ? '#layanan' : '/layanan',
     },
     {
-      text: 'Ulasan',
-      path: '/',
-      href: location.pathname === '/' ? '#ulasan' : '/',
+      text: 'Produk',
+      path: '/produk',
+      href: location.pathname === '/' ? '#produk' : '/produk',
     },
     {
       text: 'Tentang Kami',
       path: '/tentang-kami',
       href: location.pathname === '/' ? '#tentang-kami' : '/tentang-kami',
+    },
+    {
+      text: 'Kontak',
+      path: '/kontak',
+      href: location.pathname === '/' ? '#kontak' : '/kontak',
     },
   ];
 
@@ -52,7 +58,7 @@ function TentangKamiPage() {
         buttonHoverColor="bg-blue-700"
       />
       <main className="flex-grow">
-        <section >
+        <section>
           <TentangKami />
         </section>
       </main>

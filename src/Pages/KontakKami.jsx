@@ -4,9 +4,9 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 
 const navigation = [
-  { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
+  { name: 'Beranda', type: 'link', path: '/' },
   { name: 'Layanan', type: 'link', path: '/layanan' },
-  { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
+  { name: 'Produk', type: 'link', path: '/produk' },
   { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
   { name: 'Kontak', type: 'link', path: '/kontak' },
 ];
@@ -14,7 +14,7 @@ const navigation = [
 const infoLinks = [
   { text: 'Beranda', path: '/beranda-user', href: '#beranda' },
   { text: 'Layanan', path: '/layanan', href: '#layanan' },
-  { text: 'Pemesanan', path: '/pemesanan', href: '#pemesanan' },
+  { text: 'Produk', path: '/produk', href: '#produk' },
   { text: 'Tentang Kami', path: '/tentang-kami', href: '#tentang-kami' },
   { text: 'Kontak', path: '/kontak', href: '#kontak' },
 ];
@@ -30,8 +30,8 @@ const KontakKami = () => {
       {' '}
       <Navbar
         navigation={navigation}
-        buttonName="Profil User"
-        useIcon={true}
+        buttonName="Masuk"
+        useIcon={false}
         icon={<FiUserCheck size={24} />}
         backgroundColor="bg-white"
         textColor="text-black-500"

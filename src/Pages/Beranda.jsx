@@ -7,21 +7,24 @@ import TimKami from '../Components/Timkami';
 import UlasanGrid from '../Components/UlasanGrid';
 import CardProduk from '../Components/CardProduk';
 import Button from '../Components/Button';
+import { FiUserCheck } from 'react-icons/fi';
 
 function Beranda() {
   const navigation = [
-    { name: 'Beranda', type: 'scroll' },
-    { name: 'Layanan', type: 'scroll' },
-    { name: 'Ulasan', type: 'scroll' },
-    { name: 'Tentang Kami', type: 'scroll' },
+    { name: 'Beranda', type: 'link', path: '/' },
+    { name: 'Layanan', type: 'link', path: '/layanan' },
+    { name: 'Produk', type: 'link', path: '/produk' },
+    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+    { name: 'Kontak', type: 'link', path: '/kontak' },
   ];
 
-  const infoLinks = navigation
-    .filter((nav) => nav.type === 'scroll')
-    .map((nav) => ({
-      href: `/#${nav.name.toLowerCase().replace(/\s+/g, '-')}`,
-      text: nav.name,
-    }));
+  const infoLinks = [
+    { text: 'Beranda', path: '/beranda-pengguna', href: '#beranda' },
+    { text: 'Layanan', path: '/layanan', href: '#layanan' },
+    { text: 'Produk', path: '/produk', href: '#produk-kami' },
+    { text: 'Tentang Kami', path: '/tentang-kami', href: '#tentang-kami' },
+    { text: 'Kontak', path: '/kontak', href: '#kontak' },
+  ];
 
   const ulasanCards = [
     {
@@ -76,13 +79,23 @@ function Beranda() {
 
   return (
     <>
-      <Navbar navigation={navigation} buttonName='Masuk' backgroundColor="bg-white" textColor="text-black-500" hoverColor="hover:text-blue-500" buttonColor="bg-blue-700" buttonHoverColor="bg-blue-500" />
+      <Navbar
+        navigation={navigation}
+        buttonName="Masuk"
+        useIcon={false}
+        icon={<FiUserCheck size={24} />}
+        backgroundColor="bg-white"
+        textColor="text-black-500"
+        hoverColor="hover:text-blue-500"
+        buttonColor="bg-blue-500"
+        buttonHoverColor="bg-blue-700"
+      />
       <main>
         <section id="beranda">
           <HeroSection to="/login" />
         </section>
         <section id="layanan">
-          <LayananKami to="/login" />
+          <LayananKami  />
         </section>
         <section id="tentang-kami">
           <TimKami />
