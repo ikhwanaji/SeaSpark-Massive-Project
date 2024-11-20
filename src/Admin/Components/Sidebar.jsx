@@ -65,7 +65,7 @@ const Sidebar = ({ currentPage }) => {
 
       <div
         className="absolute bottom-0 left-0 w-full flex justify-center items-baseline font-medium p-2 cursor-pointer hover:bg-sky-500 bg-blue-200 mb-6"
-        onClick={() => navigate("/logout")}
+        onClick={() => navigate("/login-admin")}
       >
         <div className="flex items-center text-black gap-2">
           <FaSignOutAlt className="w-4 h-8" />

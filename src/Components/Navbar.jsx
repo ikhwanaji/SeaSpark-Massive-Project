@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+const DEFAULT_NAVIGATION = [
+  { name: 'Beranda', type: 'scroll', path: '/' },
+  { name: 'Layanan', type: 'link', path: '/layanan' },
+  { name: 'Ulasan', type: 'scroll', path: '/#ulasan' },
+  { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+];
+
 function Navbar({
-  navigation = [
-    { name: 'Beranda', type: 'scroll', path: '/' },
-    { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Ulasan', type: 'scroll', path: '/#ulasan' },
-    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-  ],
+  navigation = DEFAULT_NAVIGATION,
   buttonName = 'Masuk',
   useIcon = false,
   icon = null,
   onLoginClick = null,
-  onIconClick = null, // Tambahkan prop baru untuk ikon
+  onIconClick = null,
   backgroundColor = 'bg-white',
   textColor = 'text-black-500',
   hoverColor = 'hover:text-blue-700',
@@ -25,16 +27,49 @@ function Navbar({
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Scroll to section or navigate based on nav item type
+  const handleNavClick = (e, item) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    if (item.type === 'link') {
+      navigate(item.path);
+      return;
+    }
+
+    const targetId = item.name.toLowerCase().replace(/\s+/g, '-');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } else if (item.path) {
+      navigate(item.path);
+    }
+  };
+
+  // Handle scroll to hash on location change
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
       const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
   }, [location]);
 
+  // Determine navigation item active state
+  const getNavItemClass = (nav) => {
+    const isActive = nav.type === 'link' && (location.pathname === nav.path || (nav.name === 'Layanan' && location.pathname.startsWith('/layanan/')));
+
+    return `
+      font-medium 
+      transition 
+      duration-300 
+      ${isActive ? 'text-blue-500' : textColor} 
+      ${hoverColor}
+    `;
+  };
+
+  // Login/Profile button handler
   const handleLogin = () => {
     if (buttonName === 'Profil User') {
       navigate('/akun');
@@ -45,7 +80,7 @@ function Navbar({
     }
   };
 
-  // Fungsi untuk menangani klik ikon
+  // Icon click handler
   const handleIconClick = () => {
     if (onIconClick) {
       onIconClick();
@@ -54,35 +89,7 @@ function Navbar({
     }
   };
 
-  const handleNavClick = (e, item) => {
-    e.preventDefault();
-
-    if (item.type === 'link' && item.path) {
-      navigate(item.path);
-      setIsOpen(false);
-      return;
-    }
-
-    const targetId = item.name.toLowerCase().replace(/\s+/g, '-');
-    const element = document.getElementById(targetId);
-
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false);
-    } else if (item.path) {
-      navigate(item.path);
-    }
-  };
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const getNavItemClass = (nav) => {
-    if (nav.type === 'link') {
-      return location.pathname === nav.path ? 'font-medium text-blue-500 transition duration-300' : `font-medium ${textColor} ${hoverColor} transition duration-300`;
-    }
-    return `font-medium ${textColor} ${hoverColor} transition duration-300`;
-  };
-
+  // Render login button or icon
   const renderLoginButton = () => {
     if (useIcon && icon) {
       return (
@@ -132,6 +139,7 @@ function Navbar({
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <div className="logo">
             <a
               href="/"
@@ -144,6 +152,7 @@ function Navbar({
             </a>
           </div>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center justify-between flex-grow">
             <div className="flex-grow flex justify-center">
               <ul className="flex gap-10">
@@ -160,7 +169,7 @@ function Navbar({
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button onClick={toggleMenu} className={`md:hidden ${textColor} focus:outline-none`}>
+          <button onClick={() => setIsOpen(!isOpen)} className={`md:hidden ${textColor} focus:outline-none`}>
             {isOpen ? '✖' : '☰'}
           </button>
         </div>
@@ -198,7 +207,7 @@ Navbar.propTypes = {
   useIcon: PropTypes.bool,
   icon: PropTypes.element,
   onLoginClick: PropTypes.func,
-  onIconClick: PropTypes.func, // Tambahkan PropTypes untuk onIconClick
+  onIconClick: PropTypes.func,
   backgroundColor: PropTypes.string,
   textColor: PropTypes.string,
   hoverColor: PropTypes.string,

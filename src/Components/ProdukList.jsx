@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProdukList = ({ kategori, nama, harga, gambar, onBeli }) => {
+const ProdukList = ({ kategori, nama, harga, gambar,deskripsi,stok, onBeli }) => {
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 p-4">
       {' '}
@@ -15,7 +15,7 @@ const ProdukList = ({ kategori, nama, harga, gambar, onBeli }) => {
         </div>
         <div className="mt-auto">
           <p className="text-blue-500 text-lg font-semibold mb-4 text-center">Rp {harga.toLocaleString()}</p>
-          <button onClick={() => onBeli({ kategori, nama, harga, gambar })} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300 ease-in-out w-full">
+          <button onClick={() => onBeli({ kategori, nama, harga, gambar ,deskripsi, stok })} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300 ease-in-out w-full">
             Beli Sekarang
           </button>
         </div>
