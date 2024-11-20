@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
-import Sidebar from '../Components/Sidebar';
-import CardDetailPesananSatuan from '../Components/CardDetailPesananSatuan';
+import Navbar from '../../Components/Navbar';
+import Sidebar from '../../Components/Sidebar';
+import CardDetailPesananPaketan from '../../Components/Pesanan/CardDetailPesananPaketan';
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <div className="flex flex-1">
         <Sidebar currentPage="Manajemen Order" />
         <div className="flex-1 p-6 overflow-y-auto">
-          <CardDetailPesananSatuan />
+          <CardDetailPesananPaketan />
         </div>
       </div>
     </div>
