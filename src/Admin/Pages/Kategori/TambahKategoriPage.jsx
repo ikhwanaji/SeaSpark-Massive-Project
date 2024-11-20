@@ -3,7 +3,7 @@ import Navbar from "../../Components/Navbar";
 import Sidebar from "../../Components/Sidebar";
 import CardTambahKategori from "../../Components/Kategori/CardTambahKategori";
 
-const Kategori = () => {
+const TambahKategori = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       <Navbar />
@@ -17,4 +17,4 @@ const Kategori = () => {
   );
 };
 
-export default Kategori;
+export default TambahKategori;
