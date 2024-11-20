@@ -116,7 +116,7 @@ const LoginAdmin = () => {
                   {/* <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-700 hover:text-white transition duration-300 ease-in-out">
                     Masuk
                   </button> */}
-                  <Button buttonText='Masuk' fullWidth={true} to='/manajemen-order'/>
+                  <Button buttonText='Masuk' fullWidth={true} to='/kategori-produk'/>
                 </div>
               </form>
             </div>

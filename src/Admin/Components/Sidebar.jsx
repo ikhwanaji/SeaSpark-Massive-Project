@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   FaShoppingCart,
   FaUser,
-  FaBox,
+  FaStore,
   FaChartBar,
   FaSignOutAlt,
+  FaFileAlt,
+  FaCreditCard,
+  FaTags,
+  FaBox,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -14,24 +18,44 @@ const Sidebar = ({ currentPage }) => {
 
   const menuItems = [
     {
-      name: "Manajemen Order",
-      icon: <FaShoppingCart className="w-5 h-5" />,
-      to: "/manajemen-order",
+      name: "Kategori Produk",
+      icon: <FaTags className="w-5 h-5" />,
+      to: "/kategori-produk",
     },
     {
-      name: "Manajemen User",
-      icon: <FaUser className="w-5 h-5" />,
-      to: "/manajemen-user",
+      name: "Manajemen Produk",
+      icon: <FaStore className="w-5 h-5" />,
+      to: "/manajemen-produk",
     },
     {
-      name: "Manajemen Barang",
+      name: "Manajemen Paket",
       icon: <FaBox className="w-5 h-5" />,
-      to: "/manajemen-barang",
+      to: "/manajemen-paket",
+    },
+    {
+      name: "Daftar Pesanan",
+      icon: <FaShoppingCart className="w-5 h-5" />,
+      to: "/daftar-pesanan",
+    },
+    {
+      name: "Metode Pembayaran",
+      icon: <FaCreditCard className="w-5 h-5" />,
+      to: "/metode-pembayaran",
+    },
+    {
+      name: "Manajemen Artikel",
+      icon: <FaFileAlt className="w-5 h-5" />,
+      to: "/manajemen-artikel",
     },
     {
       name: "Laporan Pengguna",
       icon: <FaChartBar className="w-5 h-5" />,
       to: "/laporan-pengguna",
+    },
+    {
+      name: "Manajemen User",
+      icon: <FaUser className="w-5 h-5" />,
+      to: "/manajemen-user",
     },
   ];
 
@@ -41,7 +65,7 @@ const Sidebar = ({ currentPage }) => {
 
   const handleMenuClick = (item) => {
     setSelectedMenu(item.name);
-    navigate(item.to); // Navigate to the route specified in the `to` property
+    navigate(item.to);
   };
 
   return (
@@ -64,13 +88,11 @@ const Sidebar = ({ currentPage }) => {
       </ul>
 
       <div
-        className="absolute bottom-0 left-0 w-full flex justify-center items-baseline font-medium p-2 cursor-pointer hover:bg-sky-500 bg-blue-200 mb-6"
-        onClick={() => navigate("/login-admin")}
+        className="flex gap-2 absolute bottom-0 left-0 w-full justify-center items-center font-medium p-2 cursor-pointer hover:bg-sky-700 bg-sky-900 mb-6 text-white"
+        onClick={() => navigate("/logout")}
       >
-        <div className="flex items-center text-black gap-2">
-          <FaSignOutAlt className="w-4 h-8" />
-          <span>Keluar</span>
-        </div>
+        <FaSignOutAlt className="w-5 h-5" />
+        <span>Keluar</span>
       </div>
     </aside>
   );

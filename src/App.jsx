@@ -33,20 +33,46 @@ import SuksesPage from './Pages/SuksesPage';
 import TentangKami from './Pages/TentangKami';
 
 // Halaman Admin
-import LoginAdmin from './Pages/loginadmin';
-import LupaPassword from './Pages/LupaPassword';
-import ManajemenOrderPage from './Admin/Pages/ManajemenOrderPage';
-import DetailPesananSatuanPage from './Admin/Pages/DetailPesananSatuanPage';
-import TambahPesananSatuanPage from './Admin/Pages/TambahPesananSatuanPage';
-import DetailPesananPaketanPage from './Admin/Pages/DetailPesananPaketanPage';
-import TambahPesananPaketanPage from './Admin/Pages/TambahPesananPaketanPage';
-import ManajemenUserPage from './Admin/Pages/ManajemenUserPage';
-import TambahUser from './Admin/Pages/TambahUser';
-import ManajemenBarang from './Admin/Pages/ManajemenBarangPage';
-import LaporanPengguna from './Admin/Pages/LaporanPenggunaPages';
-import TambahBarang from './Admin/Pages/TambahBarang';
-import UbahUser from './Admin/Pages/UbahUser';
-import KonfirmasiPembayaran from './Pages/KonfirmasiPembayaran';
+import LoginAdmin from "./Pages/loginadmin";
+import LupaPassword from "./Pages/LupaPassword";
+
+// Halaman Admin : Pesanan
+import DaftarPesananPage from "./Admin/Pages/Pesanan/DaftarPesananPage";
+import DetailPesananSatuanPage from "./Admin/Pages/Pesanan/DetailPesananSatuanPage";
+import DetailPesananPaketanPage from "./Admin/Pages/Pesanan/DetailPesananPaketanPage";
+
+// Halaman Admin : Kategori
+import KategoriProdukPage from "./Admin/Pages/Kategori/KategoriProdukPage";
+import TambahKategoriPage from "./Admin/Pages/Kategori/TambahKategoriPage";
+import EditKategoriPage from "./Admin/Pages/Kategori/EditKategoriPage";
+
+// Halaman Admin : Manajemen Produk
+import ManajemenProdukPage from "./Admin/Pages/Produk/ManajemenProdukPage";
+import TambahProdukPage from "./Admin/Pages/Produk/TambahProdukPage";
+import EditProdukPage from "./Admin/Pages/Produk/EditProdukPage";
+
+// Halaman Admin : Manajemen Paket
+import ManajemenPaketPage from "./Admin/Pages/Paket/ManajemenPaketPage";
+import TambahPaketPage from "./Admin/Pages/Paket/TambahPaketPage";
+import EditPaketPage from "./Admin/Pages/Paket/EditPaketPage";
+
+// Halaman Admin : Metode Pembayaran
+import MetodePembayaranPage from "./Admin/Pages/Pembayaran/MetodePembayaranPage";
+import TambahMetodePage from "./Admin/Pages/Pembayaran/TambahMetodePage";
+import EditMetodePage from "./Admin/Pages/Pembayaran/EditMetodePage";
+
+// Halaman Admin : Manajemen Artikel
+import ManajemenArtikelPage from "./Admin/Pages/Artikel/ManajemenArtikelPage";
+import TambahArtikelPage from "./Admin/Pages/Artikel/TambahArtikelPage";
+import EditArtikelPage from "./Admin/Pages/Artikel/EditArtikelPage";
+
+// Halaman Admin : Laporan Pengguna
+import LaporanPenggunaPage from "./Admin/Pages/Laporan/LaporanPenggunaPage";
+
+// Halaman Admin : Manajemen User
+import ManajemenUserPage from "./Admin/Pages/User/ManajemenUserPage";
+import EditUserPage from "./Admin/Pages/User/EditUserPage";
+
 
 function App() {
   return (
@@ -90,20 +116,43 @@ function App() {
         <Route path="/login-admin" element={<LoginAdmin />} />
         <Route path="/lupa-password" element={<LupaPassword />} />
 
-        {/* Manajemen Admin */}
-        <Route path="/manajemen-order" element={<ManajemenOrderPage />} />
-        <Route path="/manajemen-user" element={<ManajemenUserPage />} />
-        <Route path="/tambah-user" element={<TambahUser />} />
-        <Route path="/manajemen-barang" element={<ManajemenBarang />} />
-        <Route path="/laporan-pengguna" element={<LaporanPengguna />} />
-        <Route path="/tambah-barang" element={<TambahBarang />} />
-        <Route path="/ubah-user" element={<UbahUser />} />
-
-        {/* Detail Pesanan Admin */}
+        {/* Page Pesanan */}
+        <Route path="/daftar-pesanan" element={<DaftarPesananPage />} />
         <Route path="/detail-pesanan-satuan" element={<DetailPesananSatuanPage />} />
-        <Route path="/tambah-pesanan-satuan" element={<TambahPesananSatuanPage />} />
         <Route path="/detail-pesanan-paketan" element={<DetailPesananPaketanPage />} />
-        <Route path="/tambah-pesanan-paketan" element={<TambahPesananPaketanPage />} />
+
+        {/* Page Kategori */}
+        <Route path="/kategori-produk" element={<KategoriProdukPage />} />
+        <Route path="/tambah-kategori" element={<TambahKategoriPage />} />
+        <Route path="/edit-kategori" element={<EditKategoriPage />} />
+
+        {/* Page Manajemen Produk */}
+        <Route path="/manajemen-produk" element={<ManajemenProdukPage />} />
+        <Route path="/tambah-produk" element={<TambahProdukPage />} />
+        <Route path="/edit-produk" element={<EditProdukPage />} />
+
+        {/* Page Manajemen Paket */}
+        <Route path="/manajemen-paket" element={<ManajemenPaketPage />} />
+        <Route path="/tambah-paket" element={<TambahPaketPage />} />
+        <Route path="/edit-paket" element={<EditPaketPage />} />
+
+        {/* Page Metode Pembayaran */}
+        <Route path="/metode-pembayaran" element={<MetodePembayaranPage />} />
+        <Route path="/tambah-metode" element={<TambahMetodePage />} />
+        <Route path="/edit-metode" element={<EditMetodePage />} />
+
+        {/* Page Manajemen Artikel */}
+        <Route path="/manajemen-artikel" element={<ManajemenArtikelPage />} />
+        <Route path="/tambah-artikel" element={<TambahArtikelPage />} />
+        <Route path="/edit-artikel" element={<EditArtikelPage />} />
+
+        {/* Page Laporan Pengguna */}
+        <Route path="/laporan-pengguna" element={<LaporanPenggunaPage />} />
+
+        {/* Page Manajemen User */}
+        <Route path="/manajemen-user" element={<ManajemenUserPage />} />
+        <Route path="/edit-user" element={<EditUserPage />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,20 @@
+import React from "react";
+import Navbar from "../../Components/Navbar";
+import Sidebar from "../../Components/Sidebar";
+import CardPaket from "../../Components/Paket/CardPaket";
+
+const ManajemenPaket = () => {
+  return (
+    <div className="flex flex-col h-screen bg-gray-100">
+      <Navbar />
+      <div className="flex flex-1">
+        <Sidebar currentPage="Manajemen Paket" />
+        <div className="flex-1 p-6 overflow-y-auto bg-gray-100">
+            <CardPaket />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ManajemenPaket;

@@ -1,40 +1,31 @@
-import React from "react";
-import {
-  FaCheck,
-  FaTrash,
-  FaUserPlus,
-  FaArrowLeft,
-  FaSave,
-  FaInfoCircle,
-  FaCog,
-} from "react-icons/fa";
+import React from 'react';
+import { FaTrash, FaPlus, FaSave, FaArrowLeft, FaPencilAlt, FaInfoCircle } from 'react-icons/fa';
 
 const Button = ({ label, type, onClick }) => {
   const buttonStyles = {
-    process:
-      "bg-emerald-600 text-white px-2 py-1 rounded-md hover:bg-emerald-400 flex items-center justify-center m-0.5 text-sm",
-    delete:
-      "bg-rose-600 text-white px-2 py-1 rounded-md hover:bg-rose-400 flex items-center justify-center m-0.5 text-sm",
-    add: "bg-sky-600 text-white px-2 py-1 rounded-md hover:bg-sky-400 flex items-center justify-center m-0.5 text-sm",
-    back: "bg-sky-600 text-white px-2 py-1 rounded-md hover:bg-sky-400 flex items-center justify-center m-0.5 text-sm",
-    details:
-      "bg-sky-600 text-white px-2 py-1 rounded-md hover:bg-sky-400 flex items-center justify-center m-0.5 text-sm",
-    save: "bg-emerald-600 text-white px-2 py-1 rounded-md hover:bg-emerald-400 flex items-center justify-center m-0.5 text-sm",
+    delete: 'bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-400 flex items-center gap-2',
+    add: 'bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-400 flex items-center gap-2',
+    save: 'bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-400 flex items-center gap-2',
+    process: 'bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-400 flex items-center gap-2',
+    back: 'bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-400 flex items-center gap-2',
+    details: 'bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-400 flex items-center gap-2',
+    edit: 'bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-400 flex items-center gap-2',
   };
 
   const icons = {
-    process: <FaCog className="mr-1" />,
-    delete: <FaTrash className="mr-1" />,
-    add: <FaUserPlus className="mr-1" />,
-    back: <FaArrowLeft className="mr-1" />,
-    details: <FaInfoCircle className="mr-1" />,
-    save: <FaSave className="mr-1" />,
-    Check: <FaCheck className="mr-1" />,
+    delete: <FaTrash className="h-5 w-5" />,
+    add: <FaPlus className="h-5 w-5" />,
+    save: <FaSave className="h-5 w-5" />,
+    process: <FaArrowLeft className="h-5 w-5" />,
+    back: <FaArrowLeft className="h-5 w-5" />,
+    details: <FaInfoCircle className="h-5 w-5" />,
+    edit: <FaPencilAlt className="h-5 w-5" />,
   };
 
   return (
     <button onClick={onClick} className={buttonStyles[type]}>
-      {icons[type]} {label}
+      {icons[type]}
+      {label}
     </button>
   );
 };
