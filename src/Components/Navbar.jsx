@@ -1,153 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FiUserCheck } from 'react-icons/fi';
 
 const DEFAULT_NAVIGATION = [
-  { name: 'Beranda', type: 'scroll', path: '/' },
+  { name: 'Beranda', type: 'link', path: '/' },
   { name: 'Layanan', type: 'link', path: '/layanan' },
-  { name: 'Ulasan', type: 'scroll', path: '/#ulasan' },
+  { name: 'Produk', type: 'link', path: '/produk' },
   { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
+  { name: 'Kontak', type: 'link', path: '/kontak' },
 ];
 
 function Navbar({
   navigation = DEFAULT_NAVIGATION,
   buttonName = 'Masuk',
-  useIcon = false,
-  icon = null,
-  onLoginClick = null,
-  onIconClick = null,
   backgroundColor = 'bg-white',
   textColor = 'text-black-500',
   hoverColor = 'hover:text-blue-700',
-  buttonColor = 'bg-blue-500',
-  buttonHoverColor = 'bg-blue-500',
   logo = '/src/Assets/img/logo.png',
+  isLoggedIn = false,
+  user = null,
+  onLogout = () => {},
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Scroll to section or navigate based on nav item type
+  const getUserName = () => {
+    return isLoggedIn && user && user.name ? user.name : 'Pengguna';
+  };
+
   const handleNavClick = (e, item) => {
     e.preventDefault();
     setIsOpen(false);
-
-    if (item.type === 'link') {
-      navigate(item.path);
-      return;
-    }
-
-    const targetId = item.name.toLowerCase().replace(/\s+/g, '-');
-    const element = document.getElementById(targetId);
-
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else if (item.path) {
-      navigate(item.path);
-    }
+    navigate(item.path);
   };
 
-  // Handle scroll to hash on location change
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [location]);
-
-  // Determine navigation item active state
-  const getNavItemClass = (nav) => {
-    const isActive = nav.type === 'link' && (location.pathname === nav.path || (nav.name === 'Layanan' && location.pathname.startsWith('/layanan/')));
-
-    return `
-      font-medium 
-      transition 
-      duration-300 
-      ${isActive ? 'text-blue-500' : textColor} 
-      ${hoverColor}
-    `;
-  };
-
-  // Login/Profile button handler
-  const handleLogin = () => {
-    if (buttonName === 'Profil User') {
-      navigate('/akun');
-    } else if (onLoginClick) {
-      onLoginClick();
-    } else {
-      navigate('/login');
-    }
-  };
-
-  // Icon click handler
-  const handleIconClick = () => {
-    if (onIconClick) {
-      onIconClick();
-    } else if (buttonName === 'Profil User') {
-      navigate('/akun');
-    }
-  };
-
-  // Render login button or icon
   const renderLoginButton = () => {
-    if (useIcon && icon) {
-      return (
-        <div
-          onClick={handleIconClick}
-          className={`
-            cursor-pointer 
-            ${textColor} 
-            ${hoverColor} 
-            transition-all 
-            duration-300 
-            hover:bg-gray-100 
-            p-2 
-            rounded-full
-          `}
-          title={buttonName}
-        >
-          {icon}
-        </div>
-      );
-    }
-
     return (
-      <button
-        onClick={handleLogin}
-        className={`
-          ${buttonColor} 
-          hover:${buttonHoverColor} 
-          text-white 
-          font-bold 
-          py-2 
-          px-4 
-          rounded-lg
-        `}
+      <div
+        onClick={isLoggedIn ? () => navigate('/akun') : () => navigate('/login')}
+        className={`cursor-pointer ${textColor} ${hoverColor} transition-all duration-300 hover:bg-gray-100 p-2 rounded-full`}
+        title={isLoggedIn ? "Akun" : buttonName}
       >
-        {buttonName}
-      </button>
+        <FiUserCheck className="w-6 h-6" />
+      </div>
     );
   };
 
   return (
-    <nav
-      className={`
-        fixed w-full transition-all py-5 shadow-md 
-        top-0 left-0 right-0 z-50 ${backgroundColor}
-      `}
-    >
+    <nav className={`fixed w-full transition-all py-5 shadow-md top-0 left-0 right-0 z-50 ${backgroundColor}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="logo">
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/');
-              }}
-            >
+            <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
               <img className="w-1/3 md:w-1/4" src={logo} alt="Logo" />
             </a>
           </div>
@@ -158,14 +65,17 @@ function Navbar({
               <ul className="flex gap-10">
                 {navigation.map((nav, index) => (
                   <li key={index}>
-                    <a href={nav.path} onClick={(e) => handleNavClick(e, nav)} className={getNavItemClass(nav)}>
+                    <a href={nav.path} onClick={(e) => handleNavClick(e, nav)} className={location.pathname === nav.path ? 'text-blue-500' : textColor}>
                       {nav.name}
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="ml-4">{renderLoginButton()}</div>
+            <div className="ml-4 flex items-center space-x-4">
+              {isLoggedIn && <div className="text-sm text-gray-700">Halo, {getUserName()}</div>}
+              {renderLoginButton()}
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -173,47 +83,54 @@ function Navbar({
             {isOpen ? '✖' : '☰'}
           </button>
         </div>
-      </div>
-
-      {/* Mobile Navigation Dropdown */}
-      {isOpen && (
-        <div className={`md:hidden ${backgroundColor}`}>
-          <ul className="flex flex-col items-center gap-4 py-4">
-            {navigation.map((nav, index) => (
-              <li key={index}>
-                <a href={nav.path} onClick={(e) => handleNavClick(e, nav)} className={getNavItemClass(nav)}>
-                  {nav.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex justify-center mt-4 pb-4">{renderLoginButton()}</div>
         </div>
-      )}
-    </nav>
-  );
+
+{/* Mobile Navigation Dropdown */}
+{isOpen && (
+  <div className={`md:hidden ${backgroundColor}`}>
+    <ul className="flex flex-col items-center gap-4 py-4">
+      {navigation.map((nav, index) => (
+        <li key={index}>
+          <a
+            href={nav.path}
+            onClick={(e) => handleNavClick(e, nav)}
+            className={location.pathname === nav.path ? 'text-blue-500' : textColor}
+          >
+            {nav.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div className="flex flex-col items-center mt-4 pb-4 space-y-2">
+      {isLoggedIn && <div className="text-sm text-gray-700">Halo, {getUserName()}</div>}
+      {renderLoginButton()}
+    </div>
+  </div>
+)}
+</nav>
+);
 }
 
-// PropTypes untuk validasi props
+// PropTypes untuk validasi prop
 Navbar.propTypes = {
-  navigation: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      type: PropTypes.oneOf(['scroll', 'link']).isRequired,
-      path: PropTypes.string,
-    })
-  ),
-  buttonName: PropTypes.string,
-  useIcon: PropTypes.bool,
-  icon: PropTypes.element,
-  onLoginClick: PropTypes.func,
-  onIconClick: PropTypes.func,
-  backgroundColor: PropTypes.string,
-  textColor: PropTypes.string,
-  hoverColor: PropTypes.string,
-  buttonColor: PropTypes.string,
-  buttonHoverColor: PropTypes.string,
-  logo: PropTypes.string,
+navigation: PropTypes.arrayOf(
+PropTypes.shape({
+name: PropTypes.string.isRequired,
+type: PropTypes.oneOf(['scroll', 'link']).isRequired,
+path: PropTypes.string,
+})
+),
+buttonName: PropTypes.string,
+backgroundColor: PropTypes.string,
+textColor: PropTypes.string,
+hoverColor: PropTypes.string,
+logo: PropTypes.string,
+isLoggedIn: PropTypes.bool,
+user: PropTypes.shape({
+name: PropTypes.string,
+// Tambahkan properti lain sesuai kebutuhan
+}),
+onLogout: PropTypes.func,
 };
 
 export default Navbar;

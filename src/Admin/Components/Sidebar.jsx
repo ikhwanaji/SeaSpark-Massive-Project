@@ -89,7 +89,7 @@ const Sidebar = ({ currentPage }) => {
 
       <div
         className="flex gap-2 absolute bottom-0 left-0 w-full justify-center items-center font-medium p-2 cursor-pointer hover:bg-sky-700 bg-sky-900 mb-6 text-white"
-        onClick={() => navigate("/logout")}
+        onClick={() => navigate("/login-admin")}
       >
         <FaSignOutAlt className="w-5 h-5" />
         <span>Keluar</span>

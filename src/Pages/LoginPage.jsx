@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaLock, FaEnvelope } from 'react-icons/fa';
+import AuthService from '../services/AuthService';
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 import Img from '../Assets/img/HeroSection.jpg';
 import ImgLoginUser from '../Assets/img/LoginUser.png';
-import Button from '../Components/Button';
 
 // Konstanta untuk pesan error
 const ERROR_MESSAGES = {
@@ -14,6 +16,7 @@ const ERROR_MESSAGES = {
 };
 
 const LoginPage = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -90,48 +93,29 @@ const LoginPage = () => {
 
     if (validateForm()) {
       try {
-        // Simulasi proses login
-        // Ganti dengan proses login sebenarnya
-        const response = await simulateLogin(formData);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
+          email: formData.email,
+          password: formData.password,
+        });
 
-        if (response.success) {
-          // Simpan email jika remember me aktif
-          if (rememberMe) {
-            localStorage.setItem('rememberedEmail', formData.email);
-          } else {
-            localStorage.removeItem('rememberedEmail');
-          }
+        // Gunakan fungsi login dari context
+        login(response.data.user, response.data.token);
 
-          // Navigasi ke halaman beranda
-          navigate('/beranda-pengguna');
-        } else {
-          setGlobalError(response.message || 'Login gagal');
-        }
+        // Navigasi ke beranda
+        navigate('/');
       } catch (error) {
-        setGlobalError('Terjadi kesalahan. Silakan coba lagi.');
-        console.error('Login error:', error);
+        // Error handling tetap sama
+        if (error.response) {
+          setGlobalError(error.response.data.message || 'Login gagal');
+        } else {
+          setGlobalError('Terjadi kesalahan saat login');
+        }
+        console.error('Login Error:', error);
       }
     }
   };
 
-  // Simulasi fungsi login (ganti dengan API sebenarnya)
-  const simulateLogin = async (credentials) => {
-    // Simulasi delay dan proses login
-    return new Promise((resolve) => { 
-      setTimeout(() => {
-        if (credentials.email === 'wann@example.com' && credentials.password === 'password123') {
-          resolve({ success: true });
-        } else {
-          resolve({
-            success: false,
-            message: 'Email atau password salah',
-          });
-        }
-      }, 1000);
-    });
-  };
-
-  // Login dengan Google
+  // Login dengan Google (placeholder)
   const handleGoogleLogin = async () => {
     try {
       // Implementasi login Google
@@ -147,7 +131,7 @@ const LoginPage = () => {
   const renderInput = (name, type, placeholder, icon = null, leadingIcon = null) => (
     <div className="mt-4">
       <label htmlFor={name} className="block text-black text-sm font-bold mb-2">
-        {name === 'email' ? 'Email' : 'Sandi'}
+        {name === 'email' ? 'Email' : 'Password'}
       </label>
       <div className="relative">
         {leadingIcon && <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">{leadingIcon}</div>}

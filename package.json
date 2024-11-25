@@ -9,9 +9,11 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "proxy": "http://localhost:3040",
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.2",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
