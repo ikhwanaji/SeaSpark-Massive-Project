@@ -13,7 +13,7 @@ function BerandaUser() {
   const navigation = [
     { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
     { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
+    { name: 'Produk', type: 'link', path: '/produk' },
     { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
     { name: 'Kontak', type: 'link', path: '/kontak' },
   ];
@@ -21,7 +21,7 @@ function BerandaUser() {
   const infoLinks = [
     { text: 'Beranda', path: '/beranda-pengguna', href: '#beranda' },
     { text: 'Layanan', path: '/layanan', href: '#layanan' },
-    { text: 'Pemesanan', path: '/pemesanan', href: '#pemesanan' },
+    { text: 'Produk', path: '/produk', href: '#produk' },
     { text: 'Tentang Kami', path: '/tentang-kami', href: '#tentang-kami' },
     { text: 'Kontak', path: '/kontak', href: '#kontak' },
   ];
