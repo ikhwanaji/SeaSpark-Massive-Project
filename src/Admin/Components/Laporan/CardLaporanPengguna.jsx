@@ -33,7 +33,7 @@ const CardLaporan = () => {
         Laporan Pengguna
       </h2>
       <hr />
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-6">
         <Table headers={headers} data={data} renderActions={renderActions} />
       </div>
     </div>

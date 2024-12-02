@@ -39,33 +39,35 @@ const CardUser = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Daftar Pengguna</h2>
-
+    <div className="border rounded-md p-4 bg-white shadow mb-6">
+      <h2 className="text-2xl text-sky-900 font-bold mb-4">
+        Manajemen User
+      </h2>
+      <hr />
       {users.length === 0 ? (
         <div>Tidak ada data pengguna</div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border">
+        <div className="overflow-x-auto mt-6">
+          <table className="w-full border-collapse mb-4">
             <thead>
-              <tr>
-                <th className="border p-2">No</th>
-                <th className="border p-2">Nama</th>
-                <th className="border p-2">Email</th>
-                <th className="border p-2">No. HP</th>
-                <th className="border p-2">Role</th>
-                <th className="border p-2">Aksi</th>
+              <tr className="bg-sky-200">
+                <th className="border border-sky-900 p-2 text-sky-900 text-center">No</th>
+                <th className="border border-sky-900 p-2 text-sky-900 text-center">Nama</th>
+                <th className="border border-sky-900 p-2 text-sky-900 text-center">Email</th>
+                <th className="border border-sky-900 p-2 text-sky-900 text-center">No. HP</th>
+                <th className="border border-sky-900 p-2 text-sky-900 text-center">Role</th>
+                <th className="border border-sky-900 p-2 text-sky-900 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, index) => (
                 <tr key={user.userId || index}>
-                  <td className="border p-2 text-center">{index + 1}</td>
-                  <td className="border p-2">{user.nama}</td>
-                  <td className="border p-2">{user.email}</td>
-                  <td className="border p-2">{user.no_hp}</td>
-                  <td className="border p-2">{user.role}</td>
-                  <td>
+                  <td className="text-center border border-sky-900 p-2 text-sky-900">{index + 1}</td>
+                  <td className="border border-sky-900 p-2 text-sky-900">{user.nama}</td>
+                  <td className="border border-sky-900 p-2 text-sky-900">{user.email}</td>
+                  <td className="border border-sky-900 p-2 text-sky-900">{user.no_hp}</td>
+                  <td className="border border-sky-900 p-2 text-sky-900">{user.role}</td>
+                  <td className="border border-sky-900 p-2 text-sky-900">
                     {' '}
                     <div className="flex flex-row gap-2 justify-center">
                       <Link to={`/edit-user/${user.userId}`}>
