@@ -202,15 +202,15 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: `url(${Img})` }}>
       <div className="container mx-auto px-4">
-        <div className="bg-sky-200 bg-opacity-80 rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+        <div className="bg-blue-200 bg-opacity-90 rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
           <div className="flex flex-col lg:flex-row">
             {/* Gambar Login */}
             <div className="hidden lg:block lg:w-1/2 bg-cover bg-center" style={{ backgroundImage: `url(${ImgLoginUser})` }} />
 
             {/* Form Login */}
             <div className="w-full p-8 lg:w-1/2">
-              <h2 className="text-2xl font-semibold text-black text-center">Selamat datang!</h2>
-              <p className="text-l text-gray-700 text-center">Silakan masuk ke akun anda</p>
+              <h2 className="text-2xl font-bold text-black text-center">Selamat Datang!</h2>
+              <p className="text-l text-gray-700 text-center">Silahkan Masuk Ke Akun Anda</p>
 
               {/* Tampilan Error Global */}
               {globalError && (
@@ -259,7 +259,7 @@ const LoginPage = () => {
                     </label>
                   </div>
 
-                  <Link to="/lupa-password" className="text-sm text-blue-600 hover:text-blue-800">
+                  <Link to="/lupa-password" className="text-sm text-blue-700 hover:text-blue-500">
                     Lupa Password?
                   </Link>
                 </div>
@@ -275,10 +275,10 @@ const LoginPage = () => {
                       py-2 
                       px-4 
                       rounded-lg 
-                      hover:bg-blue-700 
+                      hover:bg-blue-500 
                       focus:outline-none 
                       focus:ring-2 
-                      focus:ring-blue-500 
+                      focus:ring-blue-700 
                       focus:ring-opacity-50
                       transition 
                       duration-300
@@ -303,7 +303,7 @@ const LoginPage = () => {
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-600">
                   Belum punya akun?{' '}
-                  <Link to="/register" className="text-blue-600 hover:text-blue-800 font-semibold">
+                  <Link to="/register" className="text-blue-700 hover:text-blue-500 font-semibold">
                     Daftar Sekarang
                   </Link>
                 </p>

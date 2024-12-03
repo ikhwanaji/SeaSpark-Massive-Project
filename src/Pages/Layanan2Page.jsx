@@ -3,7 +3,7 @@ import Button from '../Components/Button';
 import Navbar from '../Components/Navbar';
 import { FiUserCheck } from 'react-icons/fi';
 import Footer from '../Components/Footer';
-import Card from '../Components/CardLayanan';
+import CardLayanan2 from '../Components/CardLayanan2';
 
 const Layanan = () => {
   const navigation = [
@@ -42,44 +42,6 @@ const Layanan = () => {
     },
   ];
 
-  const layananData = [
-    {
-      id: '1', // Tambahkan ID unik
-      imageSrc: '/src/Assets/img/bakteri.png',
-      title: 'Penyakit Bakteri',
-      description: 'Penyebab Penyakit: Vibrio spp. (Vibrio alginolyticus, Vibrio harveyi)',
-      linkText: 'Baca lebih lanjut...',
-    },
-    {
-      id: '2', // Tambahkan ID unik
-      imageSrc: '/src/Assets/img/jamur.png',
-      title: 'Penyakit Jamur',
-      description: 'Penyebab Penyakit: Aphanomyces spp., Saprolegnia spp.',
-      linkText: 'Baca lebih lanjut...',
-    },
-    {
-      id: '3', // Tambahkan ID unik
-      imageSrc: '/src/Assets/img/virus.png',
-      title: 'Penyakit Virus',
-      description: 'Penyebab Penyakit: White Spot Syndrome Virus (WSSV).',
-      linkText: 'Baca lebih lanjut...',
-    },
-    {
-      id: '4', // Tambahkan ID unik
-      imageSrc: '/src/Assets/img/parasit.png',
-      title: 'Penyakit Parasit',
-      description: 'Penyebab Penyakit: Protozoa Cryptocaryon irritans (penyakit bintik putih), Amyloodinium ocellatum (velvet disease), dan Trichodina spp.',
-      linkText: 'Baca lebih lanjut...',
-    },
-    {
-      id: '5', // Tambahkan ID unik
-      imageSrc: '/src/Assets/img/nutrisi.png',
-      title: 'Penyakit Nutrisi',
-      description: 'Penyebab Penyakit: Kekurangan protein, Defisiensi vitamin, Kekurangan mineral, Kandungan pakan tidak seimbang',
-      linkText: 'Baca lebih lanjut...',
-    },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar
@@ -95,14 +57,10 @@ const Layanan = () => {
       />
       <div className="flex-grow bg-blue-100 py-20">
         <div className='text-center text-2xl pt-10 font-extrabold text-gray-800'>
-          <h1>Penyakit Ikan Kerapu</h1>
+          <h1>Penyakit Yang Umumnya<br/>Menyerang Ikan Kerapu</h1>
         </div>
         <div className="p-6 flex flex-col items-center gap-6">
-          {layananData.map((layanan) => (
-            <div key={layanan.id} className="w-full max-w-xl">
-              <Card id={layanan.id} imageSrc={layanan.imageSrc} title={layanan.title} description={layanan.description} linkText={layanan.linkText} />
-            </div>
-          ))}
+          <CardLayanan2 />
         </div>
       </div>
       <Footer infoLinks={infoLinks} isUserPage={true} />

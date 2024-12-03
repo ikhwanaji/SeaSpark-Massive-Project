@@ -67,7 +67,7 @@ class AuthService {
       // Error lainnya
       throw new Error('Terjadi kesalahan');
     }
-  }
+  }  
 }
 
 export default AuthService;
