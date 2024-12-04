@@ -69,7 +69,7 @@ const CardLaporan = () => {
     <div className="border rounded-md p-4 bg-white shadow mb-6">
       <h2 className="text-2xl text-sky-900 font-bold mb-4">Laporan Pengguna</h2>
       <hr />
-      <div className="overflow-x-auto ">
+      <div className="overflow-x-auto mt-6">
         <Table headers={headers} data={data} renderActions={renderActions} />
       </div>
     </div>

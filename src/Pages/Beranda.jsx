@@ -89,9 +89,6 @@ function Beranda() {
         <section id="layanan">
           <LayananKami />
         </section>
-        <section id="tentang-kami">
-          <TimKami />
-        </section>
         <section id="produk-kami">
           <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
             <div className="text-center mb-2">
@@ -104,6 +101,9 @@ function Beranda() {
             </div>
             <Button buttonText="Pesan Sekarang" to="/login" />
           </div>
+        </section>
+        <section id="tentang-kami">
+          <TimKami />
         </section>
         <section id="ulasan">
           <UlasanGrid title="Ulasan" subtitle="Apa Pendapat Mereka??" cards={ulasanCards} />

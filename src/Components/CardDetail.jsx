@@ -273,44 +273,75 @@ const CardDetail = () => {
             {/* Grid Detail Penyakit */}
             <div className="grid md:grid-cols-2 gap-6">
               {penyakit.details &&
-                Object.entries(penyakit.details).map(([heading, content], index) => (
-                  <div key={index} className="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                    <div className="flex items-center mb-4">
-                      <span className="text-3xl mr-4">{heading === 'penyebab' ? '🦠' : heading === 'gejala' ? '🩺' : heading === 'pencegahan' ? '🛡️' : heading === 'pengobatan' ? '💊' : ''}</span>
-                      <h3 className="text-xl font-semibold text-blue-800 capitalize">{heading}</h3>
+                Object.entries(penyakit.details).map(([heading, content], index) => {
+                  // Daftar warna untuk setiap card
+                  const cardColors = [
+                    'bg-red-100 border-red-300',
+                    'bg-blue-100 border-blue-300',
+                    'bg-yellow-100 border-yellow-300',
+                    'bg-green-100 border-green-300',
+                  ];
+
+                  // Pilih warna berdasarkan index
+                  const cardColor = cardColors[index % cardColors.length];
+
+                  return (
+                    <div
+                      key={index}
+                      className={`p-6 rounded-lg shadow-md border ${cardColor} hover:shadow-lg transition-all duration-300`}
+                    >
+                      <div className="flex items-center mb-4">
+                        <span className="text-3xl mr-4">
+                          {heading === 'penyebab' ? '🦠' : heading === 'gejala' ? '🩺' : heading === 'pencegahan' ? '🛡️' : '💊'}
+                        </span>
+                        <h2 className="text-lg font-bold capitalize">{heading}</h2>
+                      </div>
+                      <ul className="list-disc ml-5 text-gray-700">
+                        {Array.isArray(content) &&
+                          content.map((item, idx) => <li key={idx}>{item}</li>)}
+                      </ul>
                     </div>
-                    <ul className="list-none pl-10 text-gray-700 space-y-1">
-                      {content.map((item, idx) => (
-                        <li key={idx} className="relative pl-4 before:content-['•'] before:absolute before:left-0 before:text-blue-500 before:mr-2">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                  );
+                })}
             </div>
 
             {/* Rekomendasi Produk */}
             {penyakit.recommendations && (
               <div className="mt-12">
-                <h3 className="text-2xl font-bold text-center mb-6">{penyakit.recommendations[0].title}</h3>
+                <h3 className="text-2xl font-bold text-center mb-6">
+                  {penyakit.recommendations[0].title}
+                </h3>
                 <div className="flex justify-center space-x-4 flex-wrap gap-4">
                   {penyakit.recommendations[0].items.map((item, index) => (
                     <div
                       key={index}
-                      className="
-                        bg-blue-100 
-                        px-6 
-                        py-3 
-                        rounded-full 
-                        text-blue-800 
-                        shadow-md
-                        hover:bg-blue-200
-                        transition
-                        duration-300
-                      "
+                      className="relative group"
                     >
-                      {item}
+                      {/* Button with integrated dropdown */}
+                      <div className="relative">
+                        <button 
+                          className="bg-blue-100 px-6 py-3 rounded-full text-blue-800 
+                                    shadow-md hover:bg-blue-200 
+                                    transition-all duration-300 
+                                    flex items-center"
+                        >
+                          {item}
+                        </button>
+                        
+                        <div 
+                          className="absolute z-10 bg-blue-100 px-4 py-2 rounded 
+                                    shadow-md opacity-0 invisible 
+                                    group-hover:opacity-100 group-hover:visible
+                                    transition-all duration-300 
+                                    text-sm mt-2 left-0 right-0 top-full"
+                        >
+                          <p className="text-blue-700">
+                            Informasi detail tentang {item}. Anda dapat menjelaskan 
+                            aspek spesifik dari item ini, seperti manfaat, fitur, 
+                            atau tips penggunaan.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -318,7 +349,7 @@ const CardDetail = () => {
             )}
 
             {/* Tombol Kembali */}
-            <div className="text-center mt-12">
+            <div className="text-center mt-16">
               <button
                 onClick={handleKembali}
                 className="

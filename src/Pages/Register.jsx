@@ -154,16 +154,16 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: `url(${Img})` }}>
       <div className="container mx-auto px-4">
-        <div className="bg-sky-200 bg-opacity-80 rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+        <div className="bg-blue-200 bg-opacity-80 rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
           <div className="flex flex-col lg:flex-row">
             <div className="hidden lg:block lg:w-1/2 bg-cover" style={{ backgroundImage: `url(${ImgLoginUser})` }}></div>
             <div className="w-full p-8 lg:w-1/2">
-              <h2 className="text-2xl font-semibold text-black text-center">Daftar Akun</h2>
-              <p className="text-xl text-black text-center">Pengguna Doker</p>
+              <h2 className="text-2xl font-bold text-black text-center">Daftar Akun</h2>
+              <p className="text-l text-gray-700 text-center mb-4">Silahkan Daftarkan Diri Anda</p>
               <div className="text-start text-xs text-gray-500 pt-2">
-                <p>
+                <p className="text-sm text-gray-600">
                   Sudah Punya Akun? {''}
-                  <Link to="/login" className="text-gray-800">
+                  <Link to="/login" className="text-blue-700 hover:text-blue-500 font-semibold">
                     Masuk disini
                   </Link>
                 </p>
@@ -181,14 +181,14 @@ const Register = () => {
                     type="submit"
                     disabled={isLoading}
                     className={`
-                      bg-sky-500 
+                      bg-blue-700 
                       text-white 
                       font-bold 
                       py-2 
                       px-4 
                       w-full 
-                      rounded 
-                      hover:bg-sky-600 
+                      rounded-lg 
+                      hover:bg-blue-500 
                       transition 
                       duration-300 
                       ease-in-out
@@ -241,7 +241,7 @@ const InputWithIcon = ({ icon: Icon, name, type, placeholder, value, onChange, e
           text-gray-700 
           focus:outline-none 
           focus:ring-2 
-          focus:ring-sky-500 
+          focus:ring-blue-500 
           border 
           border-gray-300 
           rounded-lg 

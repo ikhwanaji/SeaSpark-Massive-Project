@@ -9,9 +9,9 @@ const HeroSection = ({ to }) => {
         <div className="w-1/2 pr-8">
           {' '}
           <h2 className="font-bold text-4xl mb-4">
-            Kesehatan <span className="text-blue-500">Ikan Kerapu</span>
+            Kesehatan <span className="text-yellow-400">Ikan Kerapu</span>
             <br />
-            Kesejahteraan <span className="text-blue-500">Peternak!</span>
+            Kesejahteraan <span className="text-yellow-400">Peternak!</span>
           </h2>
           <div className="text-base max-w-md">
             {' '}

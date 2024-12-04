@@ -87,7 +87,7 @@ const Layanan = () => {
       />
       <div className="flex-grow bg-blue-100 py-20">
         <div className='text-center text-2xl pt-10 font-extrabold text-gray-800'>
-          <h1> Penyakit Ikan Kerapu</h1>
+          <h1>Penyakit Ikan Kerapu</h1>
         </div>
         <div className="p-6 flex flex-col items-center gap-6">
           {layananData.map((layanan) => (

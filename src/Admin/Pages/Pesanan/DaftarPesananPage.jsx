@@ -11,7 +11,7 @@ const DaftarPesanan = () => {
       <div className="flex flex-1">
         <Sidebar currentPage="Daftar Pesanan" />
         <div className="flex-1 p-6 overflow-y-auto bg-gray-100">
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-col">
             <div className="flex-1 min-w-[300px]">
               <CardPesananSatuan />
             </div>

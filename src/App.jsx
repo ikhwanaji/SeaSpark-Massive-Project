@@ -19,6 +19,7 @@ import KonfirmasiPembayaran from './Pages/KonfirmasiPembayaran';
 
 // Halaman Layanan
 import LayananPage from './Pages/LayananPage';
+import Layanan2Page from './Pages/Layanan2Page';
 import DetailPage from './Pages/DetailPage';
 
 // Halaman Akun & Pengaturan
@@ -101,6 +102,7 @@ function App() {
 
           {/* Layanan */}
           <Route path="/layanan" element={<LayananPage />} />
+          <Route path="/layanan2" element={<Layanan2Page />} />
           <Route path="/layanan/detail/:id" element={<DetailPage />} />
 
           {/* Akun & Pengaturan */}
