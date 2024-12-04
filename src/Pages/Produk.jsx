@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import CardPemesanan from '../Components/CardPemesanan';
-import { FiUserCheck } from 'react-icons/fi';
 import backgroundImage from '/src/assets/img/HeroSection.jpg';
+import { useAuth } from '../context/AuthContext';
 
 function Produk() {
   const navigate = useNavigate(); // Inisialisasi useNavigate
+  const { isLoggedIn, user, logout } = useAuth(); 
+  
 
   // Handler untuk navigasi
   const handleCardClick = (id) => {
@@ -36,14 +38,6 @@ function Produk() {
     },
   ];
 
-  const navigation = [
-    { name: 'Beranda', type: 'link', path: '/' },
-    { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Produk', type: 'link', path: '/produk' },
-    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-    { name: 'Kontak', type: 'link', path: '/kontak' },
-  ];
-
   const infoLinks = [
     { text: 'Beranda', path: '/beranda-pengguna', href: '#beranda' },
     { text: 'Layanan', path: '/layanan', href: '#layanan' },
@@ -55,17 +49,16 @@ function Produk() {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <Navbar
-          navigation={navigation}
-          buttonName="Masuk"
-          useIcon={false}
-          icon={<FiUserCheck size={24} />}
-          backgroundColor="bg-white"
-          textColor="text-black-500"
-          hoverColor="hover:text-blue-500"
-          buttonColor="bg-blue-500"
-          buttonHoverColor="bg-blue-700"
-        />
+      <Navbar
+        // Ubah prop untuk mendukung kondisi login
+        buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
+        // useIcon={isLoggedIn} // Gunakan icon jika sudah login
+        // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
+        // Tambahkan prop untuk status login
+        isLoggedIn={isLoggedIn}
+        user={user}
+        onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
+      />
         <div className="flex-grow bg-gradient-to-b from-sky-400 to-sky-800 flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
           <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold text-center text-white">Pilih Jenis Pemesanan</h1>

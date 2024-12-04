@@ -1,15 +1,10 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
-import { FiUserCheck } from 'react-icons/fi';
 import Footer from '../Components/Footer';
 import CardDetail from '../Components/CardDetail';
+import { useAuth } from '../context/AuthContext';
 
-const navigation = [
-  { name: 'Beranda', type: 'link', path: '/' },
-  { name: 'Layanan', type: 'link', path: '/layanan' },
-  { name: 'Ulasan', type: 'link', path: '/' },
-  { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-];
+
 
 const infoLinks = [
   { text: 'Beranda', path: '/', href: '#beranda' },
@@ -19,19 +14,19 @@ const infoLinks = [
 ];
 
 const Detail = () => {
+  const { isLoggedIn, user, logout } = useAuth(); 
   return (
     <div className="min-h-screen flex flex-col">
       {' '}
       <Navbar
-        navigation={navigation}
-        buttonName="Masuk"
-        useIcon={false}
-        icon={<FiUserCheck size={24} />}
-        backgroundColor="bg-white"
-        textColor="text-black-500"
-        hoverColor="hover:text-blue-500"
-        buttonColor="bg-blue-500"
-        buttonHoverColor="bg-blue-700"
+        // Ubah prop untuk mendukung kondisi login
+        buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
+        // useIcon={isLoggedIn} // Gunakan icon jika sudah login
+        // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
+        // Tambahkan prop untuk status login
+        isLoggedIn={isLoggedIn}
+        user={user}
+        onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
       />
       <div className="flex-grow bg-blue-50 py-20">
         {' '}

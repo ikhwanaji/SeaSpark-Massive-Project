@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 import PropTypes from 'prop-types';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import '../index.css'; // Import custom CSS
+import { useAuth } from '../context/AuthContext'; // Sesuaikan path
 
-
-// Konstanta untuk metode pembayaran
+// Konstanta metode pembayaran
 const PAYMENT_METHODS = {
   BANK: [
     { value: 'bri', label: 'Bank BRI', imgSrc: '/src/Assets/img/bri.png' },
@@ -16,134 +18,136 @@ const PAYMENT_METHODS = {
     { value: 'gopay', label: 'GoPay', imgSrc: '/src/Assets/img/gopay.png' },
   ],
   COD: [{ value: 'cod', label: 'COD (Bayar di Tempat)', imgSrc: '/src/Assets/img/cod.png' }],
-  VIRTUAL_ACCOUNT: [
-    { value: 'bni_virtual', label: 'BNI Virtual Account', imgSrc: '/src/Assets/img/bni_virtual.png' },
-    { value: 'bca_virtual', label: 'BCA Virtual Account', imgSrc: '/src/Assets/img/bca_virtual.png' },
-    { value: 'btn_virtual', label: 'BTN Virtual Account', imgSrc: '/src/Assets/img/btn_virtual.png' },
-  ],
 };
 
+// Konstanta metode pengiriman
+const SHIPPING_METHODS = [
+  {
+    value: 'reguler',
+    label: 'Reguler',
+    estimasi: '3-5 Hari',
+    harga: 15000,
+  },
+  {
+    value: 'ekonomi',
+    label: 'Ekonomi',
+    estimasi: '5-7 Hari',
+    harga: 10000,
+  },
+  {
+    value: 'kargo',
+    label: 'Kargo',
+    estimasi: '1-2 Hari',
+    harga: 25000,
+  },
+];
 
+// const {token } = useAuth();
 
-const FormPemesanan = ({ onSubmit, produk }) => {
+const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
     defaultValues: {
-      namaLengkap: '',
-      alamat: '',
-      noHp: '',
-      provinsi: '',
-      kotaKabupaten: '',
-      kecamatan: '',
-      kelurahan: '',
-      kodePos: '',
-      metodePembayaran: '',
-      jumlahProduk: 1,
+      namaLengkap: user.namaLengkap || '',
+      noHp: user.noHp || '089123123233',
+      alamat: user.alamat || 'Cikarang Barat Bekasi',
+      metodePembayaran: 'bri',
+      metodePengiriman: 'reguler',
+      catatan: 'mantap',
     },
   });
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [selectedShippingMethod, setSelectedShippingMethod] = useState(null);
   const [jumlahProduk, setJumlahProduk] = useState(1);
 
-  // Utilitas untuk mendapatkan tipe pembayaran
-  const getPaymentType = (value) => {
-    const paymentTypeMap = {
-      dana: 'Dompet Digital',
-      gopay: 'Dompet Digital',
-      cod: 'Bayar di Tempat',
-      bni_virtual: 'Virtual Account',
-      bca_virtual: 'Virtual Account',
-      btn_virtual: 'Virtual Account',
-    };
-    return paymentTypeMap[value] || 'Bank Transfer';
-  };
-  const navigate = useNavigate();
-
-  // Handler untuk submit form
-  const onFormSubmit = (data) => {
-    const formData = {
-      ...data,
-      jumlahProduk,
-      totalHarga: produk ? produk.harga * jumlahProduk : 0,
-      produk,
-    };
-    navigate('/konfirmasi-pembayaran', { state: formData });
-  };
-
-  // Render input field umum
-  const renderInputField = (label, name, placeholder, required = false, type = 'text', validation = {}) => (
-    <div className="mb-4">
-      <label htmlFor={name} className="block text-sm font-medium">
-        {label}
-      </label>
-      <input
-        id={name}
-        type={type}
-        {...register(name, {
-          required: required ? `${label} harus diisi` : false,
-          ...validation,
-        })}
-        placeholder={placeholder}
-        className={`border ${errors[name] ? 'border-red-500' : 'border-gray-300'} rounded-md w-full p-2`}
-      />
-      {errors[name] && <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>}
-    </div>
-  );
-
-  // Validasi khusus untuk nomor HP
-  const renderNoHpField = () =>
-    renderInputField('Nomor Handphone*', 'noHp', 'Contoh: 08123456789', true, 'tel', {
-      pattern: {
-        value: /^(\+62|62|0)8[1-9][0-9]{6,10}$/,
-        message: 'Nomor HP tidak valid',
-      },
-      minLength: { value: 10, message: 'Nomor HP minimal 10 digit' },
-      maxLength: { value: 14, message: 'Nomor HP maksimal 14 digit' },
-    });
-
-  // Render metode pembayaran
-  const renderPaymentMethodGroup = (title, methods) => (
-    <div key={title}>
-      <h3 className="text-md font-semibold mb-3">{title}</h3>
-      {methods.map((method) => (
-        <div key={method.value} className="flex items-center mb-2">
-          <input
-            id={method.value}
-            type="radio"
-            {...register('metodePembayaran', {
-              required: 'Pilih metode pembayaran',
-            })}
-            value={method.value}
-            checked={watch('metodePembayaran') === method.value}
-            onChange={(e) => {
-              const value = e.target.value;
-              setSelectedPaymentMethod(value);
-              setValue('metodePembayaran', value, { shouldValidate: true });
-              setIsDropdownOpen(false);
-            }}
-            className="mr-2"
-          />
-          <label htmlFor={method.value} className="flex items-center cursor-pointer">
-            <img src={method.imgSrc} alt={method.label} className="w-8 h-8 mr-2" />
-            {method.label}
-          </label>
+  // Fungsi untuk menampilkan modal edit alamat
+  const showAddressEditModal = () => {
+    Swal.fire({
+      title: 'Edit Alamat Pengiriman',
+      html: `
+        <div class="space-y-3 w-full">
+        <div class="w-full mb-2">
+            <label for="swal-input-nama" class="block text-left font-semibold mb-2">
+              Nama Lengkap
+            </label>
+            <input 
+              id="swal-input-nama" 
+              class="swal2-input w-full p-2 border rounded" 
+              placeholder="Nama Lengkap" 
+              value="${watch('namaLengkap')}"
+              required
+            >
+          </div>
+          <div class="w-full mb-2">
+            <label for="swal-input-hp" class="block text-left font-semibold mb-2">
+              Nomor HP
+            </label>
+            <input 
+              id="swal-input-hp" 
+              class="swal2-input w-full p-2 border rounded" 
+              placeholder="Nomor HP" 
+              value="${watch('noHp')}"
+              type="tel"
+              required
+            >
+          </div>
+          <div class="w-full mb-2">
+            <label for="swal-input-alamat" class="block text-left font-semibold mb-2">
+              Alamat Lengkap
+            </label>
+            <textarea 
+              id="swal-input-alamat" 
+              class="swal2-textarea w-full p-2 border rounded" 
+              placeholder="Alamat Lengkap"
+              rows="3"
+              required
+            >${watch('alamat')}</textarea>
+          </div>
         </div>
-      ))}
-    </div>
-  );
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Simpan',
+      cancelButtonText: 'Batal',
+      preConfirm: () => {
+        const namaLengkap = document.getElementById('swal-input-nama').value;
+        const noHp = document.getElementById('swal-input-hp').value;
+        const alamat = document.getElementById('swal-input-alamat').value;
+
+        // Validasi input
+        if (!namaLengkap || !noHp || !alamat) {
+          Swal.showValidationMessage('Semua field harus diisi');
+          return false;
+        }
+
+        return { namaLengkap, noHp, alamat };
+      },
+      customClass: {
+        popup: 'rounded-lg',
+        confirmButton: 'bg-blue-500 text-white px-4 py-2 rounded',
+        cancelButton: 'bg-gray-200 text-gray-800 px-4 py-2 rounded mr-2',
+      },
+    }).then((result) => {
+      if (result.value) {
+        // Update nilai-nilai input
+        setValue('namaLengkap', result.value.namaLengkap);
+        setValue('noHp', result.value.noHp);
+        setValue('alamat', result.value.alamat);
+      }
+    });
+  };
 
   // Render detail produk
   const renderProdukDetail = () => (
     <div className="mb-4 p-4 bg-gray-100 rounded">
       <h3 className="font-semibold">Produk yang Dibeli</h3>
-      <div className="flex items-top ">
+      <div className="flex items-start">
         <img src={produk.gambar} alt={produk.nama} className="w-32 h-32 object-cover mr-4" />
         <div className="flex-grow">
           <p className="font-bold">{produk.nama}</p>
@@ -166,10 +170,7 @@ const FormPemesanan = ({ onSubmit, produk }) => {
                   const value = parseInt(e.target.value);
                   setJumlahProduk((prev) => Math.min(Math.max(1, value), produk.stok));
                 }}
-                className="w-12 text-center border-y border-gray-300 py-1 appearance-none appearance-none, 
-      [-moz-appearance:textfield], 
-      [&::-webkit-inner-spin-button]:appearance-none ,
-      [&::-webkit-outer-spin-button]:appearance-none"
+                className="w-12 text-center border-y border-gray-300 py-1 appearance-none"
               />
               <button type="button" onClick={() => setJumlahProduk((prev) => Math.min(produk.stok, prev + 1))} className="bg-gray-200 px-2 py-1 rounded-r">
                 +
@@ -181,89 +182,204 @@ const FormPemesanan = ({ onSubmit, produk }) => {
     </div>
   );
 
+  // Fungsi submit form
+  const onFormSubmit = (data) => {
+    // Validasi metode pembayaran
+    if (!data.metodePembayaran) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Perhatian',
+        text: 'Pilih metode pembayaran terlebih dahulu',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
+    // Konfirmasi pesanan
+    Swal.fire({
+      icon: 'question',
+      title: 'Konfirmasi Pesanan',
+      text: 'Apakah anda yakin ingin melanjutkan pembayaran?',
+      showCancelButton: true,
+      confirmButtonText: 'Ya, Bayar',
+      cancelButtonText: 'Batal',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Persiapkan data final
+        const formData = {
+          ...data,
+          jumlahProduk,
+          totalHarga: produk.harga * jumlahProduk,
+          produk,
+        };
+
+        // Panggil fungsi submit dari parent
+        onSubmit(formData);
+      }
+    });
+  };
+
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
-      <h2 className="text-xl font-semibold mb-4">Detail Pembelian</h2>
+    <div className="container mx-auto max-w-md p-4">
+      <div className="bg-white shadow-md rounded-lg p-6">
+        {/* Detail Produk */}
+        {renderProdukDetail()}
 
-      {produk && renderProdukDetail()}
-
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        {renderInputField('Nama Lengkap*', 'namaLengkap', 'Masukkan nama Lengkap', true)}
-        {renderInputField('Alamat*', 'alamat', 'Alamat', true)}
-
-        {renderNoHpField()}
-
-        {renderInputField('Provinsi*', 'provinsi', 'Provinsi', true)}
-        {renderInputField('Kab/kota*', 'kotaKabupaten', 'Kab/kota', true)}
-        {renderInputField('Kecamatan*', 'kecamatan', 'Kecamatan', true)}
-
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          {renderInputField('Kelurahan*', 'kelurahan', 'Kelurahan', true)}
-          {renderInputField('Kode Pos*', 'kodePos', 'Kode Pos', true, 'text', {
-            pattern: {
-              value: /^\d{5}$/,
-              message: 'Kode Pos harus 5 digit angka',
-            },
-          })}
-        </div>
-
+        {/* Informasi Pengiriman */}
         <div className="mb-4">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Metode Pembayaran</h2>
-            <button type="button" onClick={() => setIsDropdownOpen((prev) => !prev)} className="text-sm text-gray-800 font-bold hover:underline flex items-center">
-              Lihat Selengkapnya
-              {isDropdownOpen ? <FiChevronUp className="ml-2" /> : <FiChevronDown className="ml-2" />}
+          <h2 className="text-xl font-bold mb-3">Informasi Pengiriman</h2>
+
+          {/* Tombol Edit Alamat */}
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="font-semibold">Alamat Pengiriman</h3>
+            <button type="button" onClick={showAddressEditModal} className="text-blue-600 hover:underline text-sm">
+              Ubah
             </button>
           </div>
 
-          {selectedPaymentMethod && (
-            <div className="mb-4 p-2 bg-gray-100 rounded">
-              <h3 className="font-semibold">Metode Pembayaran yang Dipilih:</h3>
-              <div className="flex items-center">
-                <img src={`/src/Assets/img/${selectedPaymentMethod}.png`} alt={selectedPaymentMethod} className="w-16 h-16 object-cover mr-4" />
-                <div>
-                  <p className="font-semibold">{getPaymentType(selectedPaymentMethod)}</p>
-                  <p>{selectedPaymentMethod.charAt(0).toUpperCase() + selectedPaymentMethod.slice(1).replace(/_/g, ' ')}</p>
-                </div>
+          {/* Tampilan Alamat */}
+          <div className="bg-gray-100 p-3 rounded">
+            <p>{watch('namaLengkap')}</p>
+            <p>{watch('noHp')}</p>
+            <p>{watch('alamat')}</p>
+          </div>
+        </div>
+
+        {/* Metode Pembayaran */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold mb-3">Metode Pembayaran:</h2>
+
+          {Object.entries(PAYMENT_METHODS).map(([group, methods]) => (
+            <div key={group} className="mb-3">
+              <h3 className="font-semibold mb-2">{group === 'BANK' ? 'Transfer Bank' : group === 'DIGITAL_WALLET' ? 'Dompet Digital' : group === 'COD' ? 'Bayar di Tempat' : group}</h3>
+              <div className="space-y-2">
+                {methods.map((method) => (
+                  <label key={method.value} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      {...register('metodePembayaran', {
+                        required: 'Pilih metode pembayaran',
+                      })}
+                      value={method.value}
+                      checked={watch('metodePembayaran') === method.value}
+                      onChange={(e) => {
+                        setSelectedPaymentMethod(e.target.value);
+                        setValue('metodePembayaran', e.target.value);
+                      }}
+                      className="form-radio"
+                    />
+                    <img src={method.imgSrc} alt={method.label} className="w-8 h-8 object-contain" />
+                    <span>{method.label}</span>
+                  </label>
+                ))}
               </div>
             </div>
+          ))}
+        </div>
+        
+        {/* Metode Pengiriman */}
+        <div className="mb-4">
+          <h2 className="text-xl font-bold mb-3">Metode Pengiriman:</h2>
+          <div className="space-y-2">
+            {SHIPPING_METHODS.map((method) => (
+              <label 
+                key={method.value} 
+                className="flex items-center justify-between p-3 border rounded cursor-pointer hover:bg-gray-100"
+              >
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="radio"
+                    {...register('metodePengiriman', {
+                      required: 'Pilih metode pengiriman',
+                    })}
+                    value={method.value}
+                    checked={watch('metodePengiriman') === method.value}
+                    onChange={(e) => {
+                      setSelectedShippingMethod(e.target.value);
+                      setValue('metodePengiriman', e.target.value);
+                    }}
+                    className="form-radio"
+                  />
+                  <div>
+                    <span className="font-semibold">{method.label}</span>
+                    <p className="text-xs text-gray-500">Estimasi: {method.estimasi}</p>
+                  </div>
+                </div>
+                <span className="font-medium">
+                  Rp {method.harga.toLocaleString()}
+                </span>
+              </label>
+            ))}
+          </div>
+          {errors.metodePengiriman && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.metodePengiriman.message}
+            </p>
           )}
+        </div>
 
-          {errors.metodePembayaran && <p className="text-red-500 text-sm mb-2">{errors.metodePembayaran.message}</p>}
 
-          <div className="flex flex-col space-y-2">{renderPaymentMethodGroup('Bank Transfer', PAYMENT_METHODS.BANK)}</div>
+        {/* Catatan Tambahan */}
+        <div className="mt-3">
+          <label className="block text-xl font-medium mb-1">Catatan Pesanan: </label>
+          <textarea {...register('catatan')} rows="3" className="w-full p-2 border border-gray-300 rounded" placeholder="Tambahkan catatan untuk pesanan anda"></textarea>
+        </div>
 
-          {isDropdownOpen && (
-            <div className="flex flex-col mt-4">
-              {renderPaymentMethodGroup('Dompet Digital', PAYMENT_METHODS.DIGITAL_WALLET)}
-              {renderPaymentMethodGroup('Bayar di Tempat', PAYMENT_METHODS.COD)}
-              {renderPaymentMethodGroup('Virtual Account', PAYMENT_METHODS.VIRTUAL_ACCOUNT)}
+        {/* Ringkasan Harga */}
+        <div className="bg-gray-100 rounded p-3 mb-4 mt-4">
+          <div className="flex justify-between">
+            <span>Harga Produk</span>
+            <span>Rp {(produk.harga * jumlahProduk).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Jumlah</span>
+            <span>{jumlahProduk}</span>
+          </div>
+          {selectedShippingMethod && (
+            <div className="flex justify-between">
+              <span>
+                Biaya Pengiriman ({SHIPPING_METHODS.find(m => m.value === selectedShippingMethod).label})
+              </span>
+              <span>
+                Rp {SHIPPING_METHODS.find(m => m.value === selectedShippingMethod).harga.toLocaleString()}
+              </span>
             </div>
           )}
+          <div className="flex justify-between font-bold border-t pt-2 mt-2">
+            <span>Total Harga</span>
+            <span>
+              Rp {selectedShippingMethod 
+                ? ((produk.harga * jumlahProduk) + SHIPPING_METHODS.find(m => m.value === selectedShippingMethod).harga).toLocaleString()
+                : (produk.harga * jumlahProduk).toLocaleString()
+              }
+              </span>
+          </div>
         </div>
 
-        <div className="mb-4">
-          <p className="font-semibold">Total Harga: Rp {produk ? (produk.harga * jumlahProduk).toLocaleString() : 0}</p>
-        </div>
-
-        <button type="submit" className="bg-blue-500 text-white w-full py-2 rounded-md mt-4 hover:bg-blue-700">
-          Pesan Sekarang
+        {/* Tombol Submit */}
+        <button type="button" onClick={handleSubmit(onFormSubmit)} className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 transition">
+          Bayar Sekarang
         </button>
-      </form>
+      </div>
     </div>
   );
 };
 
 // PropTypes untuk validasi props
 FormPemesanan.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    namaLengkap: PropTypes.string,
+    noHp: PropTypes.string,
+    alamat: PropTypes.string,
+  }),
   produk: PropTypes.shape({
     nama: PropTypes.string.isRequired,
     harga: PropTypes.number.isRequired,
     gambar: PropTypes.string.isRequired,
-    deskripsi: PropTypes.string.isRequired,
     stok: PropTypes.number.isRequired,
-  }),
+    deskripsi: PropTypes.string,
+  }).isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default FormPemesanan;

@@ -7,18 +7,10 @@ import TimKami from '../Components/Timkami';
 import UlasanGrid from '../Components/UlasanGrid';
 import CardProduk from '../Components/CardProduk';
 import Button from '../Components/Button';
-import { FiUserCheck } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 
 function Beranda() {
   const { isLoggedIn, user, logout } = useAuth();
-  const navigation = [
-    { name: 'Beranda', type: 'link', path: '/' },
-    { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Produk', type: 'link', path: '/produk' },
-    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-    { name: 'Kontak', type: 'link', path: '/kontak' },
-  ];
 
   const infoLinks = [
     { text: 'Beranda', path: '/beranda-pengguna', href: '#beranda' },
@@ -82,17 +74,9 @@ function Beranda() {
   return (
     <>
       <Navbar
-        navigation={navigation}
-        // Ubah prop untuk mendukung kondisi login
         buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
-
         // useIcon={isLoggedIn} // Gunakan icon jika sudah login
         // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
-        backgroundColor="bg-white"
-        textColor="text-black-500"
-        hoverColor="hover:text-blue-500"
-        buttonColor="bg-blue-500"
-        buttonHoverColor="bg-blue-700"
         // Tambahkan prop untuk status login
         isLoggedIn={isLoggedIn}
         user={user}
