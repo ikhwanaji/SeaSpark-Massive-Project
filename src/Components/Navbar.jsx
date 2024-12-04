@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FiUser } from "react-icons/fi";
 import { FiUserCheck } from 'react-icons/fi';
 
 const DEFAULT_NAVIGATION = [
@@ -43,7 +44,11 @@ function Navbar({
         className={`cursor-pointer ${textColor} ${hoverColor} transition-all duration-300 hover:bg-gray-100 p-2 rounded-full`}
         title={isLoggedIn ? "Akun" : buttonName}
       >
-        <FiUserCheck className="w-6 h-6" />
+        {isLoggedIn ? (
+          <FiUserCheck className="w-6 h-6" />
+        ) : (
+          <FiUser className="w-6 h-6" />
+        )}
       </div>
     );
   };

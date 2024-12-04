@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaLock, FaEnvelope } from 'react-icons/fa';
-import AuthService from '../services/AuthService';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
 import Img from '../Assets/img/HeroSection.jpg';
 import ImgLoginUser from '../Assets/img/LoginUser.png';
 
@@ -16,7 +14,7 @@ const ERROR_MESSAGES = {
 };
 
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, token } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -93,23 +91,21 @@ const LoginPage = () => {
 
     if (validateForm()) {
       try {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
-          email: formData.email,
-          password: formData.password,
-        });
-
         // Gunakan fungsi login dari context
-        login(response.data.user, response.data.token);
+        await login(formData.email, formData.password);
+
+        // Simpan email jika remember me dicentang
+        if (rememberMe) {
+          localStorage.setItem('rememberedEmail', formData.email);
+        } else {
+          localStorage.removeItem('rememberedEmail');
+        }
 
         // Navigasi ke beranda
         navigate('/');
       } catch (error) {
-        // Error handling tetap sama
-        if (error.response) {
-          setGlobalError(error.response.data.message || 'Login gagal');
-        } else {
-          setGlobalError('Terjadi kesalahan saat login');
-        }
+        // Error handling
+        setGlobalError(error.message || 'Login gagal');
         console.error('Login Error:', error);
       }
     }
@@ -190,7 +186,6 @@ const LoginPage = () => {
       <div className="mr-3">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path fill="#4285F4" d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z" />
-          <path fill="#34A853" d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-4v3.1C2.615 21.14 7.065 24 12.255 24z" />
           <path fill="#FBBC05" d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29v-3.1h-4c-.81 2.05-.81 4.34 0 6.39l4-3.1z" />
           <path fill="#EA4335" d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C18.205 1.19 15.495 0 12.255 0c-5.19 0-9.64 2.86-11.73 7l4 3.1c.95-2.85 3.6-4.96 6.73-4.96z" />
         </svg>

@@ -1,4 +1,3 @@
-// CardProduk.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,7 +5,6 @@ const ProdukList = ({ kategori, nama, harga, gambar,deskripsi,stok, onBeli }) =>
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 p-4">
       {' '}
-      {/* Menghapus lg:w-1/4 */}
       <div className="bg-white rounded-lg shadow-md p-4 h-full flex flex-col">
         <img src={gambar} alt={nama} className="w-full h-48 object-cover mb-4 rounded-lg" />
         <div className="text-center flex-grow">

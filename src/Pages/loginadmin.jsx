@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Img from '../Assets/img/HeroSection.jpg';
 import ImgLoginAdmin from '../Assets/img/LoginAdmin.png';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import Button from '../Components/Button';
 
 const LoginAdmin = () => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const LoginAdmin = () => {
     email: '',
     password: '',
   });
+  const [apiError, setApiError] = useState('');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,11 +28,11 @@ const LoginAdmin = () => {
       ...prevState,
       [name]: value,
     }));
-    // Clear error when user starts typing
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: '',
     }));
+    setApiError('');
   };
 
   const validateForm = () => {
@@ -52,13 +53,22 @@ const LoginAdmin = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Simulasi pengecekan login
-      // Di sini Anda bisa menambahkan logika autentikasi yang sebenarnya
-      navigate('/beranda-admin');
+      try {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login-admin`, formData);
+
+        localStorage.setItem('token', response.data.token);
+        navigate('/kategori-produk');
+      } catch (error) {
+        if (error.response) {
+          setApiError(error.response.data.message || 'Terjadi kesalahan saat login');
+        } else {
+          setApiError('Terjadi kesalahan jaringan');
+        }
+      }
     }
   };
 
@@ -69,7 +79,7 @@ const LoginAdmin = () => {
           <div className="flex flex-col lg:flex-row">
             <div className="hidden lg:block lg:w-1/2 bg-cover" style={{ backgroundImage: `url(${ImgLoginAdmin})` }}></div>
             <div className="w-full p-10 pb-28 lg:w-1/2">
-              <h2 className="text-2xl font-semibold text-black text-center">Selamat datang Admin Doker! </h2>
+              <h2 className="text-2xl font-semibold text-black text-center">Selamat datang Admin Doker!</h2>
               <p className="text-l text-gray-700 text-center">Silakan masuk ke akun anda</p>
 
               <form onSubmit={handleSubmit}>
@@ -111,12 +121,18 @@ const LoginAdmin = () => {
                     </button>
                   </div>
                   {errors.password && <p className="text-red-500 text-xs italic mt-1">{errors.password}</p>}
-                </div>            
+                </div>
+
+                {apiError && (
+                  <div className="mt-4">
+                    <p className="text-red-500 text-sm text-center">{apiError}</p>
+                  </div>
+                )}
+
                 <div className="mt-4">
-                  {/* <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-700 hover:text-white transition duration-300 ease-in-out">
+                  <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
                     Masuk
-                  </button> */}
-                  <Button buttonText='Masuk' fullWidth={true} to='/kategori-produk'/>
+                  </button>
                 </div>
               </form>
             </div>

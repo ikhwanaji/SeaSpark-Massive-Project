@@ -5,18 +5,12 @@ import Navbar from '../Components/Navbar';
 import { FiUserCheck } from 'react-icons/fi';
 import Footer from '../Components/Footer';
 import PembayaranForm from '../Components/formpemesanan'; // Import komponen form
+import { useAuth } from '../context/AuthContext';
 
 function PemesananPage() {
+  const { isLoggedIn, user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const navigation = [
-    { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
-    { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Produk', type: 'link', path: '/produk' },
-    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-    { name: 'Kontak', type: 'link', path: '/kontak' },
-  ];
   
   // Handler submit form
   const handleSubmit = (formData) => {
@@ -43,15 +37,13 @@ function PemesananPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar
-        navigation={navigation}
-        buttonName="Profil User"
-        useIcon={true}
-        icon={<FiUserCheck size={24} />}
-        backgroundColor="bg-white"
-        textColor="text-black-500"
-        hoverColor="hover:text-blue-500"
-        buttonColor="bg-blue-500"
-        buttonHoverColor="bg-blue-700"
+        buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
+        // useIcon={isLoggedIn} // Gunakan icon jika sudah login
+        // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
+        // Tambahkan prop untuk status login
+        isLoggedIn={isLoggedIn}
+        user={user}
+        onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
       />
 
       <div className="flex-grow bg-blue-50 pt-24 pb-12 flex justify-center items-center">

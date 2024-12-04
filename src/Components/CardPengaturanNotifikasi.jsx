@@ -1,7 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Sesuaikan path
 
 function NotifikasiPage() {
+    const { token } = useAuth();
+    const [profile, setProfile] = useState({
+        nama: '',
+        email: '',
+        gambar: null,
+      });
+
+    const [previewImage, setPreviewImage] = useState(null);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+          try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_ENDPOINT}/profile`, {
+              headers: {
+                // Pastikan format Bearer
+                Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+              },
+            });
+            setProfile(response.data.user);
+    
+            const profileImageUrl = response.data.user.gambar ? `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_ENDPOINT}/profile-image/${response.data.user.gambar}` : null;
+    
+            setPreviewImage(profileImageUrl);
+          } catch (error) {
+            console.error('Gagal mengambil profil:', error);
+          }
+        };
+    
+        fetchProfile();
+      }, [token]);
+
+
     const [settings, setSettings] = useState({
         orderStatus: true,
         articleUpdates: true,
@@ -26,7 +60,7 @@ function NotifikasiPage() {
             >
                 <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 translate-y-1/2">
                     <img 
-                        src="/src/Assets/img/timkami.jpg" 
+                        src={previewImage || 'https://placehold.co/150x150'}
                         alt="Profile" 
                         className="w-48 h-48 rounded-full border-4 border-gray-100 object-cover" 
                     />
@@ -36,8 +70,8 @@ function NotifikasiPage() {
             <div className="mt-20">
                 {/* User Name and Email */}
                 <div className="justify-center text-center mt-8">
-                    <h1 className="text-3xl font-bold">Alexa Rawles</h1>
-                    <p className="text-gray-500 font-semibold">alexarawles78@gmail.com</p>
+                    <h1 className="text-3xl font-bold">{profile.nama}</h1>
+                    <p className="text-gray-500 font-semibold">{profile.email}</p>
                 </div>
 
                 {/* Navigation Tabs */}

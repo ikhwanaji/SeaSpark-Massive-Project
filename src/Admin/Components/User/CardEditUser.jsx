@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../Button';
+import Button from '../../components/Button'; // Sesuaikan path
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -168,7 +168,7 @@ const CardEditUser = ({ userId }) => {
             <input type="email" name="email" value={formData.email} onChange={handleChange} className="p-2 border rounded-md w-full shadow-md mb-2 border-sky-900" required disabled={isLoading} />
           </div>
           <div>
-            <label className="block text-sky-900 font-semibold mb-2">Password (Opsional)</label>
+            <label className="block text-sky-900 font-semibold mb-2">Password </label>
             <input type="password" name="password" value={formData.password} onChange={handleChange} className="p-2 border rounded-md w-full shadow-md mb-2 border-sky-900" disabled={isLoading} />
           </div>
         </div>

@@ -149,7 +149,7 @@ function App() {
           {/* Page Manajemen Artikel */}
           <Route path="/manajemen-artikel" element={<ManajemenArtikelPage />} />
           <Route path="/tambah-artikel" element={<TambahArtikelPage />} />
-          <Route path="/edit-artikel" element={<EditArtikelPage />} />
+          <Route path="/edit-artikel/:artikelId" element={<EditArtikelPage />} />
 
           {/* Page Laporan Pengguna */}
           <Route path="/laporan-pengguna" element={<LaporanPenggunaPage />} />

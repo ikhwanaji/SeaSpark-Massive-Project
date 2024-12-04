@@ -2,10 +2,12 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import { FiUserCheck } from 'react-icons/fi';
+import { useAuth } from '../context/AuthContext';
 
 const CardDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isLoggedIn, user, logout } = useAuth(); 
 
   const navigation = [
     { name: 'Beranda', type: 'link', path: '/' },
@@ -243,15 +245,14 @@ const CardDetail = () => {
   return (
     <div className="min-h-screen flex flex-col bg-blue-50">
       <Navbar
-        navigation={navigation}
-        buttonName="Masuk"
-        useIcon={false}
-        icon={<FiUserCheck size={24} />}
-        backgroundColor="bg-white"
-        textColor="text-black-500"
-        hoverColor="hover:text-blue-500"
-        buttonColor="bg-blue-500"
-        buttonHoverColor="bg-blue-700"
+        // Ubah prop untuk mendukung kondisi login
+        buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
+        // useIcon={isLoggedIn} // Gunakan icon jika sudah login
+        // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
+        // Tambahkan prop untuk status login
+        isLoggedIn={isLoggedIn}
+        user={user}
+        onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
       />
 
       <div className="flex-grow container mx-auto px-4 py-12">
