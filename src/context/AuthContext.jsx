@@ -48,14 +48,19 @@ export function AuthProvider({ children }) {
 
       const { token, user: userData } = response.data;
 
-      // Simpan token dan user data di localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(userData));
+      if (!userData.userId) {
+        // Jika tidak ada userId, coba ambil dari response atau generate
+        userData.id = userData.id || userData._id;
+      }
 
       // Set state
       setIsLoggedIn(true);
       setUser(userData);
       setToken(token);
+
+      // Simpan token dan user data di localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData));
 
       // Set default axios header
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

@@ -1,50 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useAuth } from '../context/AuthContext';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import '../index.css'; // Import custom CSS
-import { useAuth } from '../context/AuthContext'; // Sesuaikan path
 
-// Konstanta metode pembayaran
-const PAYMENT_METHODS = {
-  BANK: [
-    { value: 'bri', label: 'Bank BRI', imgSrc: '/src/Assets/img/bri.png' },
-    { value: 'mandiri', label: 'Bank Mandiri', imgSrc: '/src/Assets/img/mandiri.png' },
-  ],
-  DIGITAL_WALLET: [
-    { value: 'dana', label: 'Dana', imgSrc: '/src/Assets/img/dana.png' },
-    { value: 'gopay', label: 'GoPay', imgSrc: '/src/Assets/img/gopay.png' },
-  ],
-  COD: [{ value: 'cod', label: 'COD (Bayar di Tempat)', imgSrc: '/src/Assets/img/cod.png' }],
-};
 
-// Konstanta metode pengiriman
-const SHIPPING_METHODS = [
-  {
-    value: 'reguler',
-    label: 'Reguler',
-    estimasi: '3-5 Hari',
-    harga: 15000,
-  },
-  {
-    value: 'ekonomi',
-    label: 'Ekonomi',
-    estimasi: '5-7 Hari',
-    harga: 10000,
-  },
-  {
-    value: 'kargo',
-    label: 'Kargo',
-    estimasi: '1-2 Hari',
-    harga: 25000,
-  },
-];
+const FormPemesanan = ({ produk, onSubmit }) => {
+  const { token } = useAuth();
+  const [selectedShippingMethod, setSelectedShippingMethod] = useState(null);
+  const [jumlahProduk, setJumlahProduk] = useState(1);
+  const [shippingMethods, setShippingMethods] = useState([]);
 
-// const {token } = useAuth();
-
-const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -53,18 +22,67 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      namaLengkap: user.namaLengkap || '',
-      noHp: user.noHp || '089123123233',
-      alamat: user.alamat || 'Cikarang Barat Bekasi',
-      metodePembayaran: 'bri',
-      metodePengiriman: 'reguler',
-      catatan: 'mantap',
+      nama:'',
+      no_hp:'',
+      alamat:'',
+      catatan: '',
     },
   });
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
-  const [selectedShippingMethod, setSelectedShippingMethod] = useState(null);
-  const [jumlahProduk, setJumlahProduk] = useState(1);
+   // Ambil profil saat komponen dimuat
+   useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/profile`, {
+          headers: {
+            Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+          },
+        });
+        
+        // Update form values dengan data dari backend
+        setValue('nama', response.data.user.nama);
+        setValue('no_hp', response.data.user.no_hp);
+        setValue('alamat', response.data.user.alamat);
+      } catch (error) {
+        console.error('Gagal mengambil profil:', error);
+      }
+    };
+
+    fetchProfile();
+  }, [token, setValue]);
+
+
+  useEffect(() => {
+    const fetchShippingMethods = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/shipping-methods`, {
+          headers: {
+            Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+          },
+        });
+        
+        // Transformasi data dari backend
+        const methods = response.data.data.map(method => ({
+          id: method.shippingId,
+          value: method.kode,
+          label: method.nama,
+          estimasi: method.estimasi,
+          harga: method.biaya
+        }));
+        
+        setShippingMethods(methods);
+      } catch (error) {
+        console.error('Gagal mengambil metode pengiriman:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Tidak dapat mengambil metode pengiriman',
+        });
+      }
+    };
+  
+    fetchShippingMethods();
+  }, [token]);
 
   // Fungsi untuk menampilkan modal edit alamat
   const showAddressEditModal = () => {
@@ -80,7 +98,7 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
               id="swal-input-nama" 
               class="swal2-input w-full p-2 border rounded" 
               placeholder="Nama Lengkap" 
-              value="${watch('namaLengkap')}"
+              value="${watch('nama')}"
               required
             >
           </div>
@@ -92,7 +110,7 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
               id="swal-input-hp" 
               class="swal2-input w-full p-2 border rounded" 
               placeholder="Nomor HP" 
-              value="${watch('noHp')}"
+              value="${watch('no_hp')}"
               type="tel"
               required
             >
@@ -116,29 +134,72 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
       confirmButtonText: 'Simpan',
       cancelButtonText: 'Batal',
       preConfirm: () => {
-        const namaLengkap = document.getElementById('swal-input-nama').value;
-        const noHp = document.getElementById('swal-input-hp').value;
+        const nama = document.getElementById('swal-input-nama').value;
+        const no_hp = document.getElementById('swal-input-hp').value;
         const alamat = document.getElementById('swal-input-alamat').value;
 
         // Validasi input
-        if (!namaLengkap || !noHp || !alamat) {
+        if (!nama || !no_hp || !alamat) {
           Swal.showValidationMessage('Semua field harus diisi');
           return false;
         }
 
-        return { namaLengkap, noHp, alamat };
+        return { nama, no_hp, alamat };
       },
       customClass: {
         popup: 'rounded-lg',
         confirmButton: 'bg-blue-500 text-white px-4 py-2 rounded',
         cancelButton: 'bg-gray-200 text-gray-800 px-4 py-2 rounded mr-2',
       },
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.value) {
-        // Update nilai-nilai input
-        setValue('namaLengkap', result.value.namaLengkap);
-        setValue('noHp', result.value.noHp);
-        setValue('alamat', result.value.alamat);
+        try {
+          // Ambil data profil terbaru sebelum update
+          const profileResponse = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/auth/profile`, 
+            {
+              headers: {
+                Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+              },
+            }
+          );
+  
+          // Kirim update profil ke backend dengan data lengkap
+          const response = await axios.put(
+            `${import.meta.env.VITE_API_URL}/api/auth/profile`, 
+            {
+              nama: result.value.nama,
+              email: profileResponse.data.user.email, 
+              no_hp: result.value.no_hp,
+              alamat: result.value.alamat,
+              username: profileResponse.data.user.nama,
+            },
+            {
+              headers: {
+                Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+  
+          // Update form values
+          setValue('nama', response.data.user.nama);
+          setValue('no_hp', response.data.user.no_hp);
+          setValue('alamat', response.data.user.alamat);
+  
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: 'Profil berhasil diperbarui',
+          });
+        } catch (error) {
+          console.error('Gagal memperbarui profil:', error.response?.data || error.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: error.response?.data?.message || 'Gagal memperbarui profil',
+          });
+        }
       }
     });
   };
@@ -184,8 +245,10 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
 
   // Fungsi submit form
   const onFormSubmit = (data) => {
+    // Temukan metode pengiriman yang dipilih
+  const selectedMethod = shippingMethods.find(m => m.value === data.metodePengiriman);
     // Validasi metode pembayaran
-    if (!data.metodePembayaran) {
+    if (!selectedMethod) {
       Swal.fire({
         icon: 'warning',
         title: 'Perhatian',
@@ -211,6 +274,8 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
           jumlahProduk,
           totalHarga: produk.harga * jumlahProduk,
           produk,
+          metodePengiriman: selectedMethod.id, // Kirim ID integer
+          metodePengirimanKode: selectedMethod.value, // Jika masih diperlukan kodenya
         };
 
         // Panggil fungsi submit dari parent
@@ -239,49 +304,19 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
 
           {/* Tampilan Alamat */}
           <div className="bg-gray-100 p-3 rounded">
-            <p>{watch('namaLengkap')}</p>
-            <p>{watch('noHp')}</p>
+            <p>{watch('nama')}</p>
+            <p>{watch('no_hp')}</p>
             <p>{watch('alamat')}</p>
           </div>
         </div>
 
-        {/* Metode Pembayaran */}
-        <div className="mb-4">
-          <h2 className="text-xl font-bold mb-3">Metode Pembayaran:</h2>
-
-          {Object.entries(PAYMENT_METHODS).map(([group, methods]) => (
-            <div key={group} className="mb-3">
-              <h3 className="font-semibold mb-2">{group === 'BANK' ? 'Transfer Bank' : group === 'DIGITAL_WALLET' ? 'Dompet Digital' : group === 'COD' ? 'Bayar di Tempat' : group}</h3>
-              <div className="space-y-2">
-                {methods.map((method) => (
-                  <label key={method.value} className="flex items-center space-x-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      {...register('metodePembayaran', {
-                        required: 'Pilih metode pembayaran',
-                      })}
-                      value={method.value}
-                      checked={watch('metodePembayaran') === method.value}
-                      onChange={(e) => {
-                        setSelectedPaymentMethod(e.target.value);
-                        setValue('metodePembayaran', e.target.value);
-                      }}
-                      className="form-radio"
-                    />
-                    <img src={method.imgSrc} alt={method.label} className="w-8 h-8 object-contain" />
-                    <span>{method.label}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        
         
         {/* Metode Pengiriman */}
         <div className="mb-4">
           <h2 className="text-xl font-bold mb-3">Metode Pengiriman:</h2>
           <div className="space-y-2">
-            {SHIPPING_METHODS.map((method) => (
+            {shippingMethods.map((method) => (
               <label 
                 key={method.value} 
                 className="flex items-center justify-between p-3 border rounded cursor-pointer hover:bg-gray-100"
@@ -338,10 +373,10 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
           {selectedShippingMethod && (
             <div className="flex justify-between">
               <span>
-                Biaya Pengiriman ({SHIPPING_METHODS.find(m => m.value === selectedShippingMethod).label})
+                Biaya Pengiriman ({shippingMethods.find(m => m.value === selectedShippingMethod).label})
               </span>
               <span>
-                Rp {SHIPPING_METHODS.find(m => m.value === selectedShippingMethod).harga.toLocaleString()}
+                Rp {shippingMethods.find(m => m.value === selectedShippingMethod).harga.toLocaleString()}
               </span>
             </div>
           )}
@@ -349,7 +384,7 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
             <span>Total Harga</span>
             <span>
               Rp {selectedShippingMethod 
-                ? ((produk.harga * jumlahProduk) + SHIPPING_METHODS.find(m => m.value === selectedShippingMethod).harga).toLocaleString()
+                ? ((produk.harga * jumlahProduk) + shippingMethods.find(m => m.value === selectedShippingMethod).harga).toLocaleString()
                 : (produk.harga * jumlahProduk).toLocaleString()
               }
               </span>
@@ -368,8 +403,8 @@ const FormPemesanan = ({ user = {}, produk, onSubmit }) => {
 // PropTypes untuk validasi props
 FormPemesanan.propTypes = {
   user: PropTypes.shape({
-    namaLengkap: PropTypes.string,
-    noHp: PropTypes.string,
+    nama: PropTypes.string,
+    no_hp: PropTypes.string,
     alamat: PropTypes.string,
   }),
   produk: PropTypes.shape({

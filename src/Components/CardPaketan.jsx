@@ -2,18 +2,17 @@ import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-const CardItem = ({ item }) => (
+const CardItem = ({ item, index }) => (
   <li className="flex items-start mb-2">
     <FaCheckCircle className="text-green-500 mr-2 flex-shrink-0 mt-1" size="16" />
     <span>{item}</span>
   </li>
 );
 
-const CardPaketan = ({ title, price, image, items }) => {
+const CardPaketan = ({paketId, title, price, image, items }) => {
   const navigate = useNavigate();
 
   const handleBuyNow = () => {
-    // Navigasi ke halaman pemesanan dengan mengoper data paket
     navigate('/pemesanan', {
       state: {
         title,
@@ -24,8 +23,11 @@ const CardPaketan = ({ title, price, image, items }) => {
     });
   };
 
+  // Debug log
+  console.log('CardPaketan Props:', { paketId, title, items });
+
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 w-80">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden w-72 transform transition-transform hover:scale-105">
       <img src={image} alt={title} className="rounded-t-lg w-full h-48 object-cover" />
       <div className="p-4">
         <h2 className="text-xl font-bold text-center mb-2">{title}</h2>
@@ -35,7 +37,11 @@ const CardPaketan = ({ title, price, image, items }) => {
         </button>
         <ul className="text-gray-700">
           {items.map((item, idx) => (
-            <CardItem key={idx} item={item} />
+            <CardItem 
+              key={`${paketId}-${idx}`} // Kombinasi paketId dan index
+              item={item} 
+              index={idx} 
+            />
           ))}
         </ul>
       </div>

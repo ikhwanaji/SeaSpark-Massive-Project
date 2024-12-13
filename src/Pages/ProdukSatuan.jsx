@@ -9,14 +9,16 @@ import KategoriProduct from '../Components/KategoriProduct';
 import { useAuth } from '../context/AuthContext';
 
 // Data
-import { INFO_LINKS, KATEGORI_PRODUK } from '../utils/constants';
+import { INFO_LINKS } from '../utils/constants';
 
 function ProdukSatuan() {
   const navigate = useNavigate();
   const { isLoggedIn, user, logout } = useAuth(); 
 
   // State Management
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(
+    location.state?.selectedCategories || []
+  );
   const [searchTerm, setSearchTerm] = useState('');
 
   // Handlers
@@ -24,15 +26,20 @@ function ProdukSatuan() {
     navigate('/pemesanan', { state: { produk } });
   };
 
+  // Handler untuk memilih kategori
   const handleCategorySelect = (categoryName) => {
-    setSelectedCategories((prevCategories) => (prevCategories.includes(categoryName) ? prevCategories.filter((cat) => cat !== categoryName) : [...prevCategories, categoryName]));
+    setSelectedCategories((prevCategories) => 
+      prevCategories.includes(categoryName) 
+        ? prevCategories.filter((cat) => cat !== categoryName) 
+        : [...prevCategories, categoryName]
+    );
   };
 
-  // Render Categories
-  const categories = KATEGORI_PRODUK.map((kategori) => ({
-    ...kategori,
-    onSelect: handleCategorySelect,
-  }));
+  // Reset kategori yang dipilih
+  const handleResetCategories = () => {
+    setSelectedCategories([]);
+  };
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -54,7 +61,8 @@ function ProdukSatuan() {
         <div className="flex gap-14">
           {/* Kategori */}
           <div className="w-1/6 sticky top-4">
-            <KategoriProduct categories={categories} />
+            <KategoriProduct onCategorySelect={handleCategorySelect}
+              selectedCategories={selectedCategories} />
           </div>
 
           {/* Daftar Produk */}

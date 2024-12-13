@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const KategoriList = () => {
+const KategoriProduct = ({ onCategorySelect, selectedCategories }) => {
   const [kategoris, setKategoris] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,7 +45,7 @@ const KategoriList = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 w-full max-w-6xl"> {/* Perluas lebar container */}
+    <div className="container mx-auto p-4 w-full max-w-6xl">
       <h1 className="text-2xl font-bold mb-4">Daftar Kategori</h1>
 
       {/* List Kategori */}
@@ -54,7 +54,16 @@ const KategoriList = () => {
           {kategoris.map((kategori) => (
             <li 
               key={kategori.kategoriId} 
-              className="px-6 py-4 hover:bg-gray-50 transition-colors w-full"
+              className={`
+                px-6 py-4 
+                transition-colors 
+                w-full 
+                cursor-pointer 
+                ${selectedCategories.includes(kategori.nama) 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'hover:bg-gray-50'}
+              `}
+              onClick={() => onCategorySelect(kategori.nama)}
             >
               <div className="flex items-center justify-between w-full">
                 <div className="flex-1 min-w-0 w-full pr-4">
@@ -88,4 +97,4 @@ const KategoriList = () => {
   );
 };
 
-export default KategoriList;
+export default KategoriProduct;
