@@ -75,6 +75,7 @@ import LaporanPenggunaPage from './Admin/Pages/Laporan/LaporanPenggunaPage';
 import ManajemenUserPage from './Admin/Pages/User/ManajemenUserPage';
 import { AuthProvider } from './context/AuthContext';
 import EditUser from './Admin/Pages/User/EditUser';
+import RiwayatPemesananPage from './Pages/RiwayatPemesananPage';
 
 
 
@@ -99,6 +100,8 @@ function App() {
           <Route path="/produk-satuan" element={<ProdukSatuan />} />
           <Route path="/pemesanan" element={<PemesananPage />} />
           <Route path="/konfirmasi-pembayaran" element={<KonfirmasiPembayaran />} />
+          <Route path="/riwayat-pembayaran" element={<RiwayatPemesananPage />} />
+
 
           {/* Layanan */}
           <Route path="/layanan" element={<LayananPage />} />
@@ -129,17 +132,17 @@ function App() {
           {/* Page Kategori */}
           <Route path="/kategori-produk" element={<KategoriProdukPage />} />
           <Route path="/tambah-kategori" element={<TambahKategoriPage />} />
-          <Route path="/edit-kategori" element={<EditKategoriPage />} />
+          <Route path="/edit-kategori/:kategoriId" element={<EditKategoriPage />} />
 
           {/* Page Manajemen Produk */}
           <Route path="/manajemen-produk" element={<ManajemenProdukPage />} />
           <Route path="/tambah-produk" element={<TambahProdukPage />} />
-          <Route path="/edit-produk" element={<EditProdukPage />} />
+          <Route path="/edit-produk/:id" element={<EditProdukPage />} />
 
           {/* Page Manajemen Paket */}
           <Route path="/manajemen-paket" element={<ManajemenPaketPage />} />
           <Route path="/tambah-paket" element={<TambahPaketPage />} />
-          <Route path="/edit-paket" element={<EditPaketPage />} />
+          <Route path="/edit-paket/:paketId" element={<EditPaketPage />} />
 
           {/* Page Metode Pembayaran */}
           <Route path="/metode-pembayaran" element={<MetodePembayaranPage />} />

@@ -18,7 +18,7 @@ const LayananKami = ({ to }) => {
   return (
   <div className="bg-blue-50 flex items-center justify-center min-h-screen">
     <div className="text-center">
-      <h2 className="text-4xl font-bold text-gray-600 mb-8">Layanan Kami</h2>
+      <h2 className="text-4xl font-bold text-black mb-8">Layanan Kami</h2>
       <div className="bg-white p-8 rounded-lg shadow-lg grid grid-cols-3 gap-6 max-w-6xl items-center">
         {/* Section 1 */}
         <div className="flex flex-col items-start space-y-4">

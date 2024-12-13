@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../Button';
+import Button from '../../components/Button';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 

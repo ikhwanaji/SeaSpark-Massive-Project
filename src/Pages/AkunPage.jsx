@@ -4,13 +4,7 @@ import { FiUserCheck } from 'react-icons/fi';
 import CardAkun from '../Components/CardAkun';
 import { useAuth } from '../context/AuthContext';
 
-const navigation = [
-  { name: 'Beranda', type: 'link', path: '/beranda-pengguna' },
-  { name: 'Layanan', type: 'link', path: '/layanan' },
-  { name: 'Pemesanan', type: 'link', path: '/pemesanan' },
-  { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-  { name: 'Kontak', type: 'link', path: '/kontak' },
-];
+
 
 const Akun = () => {
   const { isLoggedIn, user, logout } = useAuth();
@@ -18,16 +12,9 @@ const Akun = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar
-        navigation={navigation}
-        // Ubah prop untuk mendukung kondisi login
         buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
-        useIcon={isLoggedIn} // Gunakan icon jika sudah login
-        icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
-        backgroundColor="bg-white"
-        textColor="text-black-500"
-        hoverColor="hover:text-blue-500"
-        buttonColor="bg-blue-500"
-        buttonHoverColor="bg-blue-700"
+        // useIcon={isLoggedIn} // Gunakan icon jika sudah login
+        // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
         // Tambahkan prop untuk status login
         isLoggedIn={isLoggedIn}
         user={user}

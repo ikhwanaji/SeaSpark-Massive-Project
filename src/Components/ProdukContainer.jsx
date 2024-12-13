@@ -51,6 +51,7 @@ const ProdukContainer = ({ onBeli, searchTerm = '', selectedCategories = [] }) =
       {filteredProduks.map((produk) => (
         <ProdukList
           key={produk.produkId}
+          produkId={produk.produkId}
           kategori={produk.kategoriNama}
           nama={produk.nama}
           harga={produk.harga}
