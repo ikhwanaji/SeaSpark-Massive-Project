@@ -1,6 +1,6 @@
 import React from "react";
-import Table from "../Table";
-import Button from "../Button";
+import Table from "../../Components/Table";
+import Button from '../../Components/Button'; 
 import { Link } from "react-router-dom";
 
 const CardMetode = () => {

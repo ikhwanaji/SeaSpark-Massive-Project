@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../../components/Button'; // Sesuaikan path
+import Button from '../../Components/Button'; // Sesuaikan path
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
