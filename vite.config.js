@@ -11,5 +11,6 @@ export default defineConfig({
 
   optimizeDeps: {
     include: ['react', 'react-dom']
-  }
+  },
+  extensions: ['.js', '.jsx', '.ts', '.tsx']
 })
