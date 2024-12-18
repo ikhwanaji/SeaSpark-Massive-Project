@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import CardPemesanan from '../Components/CardPemesanan';
-import backgroundImage from '/src/assets/img/HeroSection.jpg';
+import backgroundImage from '../assets/img/HeroSection.jpg';
 import { useAuth } from '../context/AuthContext';
 
 function Produk() {
