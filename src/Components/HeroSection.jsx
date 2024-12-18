@@ -4,7 +4,7 @@ import Button from '../Components/Button';
 const HeroSection = ({ to }) => {
   return (
     <div className="relative max-w-2xll mt-20 rounded-md">
-      <img className="w-full h-[80vh] object-cover" src="../Assets/img/HeroSection.jpg" alt="Hero Section" />
+      <img className="w-full h-[80vh] object-cover" src="/Assets/img/HeroSection.jpg" alt="Hero Section" />
       <div className="absolute inset-0 flex items-center justify-around text-white">
         <div className="w-1/2 pr-8">
           {' '}

@@ -3,12 +3,12 @@ import Button from '../Components/Button';
 
 const TentangKami = () => {
   const teamMembers = [
-    { name: 'Noudia Inex Pasiakan', img: '../Assets/img/inexx.jpg' },
-    { name: 'Ikhwan Aji Pratama', img: '../Assets/img/iwan.jpg' },
-    { name: 'Celestina Florecita Mariwy', img: '../Assets/img/florr.jpg' },
-    { name: 'Anis Putri Purwanti', img: '../Assets/img/anis.jpg' },
-    { name: 'Ahmad Fadli', img: '../Assets/img/fadli.jpg' },
-    { name: 'Nur Syahidah', img: '../Assets/img/syaa.jpg' },
+    { name: 'Noudia Inex Pasiakan', img: '/Assets/img/inexx.jpg' },
+    { name: 'Ikhwan Aji Pratama', img: '/Assets/img/iwan.jpg' },
+    { name: 'Celestina Florecita Mariwy', img: '/Assets/img/florr.jpg' },
+    { name: 'Anis Putri Purwanti', img: '/Assets/img/anis.jpg' },
+    { name: 'Ahmad Fadli', img: '/Assets/img/fadli.jpg' },
+    { name: 'Nur Syahidah', img: '/Assets/img/syaa.jpg' },
   ];
 
   return (

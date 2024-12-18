@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Button from '../Components/Button';
 
 const gambarTim = [
-  '../Assets/img/anis.jpg',
-  '../Assets/img/florr.jpg',
-  '../Assets/img/inexx.jpg',
-  '../Assets/img/iwan.jpg',
-  '../Assets/img/syaa.jpg',
-  '../Assets/img/fadli.jpg',
-  // Tambahkan path gambar lainnya
+  '/Assets/img/anis.jpg',
+  '/Assets/img/florr.jpg',
+  '/Assets/img/inexx.jpg',
+  '/Assets/img/iwan.jpg',
+  '/Assets/img/syaa.jpg',
+  '/Assets/img/fadli.jpg',
 ];
 
 const TimKami = () => {
