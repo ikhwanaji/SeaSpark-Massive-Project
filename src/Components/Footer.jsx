@@ -38,7 +38,7 @@ const Footer = ({ infoLinks, isUserPage }) => {
           {/* Company Name */}
           <div className="flex justify-center sm:justify-start">
             <Link to={isUserPage ? '/beranda-user' : '/'} className="cursor-pointer">
-              <img className="h-44 md:h-44" src="/src/Assets/img/Logo Footer.png" alt="Logo" />
+              <img className="h-44 md:h-44" src="../Assets/img/Logo Footer.png" alt="Logo" />
             </Link>
           </div>
 

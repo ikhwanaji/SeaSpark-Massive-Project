@@ -3,19 +3,19 @@ import Button from '../Components/Button';
 
 const TentangKami = () => {
   const teamMembers = [
-    { name: 'Noudia Inex Pasiakan', img: '/src/Assets/img/inexx.jpg' },
-    { name: 'Ikhwan Aji Pratama', img: '/src/Assets/img/iwan.jpg' },
-    { name: 'Celestina Florecita Mariwy', img: '/src/Assets/img/florr.jpg' },
-    { name: 'Anis Putri Purwanti', img: '/src/Assets/img/anis.jpg' },
-    { name: 'Ahmad Fadli', img: '/src/Assets/img/fadli.jpg' },
-    { name: 'Nur Syahidah', img: '/src/Assets/img/syaa.jpg' },
+    { name: 'Noudia Inex Pasiakan', img: '../Assets/img/inexx.jpg' },
+    { name: 'Ikhwan Aji Pratama', img: '../Assets/img/iwan.jpg' },
+    { name: 'Celestina Florecita Mariwy', img: '../Assets/img/florr.jpg' },
+    { name: 'Anis Putri Purwanti', img: '../Assets/img/anis.jpg' },
+    { name: 'Ahmad Fadli', img: '../Assets/img/fadli.jpg' },
+    { name: 'Nur Syahidah', img: '../Assets/img/syaa.jpg' },
   ];
 
   return (
     <div className="w-full min-h-screen bg-blue-50 p-12 mt-14">
       {/* DoKer Section */}
       <div className="mx-auto w-4/5 sm:w-2/3 text-center mb-24 flex flex-col sm:flex-row items-center justify-center sm:space-x-8">
-        <img src="/src/Assets/img/seaspark.jpg" alt="Underwater scene" className="w-full sm:w-full h-[500px] object-cover rounded-lg shadow-md" />
+        <img src="../Assets/img/seaspark.jpg" alt="Underwater scene" className="w-full sm:w-full h-[500px] object-cover rounded-lg shadow-md" />
         <div className="mt-4 sm:mt-0 text-left">
           <h1 className="text-blue-500 text-4xl font-bold">DoKer</h1>
           <p className="text-gray-700 mt-4 text-lg text-justify">

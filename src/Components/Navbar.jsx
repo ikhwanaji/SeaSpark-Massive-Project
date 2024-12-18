@@ -18,7 +18,7 @@ function Navbar({
   backgroundColor = 'bg-white',
   textColor = 'text-black-500',
   hoverColor = 'hover:text-blue-700',
-  logo = '/src/Assets/img/logo.png',
+  logo = '../Assets/img/logo.png',
   isLoggedIn = false,
   user = null,
   onLogout = () => {},
