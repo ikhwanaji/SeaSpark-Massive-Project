@@ -82,7 +82,7 @@ const KontakKami = () => {
             {/* Bagian Form */}
             <div className="w-full md:w-1/2 md:pl-8">
               <h2 className="text-2xl font-bold text-blue-500 mb-2">Kontak Kami Sekarang</h2>
-              <p className="text-blue-500 mb-4">Silahkan tinggalkan pesan Anda pada kolom di bawah ini</p>
+              <p className="text-gray-700 mb-4">Silahkan tinggalkan pesan Anda pada kolom di bawah ini</p>
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <label className="block text-blue-500 mb-2 font-semibold" htmlFor="nama">
@@ -93,7 +93,7 @@ const KontakKami = () => {
                     type="text"
                     value={nama}
                     onChange={(e) => setNama(e.target.value)}
-                    placeholder="Masukkan nama Anda"
+                    placeholder="John Doe"
                     required
                     className="border border-gray-300 p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -107,7 +107,7 @@ const KontakKami = () => {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Masukkan email Anda"
+                      placeholder="example@gmail.com"
                       required
                       className="border border-gray-300 p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />

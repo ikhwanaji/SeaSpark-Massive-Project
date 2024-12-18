@@ -1,4 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './Components/PrivateRoute';
 
 // Halaman Utama
 import Beranda from './Pages/Beranda';
@@ -16,6 +19,7 @@ import ProdukPaketan from './Pages/ProdukPaketan';
 import ProdukSatuan from './Pages/ProdukSatuan';
 import PemesananPage from './Pages/Pemesanan';
 import KonfirmasiPembayaran from './Pages/KonfirmasiPembayaran';
+import RiwayatPemesananPage from './Pages/RiwayatPemesananPage';
 
 // Halaman Layanan
 import LayananPage from './Pages/LayananPage';
@@ -73,93 +77,90 @@ import LaporanPenggunaPage from './Admin/Pages/Laporan/LaporanPenggunaPage';
 
 // Halaman Admin : Manajemen User
 import ManajemenUserPage from './Admin/Pages/User/ManajemenUserPage';
-import { AuthProvider } from './context/AuthContext';
 import EditUser from './Admin/Pages/User/EditUser';
-import RiwayatPemesananPage from './Pages/RiwayatPemesananPage';
-
-
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Halaman Utama */}
+          {/* Halaman Utama Publik */}
           <Route path="/" element={<Beranda />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/beranda-pengguna" element={<BerandaUser />} />
-
-          {/* Kebijakan & Syarat */}
-          <Route path="/kebijakan-privasi" element={<Kebijakan_Privasi />} />
-          <Route path="/syarat-dan-ketentuan" element={<Syarat_ketentuan />} />
-
-          {/* Pemesanan */}
-          <Route path="/Produk" element={<Produk />} />
-          <Route path="/produk-paketan" element={<ProdukPaketan />} />
-          <Route path="/produk-satuan" element={<ProdukSatuan />} />
-          <Route path="/pemesanan" element={<PemesananPage />} />
-          <Route path="/konfirmasi-pembayaran" element={<KonfirmasiPembayaran />} />
-          <Route path="/riwayat-pembayaran" element={<RiwayatPemesananPage />} />
-
-
-          {/* Layanan */}
-          <Route path="/layanan" element={<LayananPage />} />
-          <Route path="/layanan2" element={<Layanan2Page />} />
-          <Route path="/layanan/detail/:id" element={<DetailPage />} />
-
-          {/* Akun & Pengaturan */}
-          <Route path="/Akun" element={<AkunPage />} />
-          <Route path="/PengaturanProfil" element={<PengaturanProfil />} />
-          <Route path="/PengaturanAvatar" element={<PengaturanAvatar />} />
-          <Route path="/PengaturanPassword" element={<PengaturanPassword />} />
-          <Route path="/PengaturanNotifikasi" element={<PengaturanNotifikasi />} />
-
-          {/* Halaman Tambahan */}
-          <Route path="/Kontak" element={<KontakKami />} />
-          <Route path="/Sukses" element={<SuksesPage />} />
-          <Route path="/tentang-kami" element={<TentangKami />} />
-
-          {/* Autentikasi Admin */}
           <Route path="/login-admin" element={<LoginAdmin />} />
           <Route path="/lupa-password" element={<LupaPassword />} />
 
-          {/* Page Pesanan */}
+          {/* Halaman Publik Lainnya */}
+          <Route path="/beranda-pengguna" element={<BerandaUser />} />
+          <Route path="/kebijakan-privasi" element={<Kebijakan_Privasi />} />
+          <Route path="/syarat-dan-ketentuan" element={<Syarat_ketentuan />} />
+          <Route path="/Produk" element={<Produk />} />
+          <Route path="/produk-paketan" element={<ProdukPaketan />} />
+          <Route path="/produk-satuan" element={<ProdukSatuan />} />
+          <Route path="/layanan" element={<LayananPage />} />
+          <Route path="/layanan2" element={<Layanan2Page />} />
+          <Route path="/layanan/detail/:id" element={<DetailPage />} />
+          <Route path="/Kontak" element={<KontakKami />} />
+          <Route path="/tentang-kami" element={<TentangKami />} />
+          <Route path="/Sukses" element={<SuksesPage />} />
+
+          {/* Rute yang Memerlukan Autentikasi */}
+          <Route element={<PrivateRoute />}>
+            {/* Pemesanan */}
+            <Route path="/pemesanan" element={<PemesananPage />} />
+            <Route path="/konfirmasi-pembayaran" element={<KonfirmasiPembayaran />} />
+            <Route path="/riwayat-pembayaran" element={<RiwayatPemesananPage />} />
+
+            {/* Akun & Pengaturan */}
+            <Route path="/Akun" element={<AkunPage />} />
+            <Route path="/PengaturanProfil" element={<PengaturanProfil />} />
+            <Route path="/PengaturanAvatar" element={<PengaturanAvatar />} />
+            <Route path="/PengaturanPassword" element={<PengaturanPassword />} />
+            <Route path="/PengaturanNotifikasi" element={<PengaturanNotifikasi />} />
+          </Route>
+
+          {/* Rute Admin */}
           <Route path="/daftar-pesanan" element={<DaftarPesananPage />} />
           <Route path="/detail-pesanan-satuan" element={<DetailPesananSatuanPage />} />
           <Route path="/detail-pesanan-paketan" element={<DetailPesananPaketanPage />} />
 
-          {/* Page Kategori */}
+          {/* Kategori */}
           <Route path="/kategori-produk" element={<KategoriProdukPage />} />
           <Route path="/tambah-kategori" element={<TambahKategoriPage />} />
           <Route path="/edit-kategori/:kategoriId" element={<EditKategoriPage />} />
 
-          {/* Page Manajemen Produk */}
+          {/* Manajemen Produk */}
           <Route path="/manajemen-produk" element={<ManajemenProdukPage />} />
           <Route path="/tambah-produk" element={<TambahProdukPage />} />
           <Route path="/edit-produk/:id" element={<EditProdukPage />} />
 
-          {/* Page Manajemen Paket */}
+          {/* Manajemen Paket */}
           <Route path="/manajemen-paket" element={<ManajemenPaketPage />} />
           <Route path="/tambah-paket" element={<TambahPaketPage />} />
           <Route path="/edit-paket/:paketId" element={<EditPaketPage />} />
 
-          {/* Page Metode Pembayaran */}
+          {/* Metode Pembayaran */}
           <Route path="/metode-pembayaran" element={<MetodePembayaranPage />} />
           <Route path="/tambah-metode" element={<TambahMetodePage />} />
           <Route path="/edit-metode" element={<EditMetodePage />} />
 
-          {/* Page Manajemen Artikel */}
+          {/* Manajemen Artikel */}
           <Route path="/manajemen-artikel" element={<ManajemenArtikelPage />} />
           <Route path="/tambah-artikel" element={<TambahArtikelPage />} />
           <Route path="/edit-artikel/:artikelId" element={<EditArtikelPage />} />
 
-          {/* Page Laporan Pengguna */}
+          {/* Laporan Pengguna */}
           <Route path="/laporan-pengguna" element={<LaporanPenggunaPage />} />
 
-          {/* Page Manajemen User */}
+          {/* Manajemen User */}
           <Route path="/manajemen-user" element={<ManajemenUserPage />} />
           <Route path="/edit-user/:userId" element={<EditUser />} />
+          <Route path="/404" element={<NotFound />} />
+
+          {/* Halaman Default atau 404 */}
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

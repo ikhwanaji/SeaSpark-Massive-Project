@@ -34,7 +34,7 @@ const TentangKami = () => {
           {teamMembers.map((member, index) => (
             <div key={index} className="text-center py-8">
               <img src={member.img} alt={member.name} className="rounded-full h-60 w-60 object-cover mx-auto" />
-              <p className="text-blue-500 text-lg font-semibold mt-4">{member.name}</p>
+              <p className="text-gray-700 text-lg font-semibold mt-4">{member.name}</p>
             </div>
           ))}
         </div>
