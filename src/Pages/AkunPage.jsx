@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
-import { FiUserCheck } from 'react-icons/fi';
 import CardAkun from '../Components/CardAkun';
 import { useAuth } from '../context/AuthContext';
 
