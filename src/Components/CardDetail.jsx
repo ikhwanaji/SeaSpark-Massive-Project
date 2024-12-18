@@ -21,7 +21,7 @@ const CardDetail = () => {
   const penyakitDetails = {
     1: {
       title: 'Penyakit Bakteri pada Ikan Kerapu',
-      image: '/src/Assets/img/bakteridetail.png',
+      image: '../Assets/img/bakteridetail.png',
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: ['Infeksi bakteri seperti Vibrio spp.', 'Aeromonas spp.', 'Streptococcus spp.', 'Pseudomonas spp.'],
@@ -38,7 +38,7 @@ const CardDetail = () => {
     },
     2: {
       title: 'Penyakit Jamur pada Ikan Kerapu',
-      image: '/src/Assets/img/jamurdetail.png',
+      image: '../Assets/img/jamurdetail.png',
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: ['Kondisi Lingkungan Buruk', 'Luka Pada Ikan', 'Stress', 'Infeksi Sekunder yang disebabkan oleh jamur yang sering menyerang ikan yang sudah lemah akibat infeksi bakteri atau parasit.'],
@@ -74,7 +74,7 @@ const CardDetail = () => {
     },
     3: {
       title: 'Penyakit Virus pada Ikan Kerapu',
-      image: '/src/Assets/img/virusdetail.png',
+      image: '../Assets/img/virusdetail.png',
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: [
@@ -124,7 +124,7 @@ const CardDetail = () => {
     },
     4: {
       title: 'Penyakit Parasit pada Ikan Kerapu',
-      image: '/src/Assets/img/parasitdetail.png',
+      image: '../Assets/img/parasitdetail.png',
       description: `Infestasi parasit merupakan ancaman serius dalam budidaya ikan kerapu, dapat memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan secara signifikan.`,
       details: {
         penyebab: [
@@ -178,7 +178,7 @@ const CardDetail = () => {
     },
     5: {
       title: 'Penyakit Nutrisi pada Ikan Kerapu',
-      image: '/src/Assets/img/nutrisidetail.png',
+      image: '../Assets/img/nutrisidetail.png',
       description: `Gangguan nutrisi merupakan faktor kritis yang memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan kerapu dalam budidaya.`,
       details: {
         penyebab: [
