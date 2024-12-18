@@ -3,7 +3,7 @@ import Button from '../Components/Button';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const LayananKami = ({ to }) => {
-  const images = ['../Assets/img/artikelimg.png', '../Assets/img/artikelimg2.png', '../Assets/img/artikelimg3.png', '../Assets/img/artikelimg4.png', '../Assets/img/artikelimg5.png'];
+  const images = ['/Assets/img/artikelimg.png', '/Assets/img/artikelimg2.png', '/Assets/img/artikelimg3.png', '/Assets/img/artikelimg4.png', '/Assets/img/artikelimg5.png'];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

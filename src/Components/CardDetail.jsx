@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
-import { FiUserCheck } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 
 const CardDetail = () => {
@@ -9,19 +8,11 @@ const CardDetail = () => {
   const navigate = useNavigate();
   const { isLoggedIn, user, logout } = useAuth(); 
 
-  const navigation = [
-    { name: 'Beranda', type: 'link', path: '/' },
-    { name: 'Layanan', type: 'link', path: '/layanan' },
-    { name: 'Produk', type: 'link', path: '/produk' },
-    { name: 'Tentang Kami', type: 'link', path: '/tentang-kami' },
-    { name: 'Kontak', type: 'link', path: '/kontak' },
-  ];
-
   // Expanded penyakit details
   const penyakitDetails = {
     1: {
       title: 'Penyakit Bakteri pada Ikan Kerapu',
-      image: '../Assets/img/bakteridetail.png',
+      image: '/Assets/img/bakteridetail.png',
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: ['Infeksi bakteri seperti Vibrio spp.', 'Aeromonas spp.', 'Streptococcus spp.', 'Pseudomonas spp.'],
@@ -38,7 +29,7 @@ const CardDetail = () => {
     },
     2: {
       title: 'Penyakit Jamur pada Ikan Kerapu',
-      image: '../Assets/img/jamurdetail.png',
+      image: '/Assets/img/jamurdetail.png',
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: ['Kondisi Lingkungan Buruk', 'Luka Pada Ikan', 'Stress', 'Infeksi Sekunder yang disebabkan oleh jamur yang sering menyerang ikan yang sudah lemah akibat infeksi bakteri atau parasit.'],
@@ -74,7 +65,7 @@ const CardDetail = () => {
     },
     3: {
       title: 'Penyakit Virus pada Ikan Kerapu',
-      image: '../Assets/img/virusdetail.png',
+      image: '/Assets/img/virusdetail.png',
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: [
@@ -124,7 +115,7 @@ const CardDetail = () => {
     },
     4: {
       title: 'Penyakit Parasit pada Ikan Kerapu',
-      image: '../Assets/img/parasitdetail.png',
+      image: '/Assets/img/parasitdetail.png',
       description: `Infestasi parasit merupakan ancaman serius dalam budidaya ikan kerapu, dapat memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan secara signifikan.`,
       details: {
         penyebab: [
@@ -178,7 +169,7 @@ const CardDetail = () => {
     },
     5: {
       title: 'Penyakit Nutrisi pada Ikan Kerapu',
-      image: '../Assets/img/nutrisidetail.png',
+      image: '/Assets/img/nutrisidetail.png',
       description: `Gangguan nutrisi merupakan faktor kritis yang memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan kerapu dalam budidaya.`,
       details: {
         penyebab: [

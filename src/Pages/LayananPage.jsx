@@ -38,35 +38,35 @@ const Layanan = () => {
   const layananData = [
     {
       id: '1', // Tambahkan ID unik
-      imageSrc: '../Assets/img/bakteri.png',
+      imageSrc: '/Assets/img/bakteri.png',
       title: 'Penyakit Bakteri',
       description: 'Penyebab Penyakit: Vibrio spp. (Vibrio alginolyticus, Vibrio harveyi)',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '2', // Tambahkan ID unik
-      imageSrc: '../Assets/img/jamur.png',
+      imageSrc: '/Assets/img/jamur.png',
       title: 'Penyakit Jamur',
       description: 'Penyebab Penyakit: Aphanomyces spp., Saprolegnia spp.',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '3', // Tambahkan ID unik
-      imageSrc: '../Assets/img/virus.png',
+      imageSrc: '/Assets/img/virus.png',
       title: 'Penyakit Virus',
       description: 'Penyebab Penyakit: White Spot Syndrome Virus (WSSV).',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '4', // Tambahkan ID unik
-      imageSrc: '../Assets/img/parasit.png',
+      imageSrc: '/Assets/img/parasit.png',
       title: 'Penyakit Parasit',
       description: 'Penyebab Penyakit: Protozoa Cryptocaryon irritans (penyakit bintik putih), Amyloodinium ocellatum (velvet disease), dan Trichodina spp.',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '5', // Tambahkan ID unik
-      imageSrc: '../Assets/img/nutrisi.png',
+      imageSrc: '/Assets/img/nutrisi.png',
       title: 'Penyakit Nutrisi',
       description: 'Penyebab Penyakit: Kekurangan protein, Defisiensi vitamin, Kekurangan mineral, Kandungan pakan tidak seimbang',
       linkText: 'Baca lebih lanjut...',

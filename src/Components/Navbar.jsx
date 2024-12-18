@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FiUser } from "react-icons/fi";
 import { FiUserCheck } from 'react-icons/fi';
+import Logo from '../Assets/img/logo.png'
 
 const DEFAULT_NAVIGATION = [
   { name: 'Beranda', type: 'link', path: '/' },
@@ -18,7 +19,7 @@ function Navbar({
   backgroundColor = 'bg-white',
   textColor = 'text-black-500',
   hoverColor = 'hover:text-blue-700',
-  logo = '../Assets/img/logo.png',
+  logo = Logo,
   isLoggedIn = false,
   user = null,
   onLogout = () => {},
