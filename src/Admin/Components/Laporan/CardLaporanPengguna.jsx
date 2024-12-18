@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Table from '../Table';
-import Button from '../../components/Button'; // Sesuaikan path
+import Table from '../../Components/Table';
+import Button from '../../Components/Button'; // Sesuaikan path
 import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const CardLaporan = () => {

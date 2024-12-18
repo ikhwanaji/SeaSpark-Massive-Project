@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../../components/Button';
+import Button from '../../Components/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchKategori, tambahProduk } from '../../services/produkService';
 

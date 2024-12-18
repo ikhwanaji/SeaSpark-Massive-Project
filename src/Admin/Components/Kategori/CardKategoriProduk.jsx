@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import Button from '../../components/Button';
+import Button from '../../Components/Button';
 import Swal from 'sweetalert2'; // Pastikan sudah install sweetalert2
 
 const CardKategori = () => {
