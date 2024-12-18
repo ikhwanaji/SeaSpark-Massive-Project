@@ -8,6 +8,7 @@ import Beranda from './Pages/Beranda';
 import LoginPage from './Pages/LoginPage';
 import Register from './Pages/Register';
 
+
 // Halaman Kebijakan & Syarat
 import Kebijakan_Privasi from './Pages/Kebijakan_Privasi';
 import Syarat_ketentuan from './Pages/Syarat_ketentuan';
@@ -92,7 +93,6 @@ function App() {
           <Route path="/lupa-password" element={<LupaPassword />} />
 
           {/* Halaman Publik Lainnya */}
-          
           <Route path="/kebijakan-privasi" element={<Kebijakan_Privasi />} />
           <Route path="/syarat-dan-ketentuan" element={<Syarat_ketentuan />} />
           <Route path="/Produk" element={<Produk />} />
