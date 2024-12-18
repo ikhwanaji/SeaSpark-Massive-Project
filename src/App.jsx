@@ -7,7 +7,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import Beranda from './Pages/Beranda';
 import LoginPage from './Pages/LoginPage';
 import Register from './Pages/Register';
-import BerandaUser from './Pages/BerandaUser';
+
 
 // Halaman Kebijakan & Syarat
 import Kebijakan_Privasi from './Pages/Kebijakan_Privasi';
@@ -93,7 +93,6 @@ function App() {
           <Route path="/lupa-password" element={<LupaPassword />} />
 
           {/* Halaman Publik Lainnya */}
-          <Route path="/beranda-pengguna" element={<BerandaUser />} />
           <Route path="/kebijakan-privasi" element={<Kebijakan_Privasi />} />
           <Route path="/syarat-dan-ketentuan" element={<Syarat_ketentuan />} />
           <Route path="/Produk" element={<Produk />} />
