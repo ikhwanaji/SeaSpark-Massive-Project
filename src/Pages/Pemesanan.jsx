@@ -63,7 +63,21 @@ function PemesananPage() {
         throw new Error('User ID tidak ditemukan. Silakan login ulang.');
       }
 
-      const totalHarga = produk.harga * formData.jumlahProduk;
+      // Ambil biaya pengiriman dari metode pengiriman yang dipilih
+      const metodePengiriman = formData.metodePengiriman;
+
+      const shippingResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/shipping-methods/${metodePengiriman}`, {
+        headers: {
+          Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+        },
+      });
+
+      const biayaPengiriman = shippingResponse.data.biaya || 0;
+
+      const hargaProduk = produk.harga * formData.jumlahProduk;
+
+      // Tambahkan biaya pengiriman
+      const totalHarga = hargaProduk + biayaPengiriman;
 
       const payload = {
         userId: user.id,
@@ -90,40 +104,118 @@ function PemesananPage() {
         // Langsung panggil snap.pay
         window.snap.pay(response.data.midtransToken, {
           onSuccess: async (result) => {
-            // Handle pembayaran berhasil
-            Swal.fire({
-              icon: 'success',
-              title: 'Pembayaran Berhasil',
-              text: 'Terima kasih atas pembayaran Anda.',
-            }).then(() => {
-              navigate('/riwayat-pembayaran', {
-                state: {
-                  paymentSuccess: true,
-                  orderId: response.data.orderId,
+            try {
+              // Kirim update status pembayaran ke backend
+              await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/pemesanan/update-payment-status`,
+                {
+                  orderId: response.data.midtransOrderId,
+                  status: 'success',
                 },
+                {
+                  headers: {
+                    Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                  },
+                }
+              );
+
+              // Handle pembayaran berhasil
+              Swal.fire({
+                icon: 'success',
+                title: 'Pembayaran Berhasil',
+                text: 'Terima kasih atas pembayaran Anda.',
+              }).then(() => {
+                navigate('/riwayat-pembayaran', {
+                  state: {
+                    paymentSuccess: true,
+                    orderId: response.data.orderId,
+                  },
+                });
               });
-            });
+            } catch (updateError) {
+              console.error('Error updating payment status:', updateError);
+              // Tetap tampilkan pesan sukses meskipun update status gagal
+              Swal.fire({
+                icon: 'success',
+                title: 'Pembayaran Berhasil',
+                text: 'Namun terjadi masalah saat memperbarui status pembayaran.',
+              });
+            }
           },
-          onPending: (result) => {
-            Swal.fire({
-              icon: 'info',
-              title: 'Pembayaran Tertunda',
-              text: 'Silakan selesaikan pembayaran Anda.',
-            });
+          onPending: async (result) => {
+            try {
+              // Kirim update status pembayaran ke backend
+              await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/pemesanan/update-payment-status`,
+                {
+                  orderId: response.data.midtransOrderId,
+                  status: 'pending',
+                },
+                {
+                  headers: {
+                    Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                  },
+                }
+              );
+
+              Swal.fire({
+                icon: 'info',
+                title: 'Pembayaran Tertunda',
+                text: 'Silakan selesaikan pembayaran Anda.',
+              });
+            } catch (updateError) {
+              console.error('Error updating payment status:', updateError);
+            }
           },
-          onError: (result) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Pembayaran Gagal',
-              text: 'Terjadi kesalahan dalam proses pembayaran.',
-            });
+          onError: async (result) => {
+            try {
+              // Kirim update status pembayaran ke backend
+              await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/pemesanan/update-payment-status`,
+                {
+                  orderId: response.data.midtransOrderId,
+                  status: 'failed',
+                },
+                {
+                  headers: {
+                    Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                  },
+                }
+              );
+
+              Swal.fire({
+                icon: 'error',
+                title: 'Pembayaran Gagal',
+                text: 'Terjadi kesalahan dalam proses pembayaran.',
+              });
+            } catch (updateError) {
+              console.error('Error updating payment status:', updateError);
+            }
           },
-          onClose: () => {
-            Swal.fire({
-              icon: 'warning',
-              title: 'Pembayaran Dibatalkan',
-              text: 'Anda menutup popup pembayaran sebelum menyelesaikan.',
-            });
+          onClose: async () => {
+            try {
+              // Kirim update status pembayaran ke backend
+              await axios.post(
+                `${import.meta.env.VITE_API_URL}/api/pemesanan/update-payment-status`,
+                {
+                  orderId: response.data.midtransOrderId,
+                  status: 'cancelled',
+                },
+                {
+                  headers: {
+                    Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
+                  },
+                }
+              );
+
+              Swal.fire({
+                icon: 'warning',
+                title: 'Pembayaran Dibatalkan',
+                text: 'Anda menutup popup pembayaran sebelum menyelesaikan.',
+              });
+            } catch (updateError) {
+              console.error('Error updating payment status:', updateError);
+            }
           },
         });
       } else {
