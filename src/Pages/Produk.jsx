@@ -5,8 +5,8 @@ import Footer from '../Components/Footer';
 import CardPemesanan from '../Components/CardPemesanan';
 import backgroundImage from '../Assets/img/HeroSection.jpg';
 import { useAuth } from '../context/AuthContext';
-import satuanImg from '../Assets/img/satuan.png';
-import paketanImg from '../Assets/img/paketan.png';
+import satuanImg from '../Assets/img/Satuan.png';
+import paketanImg from '../Assets/img/Paketan.png';
 
 function Produk() {
   const navigate = useNavigate(); // Inisialisasi useNavigate
