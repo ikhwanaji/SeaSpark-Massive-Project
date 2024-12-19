@@ -174,7 +174,7 @@ const CardDetail = () => {
     },
     5: {
       title: 'Penyakit Nutrisi pada Ikan Kerapu',
-      image: nutrisiDetailImgDetailImg,
+      image: nutrisiDetailImg,
       description: `Gangguan nutrisi merupakan faktor kritis yang memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan kerapu dalam budidaya.`,
       details: {
         penyebab: [
