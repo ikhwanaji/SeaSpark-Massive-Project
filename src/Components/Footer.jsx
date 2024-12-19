@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import logoFooterImg from '../Assets/img/Logo Footer.png';
 
 const Footer = ({ infoLinks, isUserPage }) => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Footer = ({ infoLinks, isUserPage }) => {
           {/* Company Name */}
           <div className="flex justify-center sm:justify-start">
             <Link to={isUserPage ? '/' : '/'} className="cursor-pointer">
-              <img className="h-44 md:h-44" src="/Assets/img/Logo Footer.png" alt="Logo" />
+              <img className="h-44 md:h-44" src={logoFooterImg} alt="Logo" />
             </Link>
           </div>
 

@@ -3,6 +3,11 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Card from '../Components/CardLayanan';
 import { useAuth } from '../context/AuthContext';
+import bakteriImg from '../Assets/img/bakteri.png';
+import jamurImg from '../Assets/img/jamur.png';
+import virusImg from '../Assets/img/virus.png';
+import parasitImg from '../Assets/img/parasit.png';
+import nutrisiImg from '../Assets/img/nutrisi.png';
 
 const Layanan = () => {
   const { isLoggedIn, user, logout } = useAuth(); 
@@ -38,35 +43,35 @@ const Layanan = () => {
   const layananData = [
     {
       id: '1', // Tambahkan ID unik
-      imageSrc: '/Assets/img/bakteri.png',
+      imageSrc: bakteriImg,
       title: 'Penyakit Bakteri',
       description: 'Penyebab Penyakit: Vibrio spp. (Vibrio alginolyticus, Vibrio harveyi)',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '2', // Tambahkan ID unik
-      imageSrc: '/Assets/img/jamur.png',
+      imageSrc: jamurImg,
       title: 'Penyakit Jamur',
       description: 'Penyebab Penyakit: Aphanomyces spp., Saprolegnia spp.',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '3', // Tambahkan ID unik
-      imageSrc: '/Assets/img/virus.png',
+      imageSrc: virusImg,
       title: 'Penyakit Virus',
       description: 'Penyebab Penyakit: White Spot Syndrome Virus (WSSV).',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '4', // Tambahkan ID unik
-      imageSrc: '/Assets/img/parasit.png',
+      imageSrc: parasitImg,
       title: 'Penyakit Parasit',
       description: 'Penyebab Penyakit: Protozoa Cryptocaryon irritans (penyakit bintik putih), Amyloodinium ocellatum (velvet disease), dan Trichodina spp.',
       linkText: 'Baca lebih lanjut...',
     },
     {
       id: '5', // Tambahkan ID unik
-      imageSrc: '/Assets/img/nutrisi.png',
+      imageSrc: nutrisiImg,
       title: 'Penyakit Nutrisi',
       description: 'Penyebab Penyakit: Kekurangan protein, Defisiensi vitamin, Kekurangan mineral, Kandungan pakan tidak seimbang',
       linkText: 'Baca lebih lanjut...',

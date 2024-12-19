@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { useAuth } from '../context/AuthContext';
+import kontakImg from '../Assets/img/Kontak.png';
 
 const infoLinks = [
   { text: 'Beranda', path: '/beranda-user', href: '#beranda' },
@@ -76,7 +77,7 @@ const KontakKami = () => {
           <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col md:flex-row items-center max-w-[800px] mx-auto">
             {/* Bagian Gambar */}
             <div className="w-full md:w-1/2 mb-6 md:mb-0">
-              <img src="../Assets/img/Kontak.png" alt="Perwakilan layanan pelanggan" className="rounded-lg w-full" />
+              <img src={kontakImg} alt="Perwakilan layanan pelanggan" className="rounded-lg w-full" />
             </div>
 
             {/* Bagian Form */}

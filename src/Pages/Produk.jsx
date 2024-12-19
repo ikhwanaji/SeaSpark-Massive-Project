@@ -5,6 +5,8 @@ import Footer from '../Components/Footer';
 import CardPemesanan from '../Components/CardPemesanan';
 import backgroundImage from '../Assets/img/HeroSection.jpg';
 import { useAuth } from '../context/AuthContext';
+import satuanImg from '../Assets/img/satuan.png';
+import paketanImg from '../Assets/img/paketan.png';
 
 function Produk() {
   const navigate = useNavigate(); // Inisialisasi useNavigate
@@ -28,13 +30,13 @@ function Produk() {
       id: '1',
       title: 'Pemesanan Satuan',
       description: 'Pesan alat dan bahan ikan kerapu satuan sesuai dengan kebutuhan Anda',
-      image: '/src/assets/img/Satuan.png',
+      image: satuanImg,
     },
     {
       id: '2',
       title: 'Pemesanan Paketan',
       description: 'Pesan paket penanganan penyakit ikan kerapu dengan harga yang lebih hemat',
-      image: '/src/assets/img/Paketan.png',
+      image: paketanImg,
     },
   ];
 

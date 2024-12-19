@@ -1,21 +1,28 @@
 import React from 'react';
 import Button from '../Components/Button';
+import anisImg from '../Assets/img/anis.jpg'
+import florrImg from '../Assets/img/florr.jpg'
+import inexxImg from '../Assets/img/inexx.jpg'
+import iwanImg from '../Assets/img/iwan.jpg'
+import syaaImg from '../Assets/img/syaa.jpg'
+import fadliImg from '../Assets/img/fadli.jpg'
+import SeasparkImg from '../Assets/img/seaspark.jpg'
 
 const TentangKami = () => {
   const teamMembers = [
-    { name: 'Noudia Inex Pasiakan', img: '/Assets/img/inexx.jpg' },
-    { name: 'Ikhwan Aji Pratama', img: '/Assets/img/iwan.jpg' },
-    { name: 'Celestina Florecita Mariwy', img: '/Assets/img/florr.jpg' },
-    { name: 'Anis Putri Purwanti', img: '/Assets/img/anis.jpg' },
-    { name: 'Ahmad Fadli', img: '/Assets/img/fadli.jpg' },
-    { name: 'Nur Syahidah', img: '/Assets/img/syaa.jpg' },
+    { name: 'Noudia Inex Pasiakan', img: inexxImg },
+    { name: 'Ikhwan Aji Pratama', img: iwanImg },
+    { name: 'Celestina Florecita Mariwy', img: florrImg },
+    { name: 'Anis Putri Purwanti', img: anisImg },
+    { name: 'Ahmad Fadli', img: fadliImg },
+    { name: 'Nur Syahidah', img: syaaImg },
   ];
 
   return (
     <div className="w-full min-h-screen bg-blue-50 p-12 mt-14">
       {/* DoKer Section */}
       <div className="mx-auto w-4/5 sm:w-2/3 text-center mb-24 flex flex-col sm:flex-row items-center justify-center sm:space-x-8">
-        <img src="../Assets/img/seaspark.jpg" alt="Underwater scene" className="w-full sm:w-full h-[500px] object-cover rounded-lg shadow-md" />
+        <img src={SeasparkImg} alt="Underwater scene" className="w-full sm:w-full h-[500px] object-cover rounded-lg shadow-md" />
         <div className="mt-4 sm:mt-0 text-left">
           <h1 className="text-blue-500 text-4xl font-bold">DoKer</h1>
           <p className="text-gray-700 mt-4 text-lg text-justify">
