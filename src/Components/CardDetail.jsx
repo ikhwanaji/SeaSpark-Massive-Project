@@ -2,6 +2,11 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import { useAuth } from '../context/AuthContext';
+import bakteriDetailImg from '../Assets/img/bakteridetail.png'
+import jamurDetailImg from '../Assets/img/jamurdetail.png'
+import virusDetailImg from '../Assets/img/virusdetail.png'
+import parasitDetailImg from '../Assets/img/parasitdetail.png'
+import nutrisiDetailImg from '../Assets/img/nutrisidetail.png'
 
 const CardDetail = () => {
   const { id } = useParams();
@@ -12,7 +17,7 @@ const CardDetail = () => {
   const penyakitDetails = {
     1: {
       title: 'Penyakit Bakteri pada Ikan Kerapu',
-      image: '/Assets/img/bakteridetail.png',
+      image: bakteriDetailImg,
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: ['Infeksi bakteri seperti Vibrio spp.', 'Aeromonas spp.', 'Streptococcus spp.', 'Pseudomonas spp.'],
@@ -29,7 +34,7 @@ const CardDetail = () => {
     },
     2: {
       title: 'Penyakit Jamur pada Ikan Kerapu',
-      image: '/Assets/img/jamurdetail.png',
+      image: jamurDetailImg,
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: ['Kondisi Lingkungan Buruk', 'Luka Pada Ikan', 'Stress', 'Infeksi Sekunder yang disebabkan oleh jamur yang sering menyerang ikan yang sudah lemah akibat infeksi bakteri atau parasit.'],
@@ -65,7 +70,7 @@ const CardDetail = () => {
     },
     3: {
       title: 'Penyakit Virus pada Ikan Kerapu',
-      image: '/Assets/img/virusdetail.png',
+      image: virusDetailImg,
       description: `Ikan kerapu (Epinephelus spp.) rentan terhadap penyakit bakteri yang dapat menyebabkan kerugian signifikan dalam budidaya.`,
       details: {
         penyebab: [
@@ -115,7 +120,7 @@ const CardDetail = () => {
     },
     4: {
       title: 'Penyakit Parasit pada Ikan Kerapu',
-      image: '/Assets/img/parasitdetail.png',
+      image: parasitDetailImg,
       description: `Infestasi parasit merupakan ancaman serius dalam budidaya ikan kerapu, dapat memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan secara signifikan.`,
       details: {
         penyebab: [
@@ -169,7 +174,7 @@ const CardDetail = () => {
     },
     5: {
       title: 'Penyakit Nutrisi pada Ikan Kerapu',
-      image: '/Assets/img/nutrisidetail.png',
+      image: nutrisiDetailImgDetailImg,
       description: `Gangguan nutrisi merupakan faktor kritis yang memengaruhi kesehatan, pertumbuhan, dan produktivitas ikan kerapu dalam budidaya.`,
       details: {
         penyebab: [

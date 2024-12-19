@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../Components/Button';
-
+import anisImg from '../Assets/img/anis.jpg'
+import florrImg from '../Assets/img/florr.jpg'
+import inexxImg from '../Assets/img/inexx.jpg'
+import iwanImg from '../Assets/img/iwan.jpg'
+import syaaImg from '../Assets/img/syaa.jpg'
+import fadliImg from '../Assets/img/fadli.jpg'
 const gambarTim = [
-  '/Assets/img/anis.jpg',
-  '/Assets/img/florr.jpg',
-  '/Assets/img/inexx.jpg',
-  '/Assets/img/iwan.jpg',
-  '/Assets/img/syaa.jpg',
-  '/Assets/img/fadli.jpg',
+  anisImg,
+  florrImg,
+  inexxImg,
+  iwanImg,
+  syaaImg,
+  fadliImg,
 ];
 
 const TimKami = () => {

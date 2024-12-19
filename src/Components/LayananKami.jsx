@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import Button from '../Components/Button';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import artikelImg from '../Assets/img/artikelimg.png'
+import artikelImg2 from '../Assets/img/artikelimg2.png'
+import artikelImg3 from '../Assets/img/artikelimg3.png'
+import artikelImg4 from '../Assets/img/artikelimg4.png'
+import artikelImg5 from '../Assets/img/artikelimg5.png'
 
 const LayananKami = ({ to }) => {
-  const images = ['/Assets/img/artikelimg.png', '/Assets/img/artikelimg2.png', '/Assets/img/artikelimg3.png', '/Assets/img/artikelimg4.png', '/Assets/img/artikelimg5.png'];
+  const images = [artikelImg, artikelImg2, artikelImg3, artikelImg4, artikelImg5];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 

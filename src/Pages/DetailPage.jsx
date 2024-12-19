@@ -4,8 +4,6 @@ import Footer from '../Components/Footer';
 import CardDetail from '../Components/CardDetail';
 import { useAuth } from '../context/AuthContext';
 
-
-
 const infoLinks = [
   { text: 'Beranda', path: '/', href: '#beranda' },
   { text: 'Layanan', path: '/layanan', href: '#layanan' },
