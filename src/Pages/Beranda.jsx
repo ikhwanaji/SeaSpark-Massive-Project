@@ -74,17 +74,15 @@ function Beranda() {
   return (
     <>
       <Navbar
-        buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
-        // useIcon={isLoggedIn} // Gunakan icon jika sudah login
-        // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
-        // Tambahkan prop untuk status login
+        buttonName={isLoggedIn ? 'Keluar' : 'Masuk'} // Mengubah nama tombol berdasarkan status login
         isLoggedIn={isLoggedIn}
         user={user}
         onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
+        
       />
       <main>
         <section id="beranda">
-          <HeroSection to="/login" />
+          <HeroSection />
         </section>
         <section id="layanan">
           <LayananKami />
@@ -92,14 +90,17 @@ function Beranda() {
         <section id="produk-kami">
           <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
             <div className="text-center mb-2">
-              <h2 className="text-4xl font-bold text-gray-800">Produk Terbaik Kami</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Produk Terbaik Kami</h2>
             </div>
-            <div className="flex space-x-4 p-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-12">
               {products.map((product, index) => (
                 <CardProduk key={index} image={product.image} title={product.title} price={product.price} />
               ))}
             </div>
-            <Button buttonText="Pesan Sekarang" to="/login" />
+            <Button
+              buttonText="Pesan Sekarang"
+              to={isLoggedIn ? '/produk/produk-paketan' : '/login'} 
+            />
           </div>
         </section>
         <section id="tentang-kami">

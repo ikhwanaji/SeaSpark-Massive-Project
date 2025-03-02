@@ -85,7 +85,7 @@ const Footer = ({ infoLinks, isUserPage }) => {
 
       {/* Copyright */}
       <div className="py-4 text-center bg-blue-500 text-white">
-        <p>© Copyright 2020. All Rights Reserved.</p>
+        <p>© Copyright 2024. All Rights Reserved.</p>
       </div>
     </footer>
   );

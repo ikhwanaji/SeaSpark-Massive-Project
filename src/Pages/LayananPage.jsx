@@ -81,14 +81,13 @@ const Layanan = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar
-        // Ubah prop untuk mendukung kondisi login
         buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
         // useIcon={isLoggedIn} // Gunakan icon jika sudah login
         // icon={isLoggedIn ? <FiUserCheck size={24} /> : null}
         // Tambahkan prop untuk status login
         isLoggedIn={isLoggedIn}
         user={user}
-        onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
+        onLogout={logout} 
       />
       <div className="flex-grow bg-blue-100 py-20">
         <div className='text-center text-2xl pt-10 font-extrabold text-gray-800'>
