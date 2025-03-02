@@ -72,7 +72,7 @@ const KontakKami = () => {
         user={user}
         onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
       />
-      <div className="flex-grow bg-blue-200 py-20">
+      <div className="flex-grow bg-blue-50 py-20">
         <div className="container mt-8 mx-auto px-4">
           <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col md:flex-row items-center max-w-[800px] mx-auto">
             {/* Bagian Gambar */}

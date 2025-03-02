@@ -15,7 +15,6 @@ const Detail = () => {
   const { isLoggedIn, user, logout } = useAuth(); 
   return (
     <div className="min-h-screen flex flex-col">
-      {' '}
       <Navbar
         // Ubah prop untuk mendukung kondisi login
         buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
@@ -27,7 +26,7 @@ const Detail = () => {
         onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
       />
       <div className="flex-grow bg-blue-50 py-20">
-        {' '}
+        
         <div className="container mx-auto px-8">
           <div className="min-h-screen bg-blue-50 flex flex-col items-center p-8">
             <CardDetail />

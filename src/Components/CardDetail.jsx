@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 import bakteriDetailImg from '../Assets/img/bakteridetail.png'
 import jamurDetailImg from '../Assets/img/jamurdetail.png'
 import virusDetailImg from '../Assets/img/virusdetail.png'
@@ -11,7 +11,7 @@ import nutrisiDetailImg from '../Assets/img/nutrisidetail.png'
 const CardDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isLoggedIn, user, logout } = useAuth(); 
+  // const { isLoggedIn, user, logout } = useAuth(); 
 
   // Expanded penyakit details
   const penyakitDetails = {
@@ -240,7 +240,7 @@ const CardDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-blue-50">
-      <Navbar
+      {/* <Navbar
         // Ubah prop untuk mendukung kondisi login
         buttonName={isLoggedIn ? "Keluar" : "Masuk"} // Mengubah nama tombol berdasarkan status login
         // useIcon={isLoggedIn} // Gunakan icon jika sudah login
@@ -249,7 +249,7 @@ const CardDetail = () => {
         isLoggedIn={isLoggedIn}
         user={user}
         onLogout={logout} // Pastikan fungsi logout dipanggil saat tombol diklik
-      />
+      /> */}
 
       <div className="flex-grow container mx-auto px-4 py-12">
         {/* Judul Utama */}

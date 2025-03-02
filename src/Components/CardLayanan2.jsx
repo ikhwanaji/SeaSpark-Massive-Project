@@ -45,7 +45,7 @@ const Layanan2 = () => {
             </div>
             
             {/* Tombol Kembali */}
-            <Button to='/beranda-pengguna'>
+            <Button to='/'>
                 Kembali Ke Beranda
             </Button>
         </div>

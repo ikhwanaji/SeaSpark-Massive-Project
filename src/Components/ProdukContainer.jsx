@@ -11,7 +11,6 @@ const ProdukContainer = ({ onBeli, searchTerm = '', selectedCategories = [] }) =
     const fetchProduks = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/produks`);
-
         setProduks(response.data.produk);
         setLoading(false);
       } catch (err) {
@@ -27,12 +26,22 @@ const ProdukContainer = ({ onBeli, searchTerm = '', selectedCategories = [] }) =
   const filteredProduks = useMemo(() => {
     return produks.filter((produk) => {
       const matchCategory = selectedCategories.length === 0 || selectedCategories.includes(produk.kategoriNama);
-
       const matchSearch = produk.nama.toLowerCase().includes(searchTerm.toLowerCase()) || produk.deskripsi.toLowerCase().includes(searchTerm.toLowerCase());
-
       return matchCategory && matchSearch;
     });
   }, [produks, selectedCategories, searchTerm]);
+
+  // Function to handle adding to cart
+  const handleTambahKeranjang = (produk) => {
+    console.log("Produk ditambahkan ke keranjang:", produk);
+    // Add logic to handle adding to cart
+  };
+
+  // Function to update cart count
+  const updateCartCount = () => {
+    console.log("Keranjang diperbarui");
+    // Add logic to update cart count
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -59,6 +68,8 @@ const ProdukContainer = ({ onBeli, searchTerm = '', selectedCategories = [] }) =
           deskripsi={produk.deskripsi}
           stok={produk.stok}
           onBeli={onBeli}
+          onTambahKeranjang={handleTambahKeranjang} // Pass the function
+          updateCartCount={updateCartCount} // Pass the function
         />
       ))}
     </div>
