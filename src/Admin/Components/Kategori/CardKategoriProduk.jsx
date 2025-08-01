@@ -111,7 +111,6 @@ const CardKategori = () => {
               <tr className="bg-sky-200">
                 <th className="border border-sky-900 p-2 text-sky-900 text-center">No</th>
                 <th className="border border-sky-900 p-2 text-sky-900 text-center">Nama</th>
-                <th className="border border-sky-900 p-2 text-sky-900 text-center">Deskripsi</th>
                 <th className="border border-sky-900 p-2 text-sky-900 text-center">Aksi</th>
               </tr>
             </thead>
@@ -120,7 +119,6 @@ const CardKategori = () => {
                 <tr key={kategori.kategoriId || index}>
                   <td className="text-center border border-sky-900 p-2 text-sky-900">{index + 1}</td>
                   <td className="border border-sky-900 p-2 text-sky-900">{kategori.nama}</td>
-                  <td className="border border-sky-900 p-2 text-sky-900">{kategori.deskripsi}</td>
                   <td className="border border-sky-900 p-2 text-sky-900 flex justify-center space-x-2">
                     <Link to={`/edit-kategori/${kategori.kategoriId}`}>
                       <Button label="Edit" type="edit">

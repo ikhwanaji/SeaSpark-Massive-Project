@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './Components/PrivateRoute';
+// import PrivateRoute from './Components/PrivateRoute';
 
 // Halaman Utama
 import Beranda from './Pages/Beranda';
@@ -34,7 +34,7 @@ import PengaturanNotifikasi from './Pages/PengaturanNotifikasi';
 
 // Halaman Tambahan
 import KontakKami from './Pages/KontakKami';
-import SuksesPage from './Pages/SuksesPage';
+
 import TentangKami from './Pages/TentangKami';
 
 // Halaman Admin
@@ -80,6 +80,7 @@ import EditUser from './Admin/Pages/User/EditUser';
 import NotFound from './Pages/NotFound';
 import CartPage from './Pages/CartPage';
 import { CartProvider } from './context/CartContext';
+import OrderConfirmation from './Components/CardSukses';
 
 function App() {
   return (
@@ -102,18 +103,21 @@ function App() {
             <Route path="/produk/produk-satuan" element={<ProdukSatuan />} />
             <Route path="/layanan" element={<LayananPage />} />
             <Route path="/layanan2" element={<Layanan2Page />} />
+            <Route path="/layanan2/:id" element={<Layanan2Page />} />
             <Route path="/layanan/detail/:id" element={<DetailPage />} />
             <Route path="/Kontak" element={<KontakKami />} />
             <Route path="/tentang-kami" element={<TentangKami />} />
-            <Route path="/Sukses" element={<SuksesPage />} />
+            <Route path="/Sukses" element={<OrderConfirmation />} />
+            <Route path="/Sukses:/id" element={<OrderConfirmation />} />
             <Route path="/Keranjang" element={<CartPage />} />
 
             {/* Rute yang Memerlukan Autentikasi */}
-            <Route element={<PrivateRoute />}>
+            {/* <Route element={<PrivateRoute />}> */}
               {/* Pemesanan */}
               <Route path="/produk/produk-satuan/pemesanan" element={<PemesananPage />} />
               <Route path="/konfirmasi-pembayaran" element={<KonfirmasiPembayaran />} />
-              <Route path="/riwayat-pembayaran" element={<RiwayatPemesananPage />} />
+              <Route path="/riwayat-pemesanan/:id" element={<RiwayatPemesananPage />} />
+              <Route path="/riwayat-pemesanan/" element={<RiwayatPemesananPage />} />
 
               {/* Akun & Pengaturan */}
               <Route path="/Akun" element={<AkunPage />} />
@@ -121,7 +125,7 @@ function App() {
               <Route path="/PengaturanAvatar" element={<PengaturanAvatar />} />
               <Route path="/PengaturanPassword" element={<PengaturanPassword />} />
               <Route path="/PengaturanNotifikasi" element={<PengaturanNotifikasi />} />
-            </Route>
+            {/* </Route> */}
 
             {/* Rute Admin */}
             <Route path="/daftar-pesanan" element={<DaftarPesananPage />} />
@@ -149,9 +153,9 @@ function App() {
             <Route path="/edit-metode" element={<EditMetodePage />} />
 
             {/* Manajemen Artikel */}
-            <Route path="/manajemen-artikel" element={<ManajemenArtikelPage />} />
-            <Route path="/tambah-artikel" element={<TambahArtikelPage />} />
-            <Route path="/edit-artikel/:artikelId" element={<EditArtikelPage />} />
+            <Route path="/manajemen-penyakit" element={<ManajemenArtikelPage />} />
+            <Route path="/tambah-penyakit" element={<TambahArtikelPage />} />
+            <Route path="/edit-penyakit/:penyakitId" element={<EditArtikelPage />} />
 
             {/* Laporan Pengguna */}
             <Route path="/laporan-pengguna" element={<LaporanPenggunaPage />} />

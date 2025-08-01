@@ -31,7 +31,12 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => prevItems.map((item) => (item.produkId === productId ? { ...item, quantity: Math.max(1, quantity) } : item)));
   };
 
-  return <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateCartItemQuantity }}>{children}</CartContext.Provider>;
+  const clearCart = () => {
+    setCartItems([]); // Mengosongkan array cartItems
+    localStorage.removeItem('cartItems'); // Hapus juga dari localStorage
+  };
+
+  return <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateCartItemQuantity, clearCart }}>{children}</CartContext.Provider>;
 };
 
 export const useCart = () => useContext(CartContext);

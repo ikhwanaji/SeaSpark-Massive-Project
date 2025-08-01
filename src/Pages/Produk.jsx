@@ -48,8 +48,8 @@ function Produk() {
         <Navbar buttonName={isLoggedIn ? 'Keluar' : 'Masuk'} isLoggedIn={isLoggedIn} user={user} onLogout={logout} />
         <div className="flex-grow bg-gradient-to-b from-sky-400 to-sky-800 flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
           <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold text-center text-white mb-4">Pilih Jenis Pemesanan</h1>
-            <p className="text-xl text-center text-white mb-8">Silahkan pilih jenis pemesanan yang Anda inginkan</p>
+            <h1 className="text-3xl font-bold text-center text-white mb-4">Pilih Jenis Produk</h1>
+            <p className="text-xl text-center text-white mb-8">Silahkan pilih jenis Produk yang Anda inginkan</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {pemesananData.map((pemesanan) => (
                 <div key={pemesanan.id} onClick={() => handleCardClick(pemesanan.id)} className="cursor-pointer">

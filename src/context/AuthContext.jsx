@@ -81,6 +81,27 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const googleLogin = async (token, userData) => {
+    try {
+      // Set state
+      setIsLoggedIn(true);
+      setUser(userData);
+      setToken(token);
+  
+      // Simpan token dan user data di localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData));
+  
+      // Set default axios header
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  
+      return userData;
+    } catch (error) {
+      console.error('Google Login Error:', error);
+      throw new Error('Gagal melakukan login dengan Google');
+    }
+  };
+
   // Logout handler
   const logout = () => {
     // Hapus token dari localStorage
@@ -103,6 +124,7 @@ export function AuthProvider({ children }) {
     token,
     login,
     logout,
+    googleLogin
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
