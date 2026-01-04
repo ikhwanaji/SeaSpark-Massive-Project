@@ -102,20 +102,23 @@ function Beranda() {
           <LayananKami />
         </section>
 
-        <section id="produk-kami" className="py-16 md:py-24 bg-white">
+        {/* --- PERUBAHAN RESPONSIF --- */}
+        <section id="produk-kami" className="py-16 sm:py-20 md:py-24 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Produk Terbaik Kami</h2>
+            <div className="text-center mb-10 md:mb-12">
+              {/* Ukuran font disesuaikan untuk mobile dan desktop */}
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3">Produk Terbaik Kami</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">Solusi lengkap untuk kesehatan dan pertumbuhan optimal ikan kerapu Anda</p>
             </div>
 
+            {/* Grid produk sudah responsif secara default */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
               {products.map((product, index) => (
                 <CardProduk key={index} image={product.image} title={product.title} price={product.price} />
               ))}
             </div>
 
-            <div className="mt-10 text-center">
+            <div className="mt-12 text-center">
               <Button
                 buttonText="Pesan Sekarang"
                 to={isLoggedIn ? '/produk/produk-paketan' : '/login'}
@@ -129,7 +132,8 @@ function Beranda() {
           <TimKami />
         </section>
 
-        <section id="ulasan" className="py-16 md:py-24 bg-blue-50">
+        {/* --- PERUBAHAN RESPONSIF --- */}
+        <section id="ulasan" className="py-16 sm:py-20 md:py-24 bg-blue-50">
           <UlasanGrid title="Ulasan Pelanggan" subtitle="Apa Pendapat Mereka Tentang DoKer?" cards={ulasanCards} />
         </section>
       </main>

@@ -20,13 +20,11 @@ function SuksesPage() {
   const transactionStatus = queryParams.get('transaction_status');
 
   useEffect(() => {
-    // If there's no payment success in state, redirect to home
     if (!orderId) {
       navigate('/');
       return;
     }
 
-    // Fetch order details
     const fetchOrderDetails = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/pemesanan/${orderId}`);
@@ -47,10 +45,15 @@ function SuksesPage() {
   };
 
   const handleContinueShopping = () => {
-    navigate('/');
+    navigate('/produk/produk-satuan');
   };
 
   const getImageUrl = (filename) => {
+    // Pastikan filename tidak undefined atau null
+    if (!filename) {
+      // Anda bisa return gambar placeholder jika filename tidak ada
+      return 'https://via.placeholder.com/150';
+    }
     return `${import.meta.env.VITE_API_URL}/api/produks/images/${filename}`;
   };
 
@@ -130,7 +133,7 @@ function SuksesPage() {
                       {orderData.items.map((item, index) => (
                         <div key={index} className="flex items-start p-4 bg-gray-50 rounded-lg">
                           <div className="flex-shrink-0 w-16 h-16 bg-gray-200 rounded-md overflow-hidden mr-4">
-                            <img src={getImageUrl(item.gambar)} alt={item.name} className="w-full h-full object-cover" />
+                            <img src={getImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1">
                             <h3 className="font-semibold text-gray-800">{item.name}</h3>

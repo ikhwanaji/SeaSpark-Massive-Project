@@ -96,8 +96,8 @@ const KontakKami = () => {
                 </svg>
               </div>
               <h3 className="font-semibold text-lg text-blue-600 mb-2">Alamat</h3>
-              <p className="text-gray-700">Telagamurni, Cikarang Barat</p>
-              <p className="text-gray-700">Bekasi, Jawa Barat</p>
+              <p className="text-gray-700">Jl. Za Pagar Alam No. 1</p>
+              <p className="text-gray-700">Bandar Lampung, Lampung</p>
             </div>
 
             <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 text-center">
@@ -111,7 +111,7 @@ const KontakKami = () => {
                 </svg>
               </div>
               <h3 className="font-semibold text-lg text-blue-600 mb-2">Kontak</h3>
-              <p className="text-gray-700">Telepon: 089601963811</p>
+              <p className="text-gray-700">Telepon: 08961223456</p>
               <p className="text-gray-700">Email: contact@company.com</p>
             </div>
 
@@ -131,11 +131,11 @@ const KontakKami = () => {
           <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
             <div className="p-6 bg-blue-600 text-white">
               <h2 className="text-2xl font-bold">Lokasi Kami</h2>
-              <p className="text-blue-100">Temukan kami di Telagamurni, Cikarang Barat</p>
+              <p className="text-blue-100">Temukan kami di Jl. Za Pagar Alam No. 1 Bandar Lampung, Lampung</p>
             </div>
             <div className="w-full h-96">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15865.035107105822!2d107.0966983!3d-6.2595169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69856e3db7632f%3A0xcf8419cdf6aea9e4!2sTelagamurni%2C%20Kec.%20Cikarang%20Bar.%2C%20Kabupaten%20Bekasi%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1712471847794!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.2464935968833!2d105.24988107439904!3d-5.379340653797077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40dac51ca768c5%3A0xb84445ae9da3a03d!2sJl.%20ZA.%20Pagar%20Alam%20No.1%2C%20Labuhan%20Ratu%2C%20Kec.%20Kedaton%2C%20Kota%20Bandar%20Lampung%2C%20Lampung%2035132!5e0!3m2!1sid!2sid!4v1754661538607!5m2!1sid!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
