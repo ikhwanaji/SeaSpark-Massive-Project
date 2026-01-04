@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaLock, FaEnvelope } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import Img from '../Assets/img/HeroSection.jpg';
 import ImgLoginUser from '../Assets/img/LoginUser.png';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 
 // Konstanta untuk pesan error
 const ERROR_MESSAGES = {
@@ -14,8 +17,9 @@ const ERROR_MESSAGES = {
 };
 
 const LoginPage = () => {
-  const { login, token } = useAuth();
+  const { login, googleLogin, isLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [globalError, setGlobalError] = useState('');
@@ -28,6 +32,40 @@ const LoginPage = () => {
     password: '',
   });
 
+  // Check for token in URL (for Google auth callback)
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+
+    if (token) {
+      handleBackendGoogleAuth(token);
+    }
+  }, [location]);
+
+  // Handle token from backend Google auth
+  const handleBackendGoogleAuth = async (token) => {
+    try {
+      // Set Authorization header for user data request
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      // Get user data from backend
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_ENDPOINT}/auth/me`);
+
+      if (response.data.success && response.data.user) {
+        // Login with the returned user data
+        googleLogin(token, response.data.user);
+
+        // Clear the token from URL
+        navigate('/', { replace: true });
+      } else {
+        throw new Error('Failed to fetch user data');
+      }
+    } catch (error) {
+      console.error('Google auth verification error:', error);
+      setGlobalError('Verifikasi login Google gagal');
+    }
+  };
+
   // Efek untuk mengisi form jika sebelumnya di-remember
   useEffect(() => {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
@@ -36,6 +74,13 @@ const LoginPage = () => {
       setRememberMe(true);
     }
   }, []);
+
+  // Redirect jika sudah login
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
 
   // Validasi email
   const validateEmail = (email) => {
@@ -111,16 +156,32 @@ const LoginPage = () => {
     }
   };
 
-  // Login dengan Google (placeholder)
-  const handleGoogleLogin = async () => {
+  // Login dengan Google
+  const handleGoogleLogin = (response) => {
     try {
-      // Implementasi login Google
-      // Contoh: await signInWithGoogle()
-      setGlobalError('Fitur login Google dalam pengembangan');
+      console.log('Google Login Success:', response);
+
+      // Redirect user to backend Google authentication
+      // window.location.href = `${import.meta.env.VITE_API_URL}${import.meta.env.VITE_API_ENDPOINT}/auth/google`;
+
+      // Alternatively, if you want to handle the Google token directly in frontend:
+      const decodedToken = jwtDecode(response.credential);
+      googleLogin(response.credential, {
+        name: decodedToken.name,
+        email: decodedToken.email,
+        sub: decodedToken.sub,
+        picture: decodedToken.picture,
+      });
+      navigate('/');
     } catch (error) {
-      console.error('Google Login Error', error);
-      setGlobalError('Gagal login dengan Google');
+      console.error('Error processing Google login:', error);
+      setGlobalError('Gagal memproses login Google');
     }
+  };
+
+  const handleGoogleLoginError = () => {
+    console.error('Google Login Error');
+    setGlobalError('Gagal login dengan Google');
   };
 
   // Render input dengan error handling
@@ -159,39 +220,9 @@ const LoginPage = () => {
 
   // Render tombol login sosial
   const renderSocialLoginButton = () => (
-    <button
-      type="button"
-      onClick={handleGoogleLogin}
-      className="
-        w-full 
-        flex 
-        items-center 
-        justify-center 
-        mt-4 
-        bg-white 
-        text-gray-700 
-        py-2 
-        px-4 
-        rounded-lg 
-        shadow-md 
-        hover:bg-gray-100 
-        focus:outline-none 
-        focus:ring-2 
-        focus:ring-gray-200 
-        transition 
-        duration-300 
-        ease-in-out
-      "
-    >
-      <div className="mr-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z" />
-          <path fill="#FBBC05" d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29v-3.1h-4c-.81 2.05-.81 4.34 0 6.39l4-3.1z" />
-          <path fill="#EA4335" d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C18.205 1.19 15.495 0 12.255 0c-5.19 0-9.64 2.86-11.73 7l4 3.1c.95-2.85 3.6-4.96 6.73-4.96z" />
-        </svg>
-      </div>
-      <span className="font-semibold">Lanjutkan dengan Google</span>
-    </button>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID }>
+      <GoogleLogin onSuccess={handleGoogleLogin} onError={handleGoogleLoginError} theme="filled_blue" size="large" text="continue_with" shape="rectangular" width="100%" locale="id_ID" scope="profile email" />
+    </GoogleOAuthProvider>
   );
 
   return (
@@ -292,7 +323,7 @@ const LoginPage = () => {
               </div>
 
               {/* Tombol Login Sosial */}
-              {renderSocialLoginButton()}
+              <div className="mt-4">{renderSocialLoginButton()}</div>
 
               {/* Tautan Daftar */}
               <div className="mt-4 text-center">

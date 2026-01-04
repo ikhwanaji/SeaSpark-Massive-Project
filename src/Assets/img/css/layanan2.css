@@ -1,0 +1,111 @@
+
+/* Mobile-first approach */
+@media (max-width: 640px) {
+  /* Adjust padding and margins for mobile */
+  .main-container {
+    padding: 1rem;
+  }
+
+  /* Stack buttons vertically on small screens */
+  .button-group {
+    flex-direction: column;
+  }
+
+  /* Increase touch targets for checkboxes */
+  .symptom-checkbox label {
+    padding: 0.5rem 0;
+    display: block;
+  }
+
+  /* Adjust font sizes */
+  .heading-title {
+    font-size: 1.5rem;
+  }
+
+  .subheading {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Improve spacing */
+  .main-container {
+    padding: 1.5rem;
+  }
+
+  /* Adjust grid layouts */
+  .disease-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  /* Maximize content area */
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Enhance disease grid */
+  .disease-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* General enhancement styles */
+.disease-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.disease-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Improve accessibility */
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+/* Add smooth transitions */
+.step-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Custom scrollbar for symptom list */
+.symptom-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.symptom-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.symptom-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.symptom-list::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Improve focus states for accessibility */
+*:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+input:focus,
+button:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+

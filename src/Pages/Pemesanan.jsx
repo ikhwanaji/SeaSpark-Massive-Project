@@ -125,7 +125,7 @@ function PemesananPage() {
                 title: 'Pembayaran Berhasil',
                 text: 'Terima kasih atas pembayaran Anda.',
               }).then(() => {
-                navigate('/riwayat-pembayaran', {
+                navigate('/Sukses', {
                   state: {
                     paymentSuccess: true,
                     orderId: response.data.orderId,

@@ -30,6 +30,7 @@ function ProdukPaketan() {
           title: paket.title,
           price: `Rp.${paket.harga.toLocaleString()}`,
           image: `${import.meta.env.VITE_BACKEND_URL}/paket/images/${paket.gambar}`,
+          stok: paket.stok,
           items: Array.isArray(paket.items) 
             ? paket.items 
             : JSON.parse(paket.items || '[]')
@@ -85,7 +86,8 @@ function ProdukPaketan() {
                 <CardPaketan 
                   key={pkg.paketId || index} // Fallback ke index jika tidak ada paketId
                   paketId={pkg.paketId || index}
-                  title={pkg.title} 
+                  title={pkg.title}
+                  stok={pkg.stok} 
                   price={pkg.price} 
                   image={pkg.image} 
                   items={pkg.items} 

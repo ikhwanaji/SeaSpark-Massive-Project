@@ -1,231 +1,281 @@
-// src/pages/RiwayatPemesananPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import { motion, AnimatePresence } from 'framer-motion';
+import { List, Grid, Search, Info, Filter, ChevronDown, CheckCircle2, X, ArrowLeft } from 'lucide-react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-// Komponen Detail Pesanan
-const DetailPesananModal = ({ pesanan, onClose }) => {
+// Order Details Modal Component
+const OrderDetailsModal = ({ order, onClose }) => {
+  const getImageUrl = (filename) => {
+    return `${import.meta.env.VITE_API_URL}/api/produks/images/${filename}`;
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <h2 className="text-2xl font-bold mb-4">Detail Pesanan</h2>
-
-        <div className="space-y-3">
-          <div className="flex justify-between">
-            <span className="font-semibold">Nomor Pesanan:</span>
-            <span>{pesanan.midtrans_order_id}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Tanggal Pesanan:</span>
-            <span>{new Date(pesanan.created_at).toLocaleDateString()}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Status Pembayaran:</span>
-            <span
-              className={`
-              px-2 py-1 rounded text-sm
-              ${pesanan.status_pembayaran === 'success' ? 'bg-green-100 text-green-800' : pesanan.status_pembayaran === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}
-            `}
-            >
-              {pesanan.status_pembayaran}
-            </span>
-          </div>
-
-          <div className="border-t pt-4">
-            <h3 className="font-semibold mb-2">Detail Produk</h3>
-            <div className="flex justify-between">
-              <span>Nama Produk:</span>
-              <span>{pesanan.nama_produk}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Jumlah:</span>
-              <span>{pesanan.jumlah}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Harga Satuan:</span>
-              <span>Rp {pesanan.harga.toLocaleString()}</span>
-            </div>
-          </div>
-
-          <div className="border-t pt-4">
-            <h3 className="font-semibold mb-2">Informasi Pengiriman</h3>
-            <div className="flex justify-between">
-              <span>Metode Pengiriman:</span>
-              <span>{pesanan.nama_shipping}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Total Harga:</span>
-              <span>Rp {pesanan.total_harga.toLocaleString()}</span>
-            </div>
-          </div>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
+        {/* Modal Header */}
+        <div className="bg-blue-50 p-5 flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-blue-800">Order Details</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-800 transition-colors rounded-full p-2 hover:bg-blue-100">
+            <X size={24} />
+          </button>
         </div>
 
-        <button onClick={onClose} className="mt-6 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-          Tutup
-        </button>
-      </div>
-    </div>
+        {/* Modal Content */}
+        <div className="p-6 space-y-4">
+          {/* Order Overview */}
+          <div className="flex justify-between items-center border-b pb-4">
+            <div>
+              <p className="text-gray-600">Order Number</p>
+              <p className="font-semibold">{order.midtrans_order_id}</p>
+            </div>
+            <div className="flex items-center">
+              <CheckCircle2 className={`mr-2 ${order.status_pembayaran === 'success' ? 'text-green-500' : 'text-yellow-500'}`} />
+              <span className={`font-medium ${order.status_pembayaran === 'success' ? 'text-green-800' : 'text-yellow-800'}`}>{order.status_pembayaran}</span>
+            </div>
+          </div>
+          {/* Product Details */}
+          <div className="flex items-center space-x-4 border-b pb-4">
+            <img src={getImageUrl(order.gambar_produk)} alt={order.nama_produk} className="w-24 h-24 object-cover rounded-xl shadow-md" />
+            <div>
+              <h3 className="font-bold text-lg">{order.nama_produk}</h3>
+              <p className="text-gray-600">Jumlah: {order.jumlah}</p>
+              <p className="text-gray-600">Harga: Rp {order.harga.toLocaleString()}</p>
+            </div>
+          </div>
+
+          {/* Shipping Details Section (kept original) */}
+          <div className=" border-gray-200 space-y-2 ">
+            <h3 className="text-lg font-semibold mb-3">Detail Pengiriman</h3>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Tanggal Pemesanan</span>
+              <span>{new Date(order.created_at).toLocaleDateString()}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Metode Pengiriman ({order.nama_shipping})</span>
+              <span>Rp {order.biaya_pengiriman.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Status Pengiriman</span>
+              <span>{order.status_pengiriman}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Subtotal</span>
+              <span>Rp {(order.harga * order.jumlah).toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between font-bold text-lg border-t pt-2">
+              <span>Total</span>
+              <span>Rp {order.total_harga.toLocaleString()}</span>
+            </div>
+          </div>
+
+          {/* Price Breakdown */}
+          <div className="space-y-2"></div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
-// Komponen Utama Riwayat Pemesanan
 function RiwayatPemesananPage() {
-  const { isLoggedIn, user, token, logout } = useAuth();
-  const [pesananList, setPesananList] = useState([]);
-  const [selectedPesanan, setSelectedPesanan] = useState(null);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [viewMode, setViewMode] = useState('list');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [filters, setFilters] = useState({
+    searchTerm: '',
+    sortBy: 'newest', // Add sorting functionality
+  });
 
-  // Fungsi ambil riwayat pemesanan
-  const fetchRiwayatPemesanan = async (page = 1) => {
+  const { token, isLoggedIn, user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  // Fetch order history (same as before)
+  const fetchOrders = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/pemesanan/riwayat`, {
         headers: {
           Authorization: token.startsWith('Bearer ') ? token : `Bearer ${token}`,
         },
-        params: {
-          page,
-          limit: 10, // Jumlah item per halaman
-        },
       });
 
-      setPesananList(response.data.data);
-      setTotalPages(response.data.totalPages);
+      const cleanedOrders = response.data.data
+        .filter((order) => order.status_pembayaran === 'success')
+        .map((order) => ({
+          ...order,
+          harga: order.harga || 0,
+          jumlah: order.jumlah || 1,
+          total_harga: order.total_harga || (order.harga || 0) * (order.jumlah || 1),
+          gambar_produk: order.gambar_produk || '/path/to/placeholder-image.jpg',
+          nama_produk: order.nama_produk || 'Unknown Product',
+          midtrans_order_id: order.midtrans_order_id || 'N/A',
+        }));
+
+      // Sort orders
+      const sortedOrders = cleanedOrders.sort((a, b) => {
+        return filters.sortBy === 'newest' ? new Date(b.created_at) - new Date(a.created_at) : new Date(a.created_at) - new Date(b.created_at);
+      });
+
+      setOrders(sortedOrders);
       setLoading(false);
     } catch (error) {
-      console.error('Gagal mengambil riwayat pemesanan:', error);
+      console.error('Error fetching orders:', error);
       Swal.fire({
         icon: 'error',
-        title: 'Gagal',
-        text: 'Tidak dapat mengambil riwayat pemesanan',
+        title: 'Oops...',
+        text: 'Failed to fetch order history',
       });
       setLoading(false);
     }
   };
 
-  // Panggil fetchRiwayatPemesanan saat komponen dimuat
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchRiwayatPemesanan();
+    if (!token) {
+      navigate('/login');
+      return;
     }
-  }, [isLoggedIn, token]);
+    fetchOrders();
+  }, [token, filters.sortBy]);
 
-  // Fungsi untuk membuka modal detail pesanan
-  const handleDetailPesanan = (pesanan) => {
-    setSelectedPesanan(pesanan);
-  };
+  // Filter and search logic
+  const filteredOrders = orders.filter((order) => !filters.searchTerm || order.nama_produk.toLowerCase().includes(filters.searchTerm.toLowerCase()) || order.midtrans_order_id.includes(filters.searchTerm));
 
-  // Fungsi untuk menutup modal detail pesanan
-  const handleCloseModal = () => {
-    setSelectedPesanan(null);
-  };
-
-  // Fungsi untuk mengganti halaman
-  const handlePageChange = (newPage) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-      fetchRiwayatPemesanan(newPage);
-    }
-  };
-
-  // Render status pembayaran dengan warna
-  const renderStatusBadge = (status) => {
-    const statusColors = {
-      success: 'bg-green-100 text-green-800',
-      pending: 'bg-yellow-100 text-yellow-800',
-      failed: 'bg-red-100 text-red-800',
-    };
-
-    return <span className={`px-2 py-1 rounded text-xs ${statusColors[status] || 'bg-gray-100 text-gray-800'}`}>{status}</span>;
+  const getImageUrl = (filename) => {
+    return `${import.meta.env.VITE_API_URL}/api/produks/images/${filename}`;
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar buttonName={isLoggedIn ? 'Keluar' : 'Masuk'} isLoggedIn={isLoggedIn} user={user} onLogout={logout} />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex flex-col pt-16">
+      <Navbar buttonName={isLoggedIn ? 'Logout' : 'Login'} isLoggedIn={isLoggedIn} user={user} onLogout={logout} />
 
-      <div className="flex-grow bg-gray-50 pt-24 pb-12">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-6 text-center">Riwayat Pemesanan</h1>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex-grow p-4 md:p-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Page Header */}
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-0">Order History</h1>
 
-          {loading ? (
-            <div className="flex justify-center items-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-blue-500"></div>
+            {/* View and Filter Controls */}
+            <div className="flex items-center space-x-4">
+              {/* View Mode Buttons */}
+              <div className="flex bg-white rounded-lg shadow-sm p-1">
+                <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-500 hover:bg-gray-100'}`}>
+                  <List />
+                </button>
+                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-500 hover:bg-gray-100'}`}>
+                  <Grid />
+                </button>
+              </div>
+
+              {/* Sort Dropdown */}
+              <div className="relative">
+                <select
+                  value={filters.sortBy}
+                  onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
+                  className="appearance-none bg-white border border-gray-300 rounded-lg pl-3 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              </div>
             </div>
-          ) : pesananList.length === 0 ? (
-            <div className="text-center text-gray-600">Anda belum memiliki riwayat pemesanan.</div>
-          ) : (
-            <>
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <table className="w-full">
-                  // Lanjutan dari kode sebelumnya
-                  <thead className="bg-gray-100 border-b">
-                    <tr>
-                      <th className="p-3 text-left">Nomor Pesanan</th>
-                      <th className="p-3 text-left">Tanggal</th>
-                      <th className="p-3 text-left">Produk</th>
-                      <th className="p-3 text-left">Total Harga</th>
-                      <th className="p-3 text-left">Status</th>
-                      <th className="p-3 text-center">Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {pesananList.map((pesanan) => (
-                      <tr key={pesanan.midtrans_order_id} className="border-b hover:bg-gray-50">
-                        <td className="p-3">
-                          <span className="text-sm font-medium">{pesanan.midtrans_order_id}</span>
-                        </td>
-                        <td className="p-3">{new Date(pesanan.created_at).toLocaleDateString()}</td>
-                        <td className="p-3">
-                          <div className="flex items-center">
-                            <img src={pesanan.gambar_produk} alt={pesanan.nama_produk} className="w-10 h-10 object-cover rounded mr-2" />
-                            <span className="text-sm">{pesanan.nama_produk}</span>
-                          </div>
-                        </td>
-                        <td className="p-3">Rp {pesanan.total_harga.toLocaleString()}</td>
-                        <td className="p-3">{renderStatusBadge(pesanan.status_pembayaran)}</td>
-                        <td className="p-3 text-center">
-                          <button onClick={() => handleDetailPesanan(pesanan)} className="text-blue-500 hover:text-blue-700 text-sm">
-                            Lihat Detail
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          </div>
 
-              {/* Pagination */}
-              <div className="flex justify-center mt-6 space-x-2">
-                <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50">
-                  Sebelumnya
-                </button>
-                <span className="px-4 py-2 bg-gray-100 rounded">
-                  Halaman {currentPage} dari {totalPages}
-                </span>
-                <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50">
-                  Selanjutnya
-                </button>
-              </div>
-            </>
+          {/* Search Bar */}
+          <div className="mb-6 relative">
+            <input
+              type="text"
+              placeholder="Search orders..."
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              value={filters.searchTerm}
+              onChange={(e) => setFilters({ ...filters, searchTerm: e.target.value })}
+            />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={24} />
+          </div>
+
+          {/* Loading State */}
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }} className="w-16 h-16 border-4 border-t-blue-500 border-gray-200 rounded-full" />
+            </div>
+          ) : filteredOrders.length === 0 ? (
+            // Empty State
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center bg-white rounded-2xl shadow-md p-12">
+              <Info className="mx-auto mb-4 text-blue-400" size={64} />
+              <p className="text-xl text-gray-600">No order history found</p>
+              <p className="text-gray-500 mt-2">Start shopping to see your orders here!</p>
+            </motion.div>
+          ) : viewMode === 'list' ? (
+            // List View
+            <motion.div layout className="space-y-4">
+              <AnimatePresence>
+                {filteredOrders.map((order) => (
+                  <motion.div key={order.midtrans_order_id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9 }} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all">
+                    <div className="p-4 flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img src={getImageUrl(order.gambar_produk)} alt={order.nama_produk} className="w-20 h-20 object-cover rounded-xl" />
+                        <div>
+                          <h3 className="font-bold text-lg">{order.nama_produk}</h3>
+                          <p className="text-gray-600">
+                            {order.jumlah} x Rp {order.harga.toLocaleString()}
+                          </p>
+                          <p className="text-gray-600">Total: Rp {order.total_harga.toLocaleString()}</p>
+                        </div>
+                      </div>
+                      <button onClick={() => setSelectedOrder(order)} className="text-blue-500 hover:text-blue-700 font-medium flex items-center">
+                        Details <ArrowLeft className="ml-2" size={20} />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          ) : (
+            // Grid View
+            <motion.div layout className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <AnimatePresence>
+                {filteredOrders.map((order) => (
+                  <motion.div
+                    key={order.midtrans_order_id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all"
+                  >
+                    <div className="p-4 text-center">
+                      <img src={getImageUrl(order.gambar_produk)} alt={order.nama_produk} className="w-full h-48 object-cover rounded-xl mb-4" />
+                      <h3 className="font-bold mb-2">{order.nama_produk}</h3>
+                      <p className="text-gray-600 mb-1">
+                        {order.jumlah} x Rp {order.harga.toLocaleString()}
+                      </p>
+                      <p className="text-gray-600 mb-3">Total: Rp {order.total_harga.toLocaleString()}</p>
+                      <button onClick={() => setSelectedOrder(order)} className="w-full bg-blue-50 text-blue-600 py-2 rounded-lg hover:bg-blue-100 transition-colors">
+                        View Details
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </div>
 
-        {/* Modal Detail Pesanan */}
-        {selectedPesanan && <DetailPesananModal pesanan={selectedPesanan} onClose={handleCloseModal} />}
-      </div>
+        {/* Order Details Modal */}
+        <AnimatePresence>{selectedOrder && <OrderDetailsModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />}</AnimatePresence>
+      </motion.div>
 
       <Footer
         infoLinks={[
-          { text: 'Beranda', path: '/beranda-pengguna', href: '#beranda' },
-          { text: 'Layanan', path: '/layanan', href: '#layanan' },
-          { text: 'Pemesanan', path: '/pemesanan', href: '#pemesanan' },
-          { text: 'Tentang Kami', path: '/tentang-kami', href: '#tentang-kami' },
-          { text: 'Kontak', path: '/kontak', href: '#kontak' },
+          { text: 'Home', path: '/beranda-pengguna', href: '#beranda' },
+          { text: 'Services', path: '/layanan', href: '#layanan' },
+          { text: 'Products', path: '/produk', href: '#produk-kami' },
+          { text: 'About Us', path: '/tentang-kami', href: '#tentang-kami' },
+          { text: 'Contact', path: '/kontak', href: '#kontak' },
         ]}
         isUserPage={true}
       />
